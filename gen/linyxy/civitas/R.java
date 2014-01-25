@@ -32,17 +32,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int dao_cai=0x7f080007;
         public static final int dummy_button=0x7f080002;
+        public static final int energy_bar=0x7f08000d;
+        public static final int energy_points=0x7f08000e;
         public static final int fullscreen_content=0x7f080000;
         public static final int fullscreen_content_controls=0x7f080001;
         public static final int guan_zhu=0x7f080006;
+        public static final int happy_bar=0x7f08000f;
+        public static final int happy_points=0x7f080010;
         public static final int he_cai=0x7f080005;
         public static final int header=0x7f080003;
+        public static final int health_bar=0x7f080011;
+        public static final int health_points=0x7f080012;
+        public static final int hunger_bar=0x7f080013;
+        public static final int hunger_points=0x7f080014;
         public static final int speech_name=0x7f080004;
         public static final int speech_time=0x7f080008;
+        public static final int user_exp=0x7f08000c;
+        public static final int user_icon=0x7f08000a;
+        public static final int user_level=0x7f08000b;
+        public static final int user_name=0x7f080009;
     }
     public static final class layout {
         public static final int activity_fullscreen=0x7f030000;
         public static final int speech=0x7f030001;
+        public static final int speech_no_icon=0x7f030002;
+        public static final int status=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f060000;

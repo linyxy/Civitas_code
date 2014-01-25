@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-	
-    <!--  定义一个，用来存放头像缩略图 -->
-    <ImageView android:id="@+id/header"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        />
-
-	<TableLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    	<TableLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
 	    android:orientation="vertical">
@@ -19,7 +12,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent">
 		    <TextView
-		        android:id="@+id/speech_name"
+		        android:id="@id/speech_name"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:textSize="14sp"
@@ -31,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 		    <TextView
-		        android:id="@+id/speech_name"
+		        android:id="@id/speech_name"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:textSize="14sp"
@@ -46,19 +39,19 @@
 	       android:gravity="right" >
 
 	        <Button 
-	            android:id="@+id/he_cai"
+	            android:id="@id/he_cai"
 	            style="?android:attr/buttonStyleSmall"
 	            android:layout_width="match_parent"
         		android:layout_height="wrap_content"
         		android:textSize="14sp"/>
 	        <Button 
-	            android:id="@+id/guan_zhu"
+	            android:id="@id/guan_zhu"
 	            style="?android:attr/buttonStyleSmall"
 	            android:layout_width="match_parent"
         		android:layout_height="wrap_content"
         		android:textSize="14sp"/>
 	        <Button 
-	            android:id="@+id/dao_cai"
+	            android:id="@id/dao_cai"
 	            style="?android:attr/buttonStyleSmall"
 	            android:layout_width="match_parent"
        			android:layout_height="wrap_content"
@@ -71,7 +64,7 @@
 	        android:layout_width="match_parent"
 			android:layout_height="wrap_content">
 	        <TextView
-	            android:id="@+id/speech_time" 
+	            android:id="@id/speech_time" 
 	            android:layout_width="match_parent"
        			android:layout_height="wrap_content"
        			android:paddingLeft="25dp"
@@ -81,5 +74,6 @@
 	    
 	    
 	</TableLayout>
+    
 
 </LinearLayout>
