@@ -28,9 +28,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int black_overlay=0x7f050000;
         public static final int button_blue=0x7f050002;
         public static final int gray=0x7f050001;
+        public static final int login_yellow=0x7f050003;
     }
     public static final class dimen {
+        public static final int halfScreenWidth=0x7f060005;
         public static final int loginIconLength=0x7f060004;
+        public static final int mainTitleTextSize=0x7f060006;
         public static final int normalDividerHeight=0x7f060002;
         public static final int normalIconLength=0x7f060003;
         public static final int normalPaddingLeft=0x7f060001;
@@ -59,8 +62,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int health_points=0x7f090017;
         public static final int hunger_bar=0x7f090018;
         public static final int hunger_points=0x7f090019;
-        public static final int login_button=0x7f090006;
-        public static final int login_icon=0x7f090003;
+        public static final int login_button=0x7f090005;
+        public static final int login_icon=0x7f090006;
         public static final int speech_content=0x7f090009;
         public static final int speech_list=0x7f09000e;
         public static final int speech_name=0x7f090008;
@@ -68,16 +71,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int user_exp=0x7f090011;
         public static final int user_icon=0x7f09000f;
         public static final int user_level=0x7f090010;
-        public static final int user_name=0x7f090004;
-        public static final int user_password=0x7f090005;
+        public static final int user_name=0x7f090003;
+        public static final int user_password=0x7f090004;
     }
     public static final class layout {
         public static final int activity_fullscreen=0x7f030000;
         public static final int login=0x7f030001;
-        public static final int speech=0x7f030002;
-        public static final int speech_list=0x7f030003;
-        public static final int speech_no_icon=0x7f030004;
-        public static final int status=0x7f030005;
+        public static final int login_not_use=0x7f030002;
+        public static final int speech=0x7f030003;
+        public static final int speech_list=0x7f030004;
+        public static final int speech_no_icon=0x7f030005;
+        public static final int status=0x7f030006;
     }
     public static final class string {
         public static final int WTF=0x7f070003;
@@ -97,6 +101,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int login_account_hint=0x7f070008;
         public static final int login_password_hint=0x7f070009;
+        public static final int login_subtitle=0x7f07000c;
+        public static final int login_title=0x7f07000b;
     }
     public static final class style {
         /** 

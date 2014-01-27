@@ -4,4 +4,5 @@
 	<color name="gray">#BDBDBD</color>
 	
 	<color name="button_blue">#0040FF</color>
+	<color name="login_yellow">#FFBF00</color>
 </resources>

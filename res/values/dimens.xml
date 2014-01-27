@@ -5,5 +5,6 @@
     <dimen name="normalDividerHeight">2px</dimen>
     <dimen name="normalIconLength">48px</dimen>
     <dimen name="loginIconLength">150px</dimen>
-    
+    <dimen name="halfScreenWidth">300px</dimen>
+    <dimen name="mainTitleTextSize">60dp</dimen>
 </resources>

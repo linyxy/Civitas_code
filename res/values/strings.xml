@@ -15,6 +15,8 @@
 	
 	<!-- login view -->
 	<string name="login_account_hint">你的civitas帐号</string>
-	<string name="login_password_hint">密码</string>
-	<string name="button_text">登陆</string>
+	<string name="login_password_hint">您的密码</string>
+	<string name="button_text">登陆></string>
+	<string name="login_title">CIVITAS</string>
+	<string name="login_subtitle">短暂的超游之后是长久的沉浸</string>
 </resources>
