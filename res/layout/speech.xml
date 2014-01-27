@@ -5,6 +5,7 @@
 	
     <!--  定义一个，用来存放头像缩略图 -->
     <ImageView android:id="@+id/header"
+        android:contentDescription="@string/WTF"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
@@ -31,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 		    <TextView
-		        android:id="@+id/speech_name"
+		        android:id="@+id/speech_content"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:textSize="14sp"

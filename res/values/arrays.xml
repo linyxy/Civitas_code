@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 字符串，演讲内容列表 -->
+    <string-array name="speech">
+        <item>image</item>
+        <item>speaker</item>
+        <item>content</item>
+        <item>cheer</item>
+        <item>attention</item>
+        <item>hooting</item>
+        <item>time</item>
+    </string-array>
+    
+    <array name="speech_layout">
+        <item>R.id.header</item>
+        <item>R.id.speech_name</item>
+        <item>R.id.speech_content</item>
+        <item>R.id.hei_cai</item>
+        <item>R.id.guan_zhu</item>
+        <item>R.id.dao_cai</item>
+        <item>R.id.speech_time</item>
+    </array>
+</resources>

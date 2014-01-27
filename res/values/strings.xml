@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- over all -->
     <string name="app_name">Civitas</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
+	<string name="WTF">我也不知道</string>
+	
+	<!-- personal attribute -->
+	<string name="health">健康</string>
+	<string name="hunger">饥饿</string>
+	<string name="happy">快乐</string>
+	<string name="energy">精力</string>
+	
+	<!-- login view -->
+	<string name="login_account_hint">你的civitas帐号</string>
+	<string name="login_password_hint">密码</string>
+	<string name="button_text">登陆</string>
 </resources>
