@@ -5,6 +5,14 @@
     <dimen name="normalDividerHeight">2px</dimen>
     <dimen name="normalIconLength">48px</dimen>
     <dimen name="loginIconLength">150px</dimen>
+    <dimen name="mainTitleTextSize">40px</dimen>
+    <dimen name="ciTieLength">200px</dimen>
+    
+    
+    <!-- 屏幕宽度相关 -->
     <dimen name="halfScreenWidth">300px</dimen>
-    <dimen name="mainTitleTextSize">60dp</dimen>
+    <dimen name="quarterScreenWidth">150px</dimen>
+    <dimen name="twothirdsScreenWidth">200px</dimen> 
+    
+    
 </resources>

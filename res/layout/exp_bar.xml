@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 等级与经验 -->
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/exp_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right" >
+
+     <TextView
+         android:id="@+id/user_level"
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent"
+         android:text="@string/sample_level"
+         android:textSize="@dimen/normalTextSize"
+         android:textStyle="bold" />
+
+     <TextView
+         android:id="@+id/user_exp"
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent"
+         android:paddingLeft="@dimen/normalPaddingLeft"
+         android:text="@string/sample_exp"
+         android:textSize="@dimen/normalTextSize" />
+
+ </TableRow>
+
+

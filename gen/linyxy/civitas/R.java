@@ -26,69 +26,84 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class color {
         public static final int black_overlay=0x7f050000;
-        public static final int button_blue=0x7f050002;
+        public static final int button_blue=0x7f050003;
         public static final int gray=0x7f050001;
-        public static final int login_yellow=0x7f050003;
+        public static final int login_yellow=0x7f050004;
+        public static final int white=0x7f050002;
     }
     public static final class dimen {
-        public static final int halfScreenWidth=0x7f060005;
+        public static final int ciTieLength=0x7f060006;
+        /**  屏幕宽度相关 
+         */
+        public static final int halfScreenWidth=0x7f060007;
         public static final int loginIconLength=0x7f060004;
-        public static final int mainTitleTextSize=0x7f060006;
+        public static final int mainTitleTextSize=0x7f060005;
         public static final int normalDividerHeight=0x7f060002;
         public static final int normalIconLength=0x7f060003;
         public static final int normalPaddingLeft=0x7f060001;
         public static final int normalTextSize=0x7f060000;
+        public static final int quarterScreenWidth=0x7f060008;
+        public static final int twothirdsScreenWidth=0x7f060009;
     }
     public static final class drawable {
-        public static final int bu_yu=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int login_background=0x7f020002;
-        public static final int login_button_shape=0x7f020003;
-        public static final int user_icon=0x7f020004;
+        public static final int biasic_back=0x7f020000;
+        public static final int bu_yu=0x7f020001;
+        public static final int ci_tie=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int login_background=0x7f020004;
+        public static final int login_button_shape=0x7f020005;
+        public static final int login_text_view_shape=0x7f020006;
+        public static final int normal_icon=0x7f020007;
+        public static final int user_icon=0x7f020008;
     }
     public static final class id {
-        public static final int dao_cai=0x7f09000c;
+        public static final int dao_cai=0x7f09000f;
         public static final int dummy_button=0x7f090002;
-        public static final int energy_bar=0x7f090012;
-        public static final int energy_points=0x7f090013;
+        public static final int energy_bar=0x7f090013;
+        public static final int energy_points=0x7f090014;
+        public static final int exp_bar=0x7f090003;
         public static final int fullscreen_content=0x7f090000;
         public static final int fullscreen_content_controls=0x7f090001;
-        public static final int guan_zhu=0x7f09000b;
-        public static final int happy_bar=0x7f090014;
-        public static final int happy_points=0x7f090015;
-        public static final int he_cai=0x7f09000a;
-        public static final int header=0x7f090007;
-        public static final int health_bar=0x7f090016;
-        public static final int health_points=0x7f090017;
-        public static final int hunger_bar=0x7f090018;
-        public static final int hunger_points=0x7f090019;
-        public static final int login_button=0x7f090005;
-        public static final int login_icon=0x7f090006;
-        public static final int speech_content=0x7f090009;
-        public static final int speech_list=0x7f09000e;
-        public static final int speech_name=0x7f090008;
-        public static final int speech_time=0x7f09000d;
-        public static final int user_exp=0x7f090011;
-        public static final int user_icon=0x7f09000f;
-        public static final int user_level=0x7f090010;
-        public static final int user_name=0x7f090003;
-        public static final int user_password=0x7f090004;
+        public static final int guan_zhu=0x7f09000e;
+        public static final int happy_bar=0x7f090015;
+        public static final int happy_points=0x7f090016;
+        public static final int he_cai=0x7f09000d;
+        public static final int header=0x7f09000a;
+        public static final int health_bar=0x7f090017;
+        public static final int health_points=0x7f090018;
+        public static final int hunger_bar=0x7f090019;
+        public static final int hunger_points=0x7f09001a;
+        public static final int login_button=0x7f090008;
+        public static final int login_icon=0x7f090009;
+        public static final int speech_content=0x7f09000c;
+        public static final int speech_list=0x7f090011;
+        public static final int speech_name=0x7f09000b;
+        public static final int speech_time=0x7f090010;
+        public static final int status_bar=0x7f090012;
+        public static final int user_exp=0x7f090005;
+        public static final int user_icon=0x7f09001b;
+        public static final int user_level=0x7f090004;
+        public static final int user_name=0x7f090006;
+        public static final int user_password=0x7f090007;
     }
     public static final class layout {
         public static final int activity_fullscreen=0x7f030000;
-        public static final int login=0x7f030001;
-        public static final int login_not_use=0x7f030002;
-        public static final int speech=0x7f030003;
-        public static final int speech_list=0x7f030004;
-        public static final int speech_no_icon=0x7f030005;
-        public static final int status=0x7f030006;
+        public static final int basic_citie=0x7f030001;
+        public static final int exp_bar=0x7f030002;
+        public static final int login=0x7f030003;
+        public static final int login_not_use=0x7f030004;
+        public static final int speech=0x7f030005;
+        public static final int speech_list=0x7f030006;
+        public static final int speech_no_icon=0x7f030007;
+        public static final int statue_bar=0x7f030008;
+        public static final int status=0x7f030009;
     }
     public static final class string {
         public static final int WTF=0x7f070003;
         /**  over all 
          */
         public static final int app_name=0x7f070000;
-        public static final int button_text=0x7f07000a;
+        public static final int button_text=0x7f07000b;
         public static final int dummy_button=0x7f070001;
         public static final int dummy_content=0x7f070002;
         public static final int energy=0x7f070007;
@@ -99,10 +114,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hunger=0x7f070005;
         /**  login view 
          */
-        public static final int login_account_hint=0x7f070008;
-        public static final int login_password_hint=0x7f070009;
-        public static final int login_subtitle=0x7f07000c;
-        public static final int login_title=0x7f07000b;
+        public static final int login_account_hint=0x7f070009;
+        public static final int login_password_hint=0x7f07000a;
+        public static final int login_subtitle=0x7f07000d;
+        public static final int login_title=0x7f07000c;
+        public static final int sample_attribute=0x7f070008;
+        public static final int sample_exp=0x7f07000f;
+        public static final int sample_level=0x7f07000e;
     }
     public static final class style {
         /** 
