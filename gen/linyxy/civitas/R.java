@@ -59,29 +59,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int dao_cai=0x7f09000f;
         public static final int dummy_button=0x7f090002;
-        public static final int energy_bar=0x7f090013;
-        public static final int energy_points=0x7f090014;
+        public static final int energy_bar=0x7f090014;
+        public static final int energy_points=0x7f090015;
         public static final int exp_bar=0x7f090003;
         public static final int fullscreen_content=0x7f090000;
         public static final int fullscreen_content_controls=0x7f090001;
         public static final int guan_zhu=0x7f09000e;
-        public static final int happy_bar=0x7f090015;
-        public static final int happy_points=0x7f090016;
+        public static final int happy_bar=0x7f090016;
+        public static final int happy_points=0x7f090017;
         public static final int he_cai=0x7f09000d;
         public static final int header=0x7f09000a;
-        public static final int health_bar=0x7f090017;
-        public static final int health_points=0x7f090018;
-        public static final int hunger_bar=0x7f090019;
-        public static final int hunger_points=0x7f09001a;
+        public static final int health_bar=0x7f090018;
+        public static final int health_points=0x7f090019;
+        public static final int hunger_bar=0x7f09001a;
+        public static final int hunger_points=0x7f09001b;
         public static final int login_button=0x7f090008;
         public static final int login_icon=0x7f090009;
         public static final int speech_content=0x7f09000c;
         public static final int speech_list=0x7f090011;
         public static final int speech_name=0x7f09000b;
         public static final int speech_time=0x7f090010;
-        public static final int status_bar=0x7f090012;
+        public static final int status_bar=0x7f090013;
         public static final int user_exp=0x7f090005;
-        public static final int user_icon=0x7f09001b;
+        public static final int user_icon=0x7f090012;
         public static final int user_level=0x7f090004;
         public static final int user_name=0x7f090006;
         public static final int user_password=0x7f090007;
@@ -95,8 +95,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int speech=0x7f030005;
         public static final int speech_list=0x7f030006;
         public static final int speech_no_icon=0x7f030007;
-        public static final int statue_bar=0x7f030008;
-        public static final int status=0x7f030009;
+        public static final int status=0x7f030008;
+        public static final int status_bar=0x7f030009;
     }
     public static final class string {
         public static final int WTF=0x7f070003;

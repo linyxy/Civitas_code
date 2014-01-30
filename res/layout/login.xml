@@ -33,7 +33,7 @@
          android:layout_height="wrap_content"
          android:gravity="center_horizontal"
          android:visibility="invisible" 
-         android:textSize="50sp"/>
+         android:textSize="30sp"/>
 
     <TableRow
         android:layout_width="match_parent"
@@ -92,15 +92,15 @@
 	    android:layout_height="wrap_content"
 	    android:gravity="right" >
 
-
 	<Button
 	    android:id="@+id/login_button"
-	    android:layout_marginRight="60dp"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
+	    android:layout_marginRight="60dp"
 	    android:background="@drawable/login_button_shape"
 	    android:contentDescription="@string/WTF"
 	    android:text="@string/button_text" />
+
 	</TableRow>
 	
 	
