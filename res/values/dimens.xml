@@ -3,7 +3,7 @@
     <dimen name="normalTextSize">14dp</dimen>
     <dimen name="normalPaddingLeft">10dp</dimen>
     <dimen name="normalDividerHeight">2px</dimen>
-    <dimen name="normalIconLength">48px</dimen>
+    <dimen name="normalIconLength">48dp</dimen>
     <dimen name="loginIconLength">150px</dimen>
     <dimen name="mainTitleTextSize">40px</dimen>
     <dimen name="ciTieLength">200px</dimen>

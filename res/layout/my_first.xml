@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal" >
+        
+        <!-- name_bar -->
+
+        <TextView
+            android:id="@+id/my_first_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leonado" />
+
+        <!-- exp_bar -->
+
+		<TextView
+		    android:id="@+id/my_first_level"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="right"
+		    android:text="6级" />
+
+        <TextView
+            android:id="@+id/my_first_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="126/180" />
+
+</LinearLayout>
+<include layout="@layout/status"/>
+<ListView        
+    	android:id="@+id/my_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/gray"
+        android:dividerHeight="@dimen/normalDividerHeight"
+		android:headerDividersEnabled="false"></ListView>
+
+
+</LinearLayout>
