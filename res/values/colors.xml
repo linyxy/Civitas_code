@@ -6,4 +6,6 @@
 	
 	<color name="button_blue">#0040FF</color>
 	<color name="login_yellow">#FFBF00</color>
+	
+	<color name="person_blue">#0B2AC4</color>
 </resources>

@@ -30,14 +30,14 @@
                 android:textSize="@dimen/normalTextSize" 
                 android:text="@string/energy"/>
 			<!-- 用来显示精力长度 -->
-            <ProgressBar
+            <TextView
                 android:id="@+id/energy_bar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:indeterminate="true"/>
-            <!-- 精力值 -->
+                android:layout_height="wrap_content"
+                android:background="@drawable/energy_bar"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
+            <!-- 精力值 -->
             <TextView
                 android:id="@+id/energy_points"
                 android:layout_width="wrap_content"
@@ -54,14 +54,15 @@
              android:textSize="@dimen/normalTextSize" 
              android:text="@string/happy"/>
 		<!-- 用来显示长度 -->
-       <ProgressBar
-           android:id="@+id/happy_bar"
-           style="?android:attr/progressBarStyleHorizontal"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" 
-           android:indeterminate="true"/>
-       <!-- 快乐值 -->
+         <TextView
+             android:id="@+id/happy_bar"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@drawable/energy_bar"
+             android:textAppearance="?android:attr/textAppearanceSmall" />
 
+
+       <!-- 快乐值 -->
        <TextView
            android:id="@+id/happy_points"
            android:layout_width="wrap_content"
@@ -78,14 +79,15 @@
                android:textSize="@dimen/normalTextSize" 
                android:text="@string/happy"/>
 		<!-- 用来显示健康长度 -->
-           <ProgressBar
+           <TextView
                android:id="@+id/health_bar"
-               style="?android:attr/progressBarStyleHorizontal"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content" 
-               android:indeterminate="true"/>
-           <!-- 健康值 -->
+               android:layout_height="wrap_content"
+               android:background="@drawable/energy_bar"
+               android:textAppearance="?android:attr/textAppearanceSmall" />
 
+
+           <!-- 健康值 -->
            <TextView
                android:id="@+id/health_points"
                android:layout_width="wrap_content"
@@ -102,14 +104,14 @@
                android:textSize="@dimen/normalTextSize" 
                android:text="@string/hunger"/>
 		  <!-- 用来显示饥饿长度 -->
-          <ProgressBar
+           <TextView
                android:id="@+id/hunger_bar"
-               style="?android:attr/progressBarStyleHorizontal"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content" 
-               android:indeterminate="true"/>
-           <!-- 饥饿值 -->
+               android:layout_height="wrap_content"
+               android:background="@drawable/energy_bar"
+               android:textAppearance="?android:attr/textAppearanceSmall" />
 
+           <!-- 饥饿值 -->
            <TextView
                android:id="@+id/hunger_points"
                android:layout_width="wrap_content"

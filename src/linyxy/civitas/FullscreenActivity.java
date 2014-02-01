@@ -2,6 +2,7 @@ package linyxy.civitas;
 
 import linyxy.civitas.util.SystemUiHider;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -69,6 +70,13 @@ public class FullscreenActivity extends Activity {
 			String pasword= userPassword.getText().toString();
 			
 			Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
+			
+			Intent startMySecond = new Intent();
+			startMySecond.setClass(FullscreenActivity.this, my_second.class);
+			
+			FullscreenActivity.this.startActivity(startMySecond);
+			
+			
 			// TODO Auto-generated method stub
 		}
 		
