@@ -1,6 +1,14 @@
 package linyxy.civitas;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import linyxy.civitas.util.DialogUtil;
+import linyxy.civitas.util.HttpUtil;
 import linyxy.civitas.util.SystemUiHider;
+
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,19 +75,85 @@ public class FullscreenActivity extends Activity {
 		public void onClick(View v) {
 			
 			String name = userName.getText().toString();
-			String pasword= userPassword.getText().toString();
 			
-			Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
+			if(validate())
+			{
+				if(loginPro())
+				{
+					
+					Intent startMySecond = new Intent();
+					startMySecond.setClass(FullscreenActivity.this, my_second.class);
+					FullscreenActivity.this.startActivity(startMySecond);
+					finish();
+				}
+				else
+				{
+					DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
+				}
+			}
 			
-			Intent startMySecond = new Intent();
-			startMySecond.setClass(FullscreenActivity.this, my_second.class);
-			
-			FullscreenActivity.this.startActivity(startMySecond);
 			
 			
 			// TODO Auto-generated method stub
 		}
 		
+	}
+	
+	private boolean loginPro()
+	{
+		// 获取用户输入的用户名、密码
+		String username = userName.getText().toString();
+		String pwd = userPassword.getText().toString();
+		JSONObject jsonObj;
+		try
+		{
+			jsonObj = query(username, pwd);
+			// 用户名结果返回的不是“false”
+			if (!jsonObj.getString("userName").equals("false"))
+			{
+				//将用户名放入value@string文件
+				return true;
+			}
+		}
+		catch (Exception e)
+		{
+			DialogUtil.showDialog(this, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	// 对用户输入的用户名、密码进行校验
+	private boolean validate()
+	{
+		String username = userName.getText().toString().trim();
+		if (username.equals(""))
+		{
+			DialogUtil.showDialog(this, "你填写的用户是个啥！", false);
+			return false;
+		}
+		String pwd = userPassword.getText().toString().trim();
+		if (pwd.equals(""))
+		{
+			DialogUtil.showDialog(this, "你填的密码是个啥！", false);
+			return false;
+		}
+		return true;
+	}
+
+	// 定义发送请求的方法
+	private JSONObject query(String username, String password) throws Exception
+	{
+		// 使用Map封装请求参数
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userName", username);
+		map.put("password", password);
+		// 定义发送请求的URL
+		String url = HttpUtil.BASE_URL + /*!!!!!此处仍需要修改!!!*/"processLogin.action";
+		// 发送请求
+		return new JSONObject(HttpUtil.postRequest(url, map));
 	}
 //		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 //		final View contentView = findViewById(R.id.fullscreen_content);
@@ -190,4 +264,6 @@ public class FullscreenActivity extends Activity {
 //		mHideHandler.removeCallbacks(mHideRunnable);
 //		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 //	}
+
+
 }
