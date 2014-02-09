@@ -28,6 +28,10 @@
             android:name="linyxy.civitas.my_second"
             android:label="@string/my_second"
             ></activity>
+        <activity
+            android:name="linyxy.civitas.messages"
+            android:label="@string/messages"
+            ></activity>
     </application>
 
 </manifest>
