@@ -5,7 +5,6 @@ import java.util.Map;
 
 import linyxy.civitas.util.DialogUtil;
 import linyxy.civitas.util.HttpUtil;
-import linyxy.civitas.util.SharedPreferenceUtil;
 import linyxy.civitas.util.SystemUiHider;
 
 import org.json.JSONObject;
@@ -82,9 +81,6 @@ public class FullscreenActivity extends Activity {
 			{
 				if(loginPro())
 				{
-					
-					
-					SharedPreferenceUtil.updateSharedPreference(FullscreenActivity.this, "personStatus","userName", name);
 					
 					Intent startMySecond = new Intent();
 					startMySecond.setClass(FullscreenActivity.this, my_second.class);
