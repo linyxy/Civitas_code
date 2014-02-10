@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 /*
  * 这是一个用来访问网络数据类，
@@ -16,6 +17,8 @@ import android.content.Context;
  */
 public class DataRequestUtil {
 
+	public static final String pseronStatus = "personStatus";
+	static String dataR = "DataRequest";
 	
 	public DataRequestUtil() {
 		// TODO Auto-generated constructor stub
@@ -24,6 +27,7 @@ public class DataRequestUtil {
 	public static JSONObject query(String conectPosition,Map<String, String> requestMap) throws Exception
 	{
 		// 定义发送请求的URL
+		Log.d(dataR, "send request to server| query");
 		String url = HttpUtil.BASE_URL + conectPosition+".jsp";
 		// 发送请求
 		return new JSONObject(HttpUtil.postRequest(url,requestMap));
@@ -32,6 +36,7 @@ public class DataRequestUtil {
 	public static JSONArray requestData(String conectPosition,Map<String, String> requestMap) throws Exception
 	{
 		// 定义发送请求的URL
+		Log.d(dataR, "send request to server | requestData");
 		String url = HttpUtil.BASE_URL + conectPosition+".jsp";
 		// 发送请求
 		return new JSONArray(HttpUtil.postRequest(url,requestMap));
@@ -45,8 +50,7 @@ public class DataRequestUtil {
 	@SuppressWarnings("null")
 	public static void getStatus(Context ctx)
 	{
-		
-		String username = SharedPreferenceUtil.readSharedPreference(ctx,"personStatus", "unserNmae");
+		String username = SharedPreferenceUtil.readSharedPreference(ctx,pseronStatus, "unserNmae");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userName", username);
 		//读取sharedP中的用户名，以用户名作为参数，去服务器request status
@@ -68,7 +72,7 @@ public class DataRequestUtil {
 			
 			for(String in:key)
 			{
-				SharedPreferenceUtil.updateSharedPreference(ctx,"personStatus", in, status.getString(in));
+				SharedPreferenceUtil.updateSharedPreference(ctx,pseronStatus, in, status.getString(in));
 			}
 			
 		} catch (Exception e) {
@@ -89,7 +93,7 @@ public class DataRequestUtil {
 	 */
 	public static void getWorkPlace(Context ctx)
 	{
-		String username = SharedPreferenceUtil.readSharedPreference(ctx,"personStatus", "unserNmae");
+		String username = SharedPreferenceUtil.readSharedPreference(ctx,pseronStatus, "unserNmae");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userName", username);
 		//读取sharedP中的用户名，以用户名作为参数，去服务器request workpalce
@@ -97,7 +101,7 @@ public class DataRequestUtil {
 		
 		try {
 			JSONObject w = query("getWorkPlace",map);
-			SharedPreferenceUtil.updateSharedPreference(ctx, "personStatus", "workPlace", w.getString("workPlace"));
+			SharedPreferenceUtil.updateSharedPreference(ctx, pseronStatus, "workPlace", w.getString("workPlace"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

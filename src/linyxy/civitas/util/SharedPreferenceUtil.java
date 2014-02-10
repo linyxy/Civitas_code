@@ -3,11 +3,13 @@ package linyxy.civitas.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 public class SharedPreferenceUtil {
 
 	
 	public static final String userInfo = "userInof";
+	public static String sharedP = "sharedP";
 	
 	public SharedPreferenceUtil() {
 		// TODO Auto-generated constructor stub
@@ -24,9 +26,9 @@ public class SharedPreferenceUtil {
 	{
 		SharedPreferences S  = ctx.getSharedPreferences(fileName, Context.MODE_PRIVATE);
 		Editor editor = S.edit();
-		
 		editor.putString(key, value);
 		editor.commit();
+		Log.d(sharedP, "update sharedP");
 	}
 	
 	
@@ -41,6 +43,7 @@ public class SharedPreferenceUtil {
 	{
 		SharedPreferences S = ctx.getSharedPreferences(fileName, 0);
 		String str = S.getString(key, "");
+		Log.d(sharedP, "successfully read from sharedP");
 		return str;
 	}
 	

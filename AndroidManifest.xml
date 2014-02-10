@@ -32,6 +32,9 @@
             android:name="linyxy.civitas.messages"
             android:label="@string/messages"
             ></activity>
+        <activity 
+            android:name="linyxy.civitas.conversation"
+            android:label="@string/conversation"></activity>
     </application>
 
 </manifest>

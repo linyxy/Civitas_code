@@ -3,6 +3,7 @@ package linyxy.civitas;
 import java.util.HashMap;
 import java.util.Map;
 
+import linyxy.civitas.util.DataRequestUtil;
 import linyxy.civitas.util.DialogUtil;
 import linyxy.civitas.util.HttpUtil;
 import linyxy.civitas.util.SharedPreferenceUtil;
@@ -13,6 +14,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,12 +59,14 @@ public class FullscreenActivity extends Activity {
 	private EditText userName;
 	private EditText userPassword;
 	
+	static String Login = "logining";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
-		
+		Log.d(Login,"The application is started normally");
 		log = (Button)findViewById(R.id.login_button);
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
@@ -76,7 +80,7 @@ public class FullscreenActivity extends Activity {
 		public void onClick(View v) {
 			
 			String name = userName.getText().toString();
-			
+			Log.d(Login, "start to login");
 			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
 			if(validate())
 			{
@@ -85,7 +89,7 @@ public class FullscreenActivity extends Activity {
 					
 					
 					SharedPreferenceUtil.updateSharedPreference(FullscreenActivity.this, "personStatus","userName", name);
-					
+					Log.d(Login, "Jump to my_second");
 					Intent startMySecond = new Intent();
 					startMySecond.setClass(FullscreenActivity.this, my_second.class);
 					FullscreenActivity.this.startActivity(startMySecond);
@@ -116,12 +120,14 @@ public class FullscreenActivity extends Activity {
 			// 用户名结果返回的不是“false”
 			if (!jsonObj.getString("userName").equals("false"))
 			{
-				//将用户名放入value@string文件
+				SharedPreferenceUtil.updateSharedPreference(this, DataRequestUtil.pseronStatus, "userName",jsonObj.getString("userName"));
+				Log.d(Login, "successfully logined");
 				return true;
 			}
 		}
 		catch (Exception e)
-		{
+		{	
+			Log.d(Login, "sever response failed");
 			DialogUtil.showDialog(this, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
 			e.printStackTrace();
 		}
@@ -144,6 +150,7 @@ public class FullscreenActivity extends Activity {
 			DialogUtil.showDialog(this, "你填的密码是个啥！", false);
 			return false;
 		}
+		Log.d(Login,"pass validation");
 		return true;
 	}
 

@@ -1,15 +1,14 @@
 package linyxy.civitas;
 
-import linyxy.civitas.R.layout;
 import android.app.Activity;
 import android.os.Bundle;
 
 /*
- * 站内信的总集页面，显示显示所有coversations
+ * 单个站内信对话
  */
-public class messages extends Activity {
+public class Conversation extends Activity {
 
-	public messages() {
+	public Conversation() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -20,8 +19,9 @@ public class messages extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.conversation);
 		
-		setContentView(layout.messages);
+		
 	}
 
 }
