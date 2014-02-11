@@ -20,25 +20,11 @@ import android.widget.Button;
 
 public class SQLiteActivity extends Activity {
     /** Called when the activity is first created. */
-	private Button createButton;
-	private Button insertButton;
-	private Button updateButton;
-	private Button updateRecordButton;
-	private Button queryButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        createButton = (Button)findViewById(R.id.createDatabase);
-        updateButton = (Button)findViewById(R.id.updateDatabase);
-        insertButton = (Button)findViewById(R.id.insert);
-        updateRecordButton = (Button)findViewById(R.id.update);
-        queryButton = (Button)findViewById(R.id.query);
-        createButton.setOnClickListener(new CreateListener());
-        updateButton.setOnClickListener(new UpdateListener());
-        insertButton.setOnClickListener(new InsertListener());
-        updateRecordButton.setOnClickListener(new UpdateRecordListener());
-        queryButton.setOnClickListener(new QueryListener());
+
     }
     class CreateListener implements OnClickListener{
 		@Override
