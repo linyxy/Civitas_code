@@ -7,6 +7,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -14,8 +15,9 @@ import android.util.Log;
  * 这是一个用来访问网络数据类，
  * 包含基础的数据请求函数，
  * 和用来刷新数据库，sharedP里面的内容的函数
+ * 相当于Http＋数据库操作
  */
-public class DataRequestUtil {
+public class DataRequestUtil extends Activity{
 
 	public static final String pseronStatus = "personStatus";
 	static String dataR = "DataRequest";
@@ -48,9 +50,9 @@ public class DataRequestUtil {
 	@return 一个包含玩家名字，等级，经验，精力，快乐，健康，饥饿的列表
 	 */
 	@SuppressWarnings("null")
-	public static void getStatus(Context ctx)
+	public void getStatus()
 	{
-		String username = SharedPreferenceUtil.readSharedPreference(ctx,pseronStatus, "unserNmae");
+		String username = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this,pseronStatus, "unserNmae");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userName", username);
 		//读取sharedP中的用户名，以用户名作为参数，去服务器request status
@@ -72,13 +74,13 @@ public class DataRequestUtil {
 			
 			for(String in:key)
 			{
-				SharedPreferenceUtil.updateSharedPreference(ctx,pseronStatus, in, status.getString(in));
+				SharedPreferenceUtil.updateSharedPreference(DataRequestUtil.this,pseronStatus, in, status.getString(in));
 			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("在获取status时出现错误");
-			DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
+			DialogUtil.showDialog(DataRequestUtil.this, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
 			e.printStackTrace();
 		}
 		
@@ -91,9 +93,9 @@ public class DataRequestUtil {
 	@return String 工作地点，没有工作return null
 
 	 */
-	public static void getWorkPlace(Context ctx)
+	public void getWorkPlace()
 	{
-		String username = SharedPreferenceUtil.readSharedPreference(ctx,pseronStatus, "unserNmae");
+		String username = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this,pseronStatus, "unserNmae");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userName", username);
 		//读取sharedP中的用户名，以用户名作为参数，去服务器request workpalce
@@ -101,7 +103,7 @@ public class DataRequestUtil {
 		
 		try {
 			JSONObject w = query("getWorkPlace",map);
-			SharedPreferenceUtil.updateSharedPreference(ctx, pseronStatus, "workPlace", w.getString("workPlace"));
+			SharedPreferenceUtil.updateSharedPreference(DataRequestUtil.this, pseronStatus, "workPlace", w.getString("workPlace"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
