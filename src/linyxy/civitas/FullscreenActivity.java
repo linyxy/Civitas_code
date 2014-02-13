@@ -71,9 +71,17 @@ public class FullscreenActivity extends Activity {
 	class loginButtonListener implements View.OnClickListener
 	{
 
+		
+		
+		
 		@Override
 		public void onClick(View v) {
-			
+			////////////
+			Intent intent = new Intent();		       
+	        intent.setClass(FullscreenActivity.this, my_second.class);
+	        FullscreenActivity.this.startActivity(intent);
+	        ////////////
+	        
 			String name = userName.getText().toString();
 			
 			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();

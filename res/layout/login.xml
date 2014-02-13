@@ -45,7 +45,9 @@
 		    android:layout_width="@dimen/halfScreenWidth"
 		    android:layout_height="wrap_content"
 		    android:background="@drawable/login_text_view_shape"
-		    android:hint="@string/login_account_hint" />
+		    android:singleLine="true"
+		    android:hint="@string/login_account_hint" 
+		    android:textColor="#000000"/>
 
 	</TableRow>
 	<TableRow
@@ -71,7 +73,9 @@
 	        android:layout_height="wrap_content"
 	        android:hint="@string/login_password_hint"
 	        android:background="@drawable/login_text_view_shape"
-	        android:inputType="textPassword" />
+	        android:inputType="textPassword"
+	        android:singleLine="true" 
+	        android:textColor="#000000"/>
 
 	</TableRow>
 

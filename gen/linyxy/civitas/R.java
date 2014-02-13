@@ -25,11 +25,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int buttonBarStyle=0x7f010000;
     }
     public static final class color {
+        public static final int black=0x7f050009;
         public static final int black_overlay=0x7f050000;
+        public static final int blue=0x7f050008;
         public static final int button_blue=0x7f050003;
+        public static final int ci_tie2color=0x7f050005;
         public static final int gray=0x7f050001;
         public static final int login_yellow=0x7f050004;
-        public static final int person_blue=0x7f050005;
+        public static final int person_blue=0x7f050006;
+        public static final int transparent=0x7f050007;
         public static final int white=0x7f050002;
     }
     public static final class dimen {
@@ -48,78 +52,92 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int twothirdsScreenWidth=0x7f06000a;
     }
     public static final class drawable {
-        public static final int biasic_back=0x7f020000;
-        public static final int bu_yu=0x7f020001;
-        public static final int ci_tie=0x7f020002;
-        public static final int collections=0x7f020003;
-        public static final int district=0x7f020004;
-        public static final int domicile=0x7f020005;
-        public static final int employments=0x7f020006;
-        public static final int energy_bar=0x7f020007;
-        public static final int estates=0x7f020008;
-        public static final int friendships=0x7f020009;
-        public static final int ic_launcher=0x7f02000a;
-        public static final int login_background=0x7f02000b;
-        public static final int login_button_shape=0x7f02000c;
-        public static final int login_text_view_shape=0x7f02000d;
-        public static final int marketing=0x7f02000e;
-        public static final int messages=0x7f02000f;
-        public static final int normal_icon=0x7f020010;
-        public static final int normal_return_shape=0x7f020011;
-        public static final int notifications=0x7f020012;
-        public static final int notifications_1=0x7f020013;
-        public static final int notifications_2=0x7f020014;
-        public static final int notifications_3=0x7f020015;
-        public static final int notifications_4=0x7f020016;
-        public static final int person=0x7f020017;
-        public static final int recipes=0x7f020018;
-        public static final int resign=0x7f020019;
-        public static final int user_icon=0x7f02001a;
-        public static final int workplace=0x7f02001b;
+        public static final int bg_btn_sel=0x7f020000;
+        public static final int biasic_back=0x7f020001;
+        public static final int bu_yu=0x7f020002;
+        public static final int button_color=0x7f020003;
+        public static final int ci_tie=0x7f020004;
+        public static final int ci_tie2=0x7f020005;
+        public static final int collections=0x7f020006;
+        public static final int district=0x7f020007;
+        public static final int domicile=0x7f020008;
+        public static final int employments=0x7f020009;
+        public static final int energy_bar=0x7f02000a;
+        public static final int estates=0x7f02000b;
+        public static final int friendships=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int login_background=0x7f02000e;
+        public static final int login_button_shape=0x7f02000f;
+        public static final int login_text_view_shape=0x7f020010;
+        public static final int marketing=0x7f020011;
+        public static final int messages=0x7f020012;
+        public static final int normal_icon=0x7f020013;
+        public static final int normal_return_shape=0x7f020014;
+        public static final int notifications=0x7f020015;
+        public static final int notifications_1=0x7f020016;
+        public static final int notifications_2=0x7f020017;
+        public static final int notifications_3=0x7f020018;
+        public static final int notifications_4=0x7f020019;
+        public static final int person=0x7f02001a;
+        public static final int recipes=0x7f02001b;
+        public static final int resign=0x7f02001c;
+        public static final int tabwidget_btn_bg=0x7f02001d;
+        public static final int titlebar_bg_nor_2=0x7f02001e;
+        public static final int titlebar_bg_nor_3=0x7f02001f;
+        public static final int user_icon=0x7f020020;
+        public static final int workplace=0x7f020021;
+        public static final int write=0x7f020022;
     }
     public static final class id {
-        public static final int button1=0x7f090016;
-        public static final int dao_cai=0x7f09001c;
-        public static final int domicile=0x7f090012;
+        public static final int TableLayout01=0x7f09000f;
+        public static final int button1=0x7f090017;
+        public static final int dao_cai=0x7f09001d;
+        public static final int domicile=0x7f090013;
         public static final int dummy_button=0x7f090002;
-        public static final int energy_bar=0x7f090022;
-        public static final int energy_points=0x7f090023;
-        public static final int estates=0x7f090014;
+        public static final int energy_bar=0x7f090023;
+        public static final int energy_points=0x7f090024;
+        public static final int estates=0x7f090015;
         public static final int exp_bar=0x7f090003;
         public static final int fullscreen_content=0x7f090000;
         public static final int fullscreen_content_controls=0x7f090001;
-        public static final int guan_zhu=0x7f09001b;
-        public static final int happy_bar=0x7f090024;
-        public static final int happy_points=0x7f090025;
-        public static final int he_cai=0x7f09001a;
-        public static final int header=0x7f090017;
-        public static final int health_bar=0x7f090026;
-        public static final int health_points=0x7f090027;
-        public static final int hunger_bar=0x7f090028;
-        public static final int hunger_points=0x7f090029;
+        public static final int guan_zhu=0x7f09001c;
+        public static final int happy_bar=0x7f090025;
+        public static final int happy_points=0x7f090026;
+        public static final int he_cai=0x7f09001b;
+        public static final int header=0x7f090018;
+        public static final int health_bar=0x7f090027;
+        public static final int health_points=0x7f090028;
+        public static final int hunger_bar=0x7f090029;
+        public static final int hunger_points=0x7f09002a;
+        public static final int iv_mark=0x7f09002d;
+        public static final int letterlistview=0x7f09002b;
         public static final int login_button=0x7f090008;
         public static final int login_icon=0x7f090009;
-        public static final int messages=0x7f09000f;
+        public static final int messages=0x7f090010;
         public static final int my_first=0x7f09000d;
         public static final int my_first_exp=0x7f09000c;
         public static final int my_first_level=0x7f09000b;
         public static final int my_first_name=0x7f09000a;
-        public static final int my_first_speech_list=0x7f090015;
+        public static final int my_first_speech_list=0x7f090016;
         public static final int my_first_status=0x7f09000e;
-        public static final int recipes=0x7f090013;
-        public static final int speech_content=0x7f090019;
-        public static final int speech_list=0x7f09001e;
-        public static final int speech_name=0x7f090018;
-        public static final int speech_time=0x7f09001d;
-        public static final int status=0x7f09001f;
-        public static final int status_bar=0x7f090021;
-        public static final int storeage=0x7f090011;
+        public static final int recipes=0x7f090014;
+        public static final int speech_content=0x7f09001a;
+        public static final int speech_list=0x7f09001f;
+        public static final int speech_name=0x7f090019;
+        public static final int speech_time=0x7f09001e;
+        public static final int status=0x7f090020;
+        public static final int status_bar=0x7f090022;
+        public static final int storeage=0x7f090012;
+        public static final int tab_title=0x7f09002c;
+        public static final int tabhost=0x7f09002e;
         public static final int user_exp=0x7f090005;
-        public static final int user_icon=0x7f090020;
+        public static final int user_icon=0x7f090021;
         public static final int user_level=0x7f090004;
         public static final int user_name=0x7f090006;
         public static final int user_password=0x7f090007;
-        public static final int workplace=0x7f090010;
+        public static final int viewpager=0x7f09002f;
+        public static final int workplace=0x7f090011;
+        public static final int writebutton=0x7f090030;
     }
     public static final class layout {
         public static final int activity_fullscreen=0x7f030000;
@@ -134,6 +152,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int speech_list=0x7f030009;
         public static final int speech_no_icon=0x7f03000a;
         public static final int status=0x7f03000b;
+        public static final int sub=0x7f03000c;
+        public static final int tabwidget=0x7f03000d;
+        public static final int viewpager=0x7f03000e;
     }
     public static final class string {
         public static final int WTF=0x7f070003;
@@ -221,7 +242,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:buttonBarButtonStyle
+          @attr name linyxy.civitas:buttonBarButtonStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarButtonStyle = 1;
         /**
@@ -231,7 +252,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:buttonBarStyle
+          @attr name linyxy.civitas:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
     };
