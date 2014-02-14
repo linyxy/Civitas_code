@@ -52,10 +52,8 @@ public class DataRequestUtil extends Activity{
 	@SuppressWarnings("null")
 	public void getStatus()
 	{
-		String username = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this,pseronStatus, "unserNmae");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("userName", username);
-		//读取sharedP中的用户名，以用户名作为参数，去服务器request status
+		Map<String, String> map =getName();
+		
 		
 		List<String> key = null;
 		key.add("name");
@@ -95,11 +93,7 @@ public class DataRequestUtil extends Activity{
 	 */
 	public void getWorkPlace()
 	{
-		String username = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this,pseronStatus, "unserNmae");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("userName", username);
-		//读取sharedP中的用户名，以用户名作为参数，去服务器request workpalce
-		
+		Map<String, String> map = getName();
 		
 		try {
 			JSONObject w = query("getWorkPlace",map);
@@ -112,6 +106,29 @@ public class DataRequestUtil extends Activity{
 		return;
 	}
 	
+	public void getChat()
+	{
+		Map<String, String> map = getName();
+		
+		try {
+			JSONArray arr = requestData("getChat",map);
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 用于读取sharedP中的用户名
+	 * @return map containing of name
+	 */
+	public Map<String, String> getName()
+	{
+		String username = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this,pseronStatus, "unserNmae");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userName", username);
+		return map;
+	}
 
 }

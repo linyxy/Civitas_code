@@ -22,6 +22,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		DataRequestUtil DR = new DataRequestUtil();
 		
 		if(params.equals("getStatus")) DR.getStatus();
+		if(params.equals("getChat")) DR.getChat();
 		
 		return params[0];
 	}
