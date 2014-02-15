@@ -30,8 +30,20 @@
             android:label="@string/my_second"
             ></activity>
         <activity
-            android:name="linyxy.civitas.messages"
-            android:label="@string/messages"
+            android:name="linyxy.civitas.EmptyActivity"
+            android:label="@string/my_second"
+            ></activity>
+        <activity
+            android:name="linyxy.civitas.LetterTabHostActivity"
+            android:label="@string/my_second"
+            ></activity>
+        <activity
+            android:name="linyxy.civitas.LetterActivity"
+            android:label="@string/my_second"
+            ></activity>
+        <activity
+            android:name="linyxy.civitas.MessageActivity"
+            android:label="@string/my_second"
             ></activity>
         <activity 
             android:name="linyxy.civitas.conversation"

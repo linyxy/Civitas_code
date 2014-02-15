@@ -24,7 +24,21 @@ public class SQLiteActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 
+=======
+        /*setContentView(R.layout.main);
+        createButton = (Button)findViewById(R.id.createDatabase);
+        updateButton = (Button)findViewById(R.id.updateDatabase);
+        insertButton = (Button)findViewById(R.id.insert);
+        updateRecordButton = (Button)findViewById(R.id.update);
+        queryButton = (Button)findViewById(R.id.query);*/
+        createButton.setOnClickListener(new CreateListener());
+        updateButton.setOnClickListener(new UpdateListener());
+        insertButton.setOnClickListener(new InsertListener());
+        updateRecordButton.setOnClickListener(new UpdateRecordListener());
+        queryButton.setOnClickListener(new QueryListener());
+>>>>>>> pr/1
     }
     class CreateListener implements OnClickListener{
 		@Override

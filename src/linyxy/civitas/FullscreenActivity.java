@@ -6,7 +6,6 @@ import java.util.Map;
 import linyxy.civitas.util.DataRequestUtil;
 import linyxy.civitas.util.DialogUtil;
 import linyxy.civitas.util.HttpUtil;
-import linyxy.civitas.util.SharedPreferenceUtil;
 import linyxy.civitas.util.SystemUiHider;
 
 import org.json.JSONObject;
@@ -76,9 +75,17 @@ public class FullscreenActivity extends Activity {
 	class loginButtonListener implements View.OnClickListener
 	{
 
+		
+		
+		
 		@Override
 		public void onClick(View v) {
-			
+			////////////
+			Intent intent = new Intent();		       
+	        intent.setClass(FullscreenActivity.this, my_second.class);
+	        FullscreenActivity.this.startActivity(intent);
+	        ////////////
+	        
 			String name = userName.getText().toString();
 			Log.d(Login, "start to login");
 			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
@@ -87,9 +94,12 @@ public class FullscreenActivity extends Activity {
 				if(loginPro())
 				{
 					
+<<<<<<< HEAD
 					
 					SharedPreferenceUtil.updateSharedPreference(FullscreenActivity.this, "personStatus","userName", name);
 					Log.d(Login, "Jump to my_second");
+=======
+>>>>>>> pr/1
 					Intent startMySecond = new Intent();
 					startMySecond.setClass(FullscreenActivity.this, my_second.class);
 					FullscreenActivity.this.startActivity(startMySecond);

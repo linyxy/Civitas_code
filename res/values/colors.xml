@@ -6,6 +6,11 @@
 	
 	<color name="button_blue">#0040FF</color>
 	<color name="login_yellow">#FFBF00</color>
-	
+	<color name="ci_tie2color">#00ccff</color>
 	<color name="person_blue">#0B2AC4</color>
+	<color name="transparent">#00000000</color>
+     
+    <color name="blue">#87CEFA</color>  
+    <color name="black">#ff000000</color>
+    
 </resources>
