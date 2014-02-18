@@ -1,5 +1,7 @@
 package linyxy.civitas;
 
+import java.util.List;
+
 import linyxy.civitas.util.DatabaseHelper;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -24,26 +26,22 @@ public class SQLiteActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DatabaseHelper dbHelper = new DatabaseHelper(SQLiteActivity.this,DatabaseHelper.dataBaseCivi);
 
     }
-    class CreateListener implements OnClickListener{
-		@Override
-		public void onClick(View v) {
-			//创建一个DatabaseHelper对象
-			DatabaseHelper dbHelper = new DatabaseHelper(SQLiteActivity.this,"test_mars_db");
-			//只有调用了DatabaseHelper对象的getReadableDatabase()方法，或者是getWritableDatabase()方法之后，才会创建，或打开一个数据库
-			SQLiteDatabase db = dbHelper.getReadableDatabase();
-		}
+    
+    
+    public void refreshData (List<Object> models){
+    	//创建一个DatabaseHelper对象
+		DatabaseHelper dbHelper = new DatabaseHelper(SQLiteActivity.this,DatabaseHelper.dataBaseCivi);
+		//只有调用了DatabaseHelper对象的getReadableDatabase()方法，或者是getWritableDatabase()方法之后，才会创建，或打开一个数据库
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		
+		//下面将更具传入的model种类更新数据库
     }
-    class UpdateListener implements OnClickListener{
+    
+    
 
-		@Override
-		public void onClick(View v) {
-			DatabaseHelper dbHelper = new DatabaseHelper(SQLiteActivity.this,"test_mars_db",2);
-			SQLiteDatabase db = dbHelper.getReadableDatabase();
-		}
-    	
-    }
     class InsertListener implements OnClickListener{
 
 		@Override

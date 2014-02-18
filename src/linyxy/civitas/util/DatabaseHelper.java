@@ -9,12 +9,18 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.util.Log;
 
-//DatabaseHelper作为一个访问SQLite的助手类，提供两个方面的功能，
-//第一，getReadableDatabase(),getWritableDatabase()可以获得SQLiteDatabse对象，通过该对象可以对数据库进行操作
-//第二，提供了onCreate()和onUpgrade()两个回调函数，允许我们在创建和升级数据库时，进行自己的操作
+/*
+ * Update Feb18
+ * 开始进行SQL数据库存放， 
+ * 具体存放规则见“SQL存放规则.txt”
+ */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+	
+	public static String dataBaseCivi = "civitasData"; //用于存放数据库的名字
+	public static String DBtag = "databse";
 	
 	private static final int VERSION = 1;
 	//在SQLiteOepnHelper的子类当中，必须有该构造函数
@@ -36,7 +42,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 		System.out.println("create a Database");
+		Log.d(DBtag, "开始创建数据库");
 		//execSQL函数用于执行SQL语句
+		
+		  db.execSQL("CREATE TABLE IF NOT EXISTS notifications (num integer primary key autoincrement, content TEXT, notificationType INTEGER)"); 
+		  //创建关于notifications的表格
+		  db.execSQL("CREATE TABLE IF NOT EXISTS chats (name TEXT, content TEXT,num INTEGER, send INTEGER)");
+		  //创建关于chats的表格
+		  
+		  
 		//db.execSQL("create table user(id int,name varchar(20))");
 	}
 

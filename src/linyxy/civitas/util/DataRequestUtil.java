@@ -26,6 +26,15 @@ public class DataRequestUtil extends Activity{
 		// TODO Auto-generated constructor stub
 		
 	}
+	
+	/**
+	 * 通过post函数向服务器调取内容的函数
+	 * 传入 连接位置 请求map
+	 * @param conectPosition
+	 * @param requestMap
+	 * @return
+	 * @throws Exception
+	 */
 	public static JSONObject query(String conectPosition,Map<String, String> requestMap) throws Exception
 	{
 		// 定义发送请求的URL
@@ -88,7 +97,7 @@ public class DataRequestUtil extends Activity{
 	
 	/**获取工作地址
 	@input 用户名
-	@return String 工作地点，没有工作return null
+	@return String 工作地点，没有工作return null（将存入SharedP）
 
 	 */
 	public void getWorkPlace()
@@ -105,13 +114,17 @@ public class DataRequestUtil extends Activity{
 		
 		return;
 	}
-	
+	/**
+	 * 从服务器获取chats的函数
+	 */
 	public void getChat()
 	{
 		Map<String, String> map = getName();
 		
 		try {
 			JSONArray arr = requestData("getChat",map);
+			//从服务器获取的JSONArray需要进行解析，然后存入SQLite中等待调取
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -119,6 +132,23 @@ public class DataRequestUtil extends Activity{
 		}
 	}
 
+	/**
+	 * 从服务器获取Notifications的函数
+	 */
+	public void getNotifications()
+	{
+		Map<String,String> map = getName();
+		
+		try{
+			JSONArray arr = requestData("getNotifications",map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	/**
 	 * 用于读取sharedP中的用户名
 	 * @return map containing of name

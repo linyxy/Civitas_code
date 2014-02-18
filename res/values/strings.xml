@@ -10,6 +10,7 @@
 	<string name="my_second">lalalalalal</string>
 	<string name="messages">personal_messages</string>
 	<string name="conversation">conversation_of_messages</string>
+	<string name="SQL">SQL类</string>
 	
 	<!-- personal attribute -->
 	<string name="health">健康</string>
