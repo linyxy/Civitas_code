@@ -1,14 +1,17 @@
 package linyxy.civitas.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import linyxy.civitas.SQLiteActivity;
+import linyxy.civitas.model.Notification;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
 /*
@@ -140,9 +143,15 @@ public class DataRequestUtil extends Activity{
 		Map<String,String> map = getName();
 		
 		try{
-			JSONArray arr = requestData("getNotifications",map);
+			JSONArray arr = requestData("getNotifications",map);	
+			List<JSONObject> array = new ArrayList<JSONObject>();
+			array = JSONAnalysis.JSONArrayDivider(arr);
+			SQLiteActivity SQL = new SQLiteActivity();
+			SQL.refreshData("notifications", array, "content","notificationType");
+			
 			
 		} catch (Exception e) {
+			Log.d(dataR, "something wrong when handling the notifications");
 			e.printStackTrace();
 		}
 	}

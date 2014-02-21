@@ -49,7 +49,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		  //创建关于notifications的表格
 		  db.execSQL("CREATE TABLE IF NOT EXISTS chats (name TEXT, content TEXT,num INTEGER, send INTEGER)");
 		  //创建关于chats的表格
-		  
+		  db.execSQL("CREATE TABLE IF NOT EXISTS educations (skillName TEXT, skillLevel TEXT,comprehension TEXT, " +
+		  		" breakingProp TEXT,description TEXT," +
+		  		" subSkillName TEXT,subSkillPercentage TEXT)");
+		  //创建关于educationExperience的表格
 		  
 		//db.execSQL("create table user(id int,name varchar(20))");
 	}

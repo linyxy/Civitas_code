@@ -3,6 +3,10 @@ package linyxy.civitas;
 import java.util.List;
 
 import linyxy.civitas.util.DatabaseHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -11,7 +15,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 /*
  * 这是一个从mars老师教程里面拉出来的类，
  * 是databaseAcitivity的用于演示的类，
@@ -31,16 +34,34 @@ public class SQLiteActivity extends Activity {
     }
     
     
-    public void refreshData (List<Object> models){
+    public  void  refreshData (String tableName,List<JSONObject> models,String... keys){
     	//创建一个DatabaseHelper对象
 		DatabaseHelper dbHelper = new DatabaseHelper(SQLiteActivity.this,DatabaseHelper.dataBaseCivi);
 		//只有调用了DatabaseHelper对象的getReadableDatabase()方法，或者是getWritableDatabase()方法之后，才会创建，或打开一个数据库
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
 		
 		//下面将更具传入的model种类更新数据库
+		for(JSONObject model: models)
+		{
+			ContentValues values = new ContentValues();
+			
+			for(String key: keys)
+			{
+				try {
+					values.put(key,model.getString(key));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			//调用insert方法，就可以将数据插入到数据库当中
+			db.insert(tableName, null, values);
+		}
     }
     
-    
+    //－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
 
     class InsertListener implements OnClickListener{
 
