@@ -19,10 +19,24 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 	@Override
 	protected String doInBackground(String... params) {
 		// TODO Auto-generated method stub
+		Log.d(async, "doing something in an new thread");
 		DataRequestUtil DR = new DataRequestUtil();
+		
+		
 		
 		if(params.equals("getStatus")) DR.getStatus();
 		if(params.equals("getChat")) DR.getChat();
+		if(params.equals("UrlTest"))
+		{
+			try {
+				String ace = HttpUtilX.getRequest("");
+				Log.i(async, ace);
+				System.out.println(ace);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		return params[0];
 	}

@@ -6,13 +6,16 @@ import java.util.Map;
 import linyxy.civitas.util.DataRequestUtil;
 import linyxy.civitas.util.DialogUtil;
 import linyxy.civitas.util.HttpUtil;
+import linyxy.civitas.util.HttpUtilX;
 import linyxy.civitas.util.SharedPreferenceUtil;
 import linyxy.civitas.util.SystemUiHider;
+import linyxy.civitas.util.UpdateData;
 
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,12 +68,16 @@ public class FullscreenActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+		
 
+		
 		Log.d(Login,"The application is started normally");
 		log = (Button)findViewById(R.id.login_button);
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
 		log.setOnClickListener(new loginButtonListener());
+		
+		
 	}
 	
 	class loginButtonListener implements View.OnClickListener
@@ -81,6 +88,11 @@ public class FullscreenActivity extends Activity {
 			
 			String name = userName.getText().toString();
 			Log.d(Login, "start to login");
+			System.out.println("start the program");
+
+			UpdateData update = new UpdateData();
+			update.execute("UrlTest");
+			
 			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
 			if(validate())
 			{
@@ -107,6 +119,8 @@ public class FullscreenActivity extends Activity {
 		}
 		
 	}
+	
+
 	
 	private boolean loginPro()
 	{
