@@ -51,6 +51,7 @@ public class HttpUtilX
 		// 发送GET请求
 		HttpResponse httpResponse = httpClient.execute(get);
 		// 如果服务器成功地返回响应
+		Log.d(HttpTag, "connecting the server");
 		if (httpResponse.getStatusLine()
 			.getStatusCode() == 200)
 		{

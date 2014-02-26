@@ -20,16 +20,17 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 	protected String doInBackground(String... params) {
 		// TODO Auto-generated method stub
 		Log.d(async, "doing something in an new thread");
-		DataRequestUtil DR = new DataRequestUtil();
+		//DataRequestUtil DR = new DataRequestUtil();
 		
 		
 		
-		if(params.equals("getStatus")) DR.getStatus();
-		if(params.equals("getChat")) DR.getChat();
-		if(params.equals("UrlTest"))
+//		if(params.equals("getStatus")) DR.getStatus();
+//		if(params.equals("getChat")) DR.getChat();
+		if(params[0].equals("UrlTest"))
 		{
+			System.out.println("try HTTPUTILX");
 			try {
-				String ace = HttpUtilX.getRequest("");
+				String ace = HttpUtilX.getRequest(HttpUtilX.BASE_URL);
 				Log.i(async, ace);
 				System.out.println(ace);
 			} catch (Exception e) {
