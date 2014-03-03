@@ -98,9 +98,9 @@ public class FullscreenActivity extends Activity {
 			startDataR.setClass(FullscreenActivity.this, DataRequestUtil.class);
 
 			
-			UpdateData update = new UpdateData();
+			UpdateData update = new UpdateData(FullscreenActivity.this);
 			//服务器相应测试
-			update.execute("UrlTest");
+			update.execute("SharedPTest");
 			//SharedPreference测试
 			//update.execute("SharedTest");
 			

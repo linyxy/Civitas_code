@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -46,7 +47,7 @@ public class DataRequestUtil extends Activity{
 	{
 //		if(action.equals("getStatus")) getStatus();
 //		if(action.equals("getChat")) getChat();
-		if(action.equals("SharedTest")) sharePTest();
+//		if(action.equals("SharedTest")) sharePTest(null);
 		
 	}
 
@@ -190,15 +191,15 @@ public class DataRequestUtil extends Activity{
 		return map;
 	}
 	
-	public void sharePTest()
+	public static void sharePTest(Context ctx)
 	{
 		Log.d(dataR, "Tring to put sample SharedP");
-		SharedPreferenceUtil.updateSharedPreference(DataRequestUtil.this, pseronStatus, "ShareTest", "sample imput");
+		SharedPreferenceUtil.updateSharedPreference(ctx, pseronStatus, "ShareTest", "sample imput");
 		
-		String outByThisCtx = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this, pseronStatus, "ShareTest");
+		String outByThisCtx = SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, "ShareTest");
 		Log.d(dataR, outByThisCtx);
 		
-		String outByAppCtx = SharedPreferenceUtil.readSharedPreference(getApplicationContext(), pseronStatus, "ShareTest");
+		String outByAppCtx = SharedPreferenceUtil.readSharedPreference(ctx.getApplicationContext(), pseronStatus, "ShareTest");
 		Log.d(dataR, outByAppCtx);
 		
 		return ;

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import projectTesting.HttpUtilX;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -17,6 +19,13 @@ import android.util.Log;
 public class UpdateData extends AsyncTask<String, Void, String> {
 
 	public final String async = "async task";
+	private Context ctx;
+	
+	public UpdateData(Context ctx) {
+		super();
+		this.ctx = ctx;
+	}
+
 	/* (non-Javadoc)
 	 * @see android.os.AsyncTask#doInBackground(Params[])
 	 */
@@ -29,13 +38,15 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 
 			System.out.println("SharedTest");
 			Log.d(async, "creating DataRequestUtil activity");
-//			Intent intent = new Intent();
-//			intent.putExtra("action", params[0]);
-			
+	
 			
 			Log.d(async, "DataRequestUtil created");
 			
-
+		if(params[0].equals("SharedPTest"))
+		{
+			DataRequestUtil.sharePTest(ctx);
+		}
+			
 		if(params[0].equals("UrlTest"))
 		{
 			System.out.println("try HTTPUTILX");
