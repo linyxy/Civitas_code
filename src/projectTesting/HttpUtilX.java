@@ -1,7 +1,7 @@
 /**
  * 
  */
-package linyxy.civitas.util;
+package projectTesting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +25,17 @@ import android.util.Log;
  * <br/>Program Name:
  * <br/>Date:
  * @author  linyxy
- * @version  1.5
+ * @version  1.0
  */
 public class HttpUtilX
 {
+	// 创建HttpClient对象
 	public static final String HttpTag = "HTTP_TASK";
 	
-	// 创建HttpClient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
 	public static final String BASE_URL = 
-		"http://192.168.1.107:8080/nhjd'";//需要修改
-	
+		"http://192.168.1.107:8080/nhjd";//需要修改
+	public static final String keng = "?user='11'&pass='22";
 	/**
 	 * 
 	 * @param url 发送请求的URL
@@ -45,13 +45,14 @@ public class HttpUtilX
 	public static String getRequest(String url)
 		throws Exception
 	{
-		Log.d(HttpTag, "starting a new HTTP request");
 		// 创建HttpGet对象。
+		System.out.println("tep1");
+		Log.d(HttpTag, "starting a new HTTP request");
 		HttpGet get = new HttpGet(url);
 		// 发送GET请求
 		HttpResponse httpResponse = httpClient.execute(get);
-		Log.d(HttpTag, "connecting the server");
 		// 如果服务器成功地返回响应
+		Log.d(HttpTag, "connecting the server");
 		if (httpResponse.getStatusLine()
 			.getStatusCode() == 200)
 		{
@@ -59,6 +60,8 @@ public class HttpUtilX
 			// 获取服务器响应字符串
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());
+			Log.i(HttpTag, result);
+			System.out.println(result);
 			return result;
 		}
 		return null;
@@ -74,12 +77,7 @@ public class HttpUtilX
 	public static String postRequest(String url
 		, Map<String ,String> rawParams)throws Exception
 	{
-		Log.d(HttpTag, "starting a post request");
-		
-		System.out.println("size of raw Params"+rawParams.size());
-		
-		
-		
+		Log.d(HttpTag, "start a post request");
 		// 创建HttpPost对象。
 		HttpPost post = new HttpPost(url);
 		// 如果传递参数个数比较多的话可以对传递的参数进行封装
@@ -87,38 +85,28 @@ public class HttpUtilX
 		for(String key : rawParams.keySet())
 		{
 			//封装请求参数
-			Log.d(HttpTag, key);
 			params.add(new BasicNameValuePair(key , rawParams.get(key)));
 		}
 		// 设置请求参数
 		post.setEntity(new UrlEncodedFormEntity(
 			params, "gbk"));
-		// 发送POST请求
+		Log.d(HttpTag, "encoded the pattern into post");
 		
-		Log.d(HttpTag, "encoded the params");
-/*		HttpResponse httpResponse = httpClient.execute(post);
+		// 发送POST请求
+		HttpResponse httpResponse = httpClient.execute(post);
 		// 如果服务器成功地返回响应
 		if (httpResponse.getStatusLine()
 			.getStatusCode() == 200)
 		{
-			Log.d(HttpTag, "server responsed correctly");
+			Log.d(HttpTag, "server successfully responesd");
 			// 获取服务器响应字符串
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());
-			
+			Log.d(HttpTag, result);
 			return result;
 		}
-*/		return null;
+		return null;
 	}
 	
-	public static void main(String[] args)
-	{
-		try {
-			String abe = getRequest(BASE_URL);
-			System.out.println(abe);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 }

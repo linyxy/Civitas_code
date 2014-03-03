@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import linyxy.civitas.SQLiteActivity;
-import linyxy.civitas.model.Notification;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 
 /*
@@ -30,6 +30,26 @@ public class DataRequestUtil extends Activity{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		String action;
+		
+	}
+	
+	public void process(String action)
+	{
+//		if(action.equals("getStatus")) getStatus();
+//		if(action.equals("getChat")) getChat();
+		if(action.equals("SharedTest")) sharePTest();
+		
+	}
+
 	/**
 	 * 通过post函数向服务器调取内容的函数
 	 * 传入 连接位置 请求map
@@ -168,6 +188,20 @@ public class DataRequestUtil extends Activity{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userName", username);
 		return map;
+	}
+	
+	public void sharePTest()
+	{
+		Log.d(dataR, "Tring to put sample SharedP");
+		SharedPreferenceUtil.updateSharedPreference(DataRequestUtil.this, pseronStatus, "ShareTest", "sample imput");
+		
+		String outByThisCtx = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this, pseronStatus, "ShareTest");
+		Log.d(dataR, outByThisCtx);
+		
+		String outByAppCtx = SharedPreferenceUtil.readSharedPreference(getApplicationContext(), pseronStatus, "ShareTest");
+		Log.d(dataR, outByAppCtx);
+		
+		return ;
 	}
 
 }

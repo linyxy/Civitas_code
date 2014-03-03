@@ -16,6 +16,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
+import android.util.Log;
 /**
  * Description:
  * <br/>Copyright (C), 2012-2022, linyxy
@@ -27,10 +29,13 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpUtil
 {
+	public static final String HttpTag = "HTTP_TASK";
+	
 	// 创建HttpClient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
 	public static final String BASE_URL = 
-		"http://192.168.1.107:8080/nhjd";//需要修改
+		"http://192.168.1.107:8080/nhjd'";//需要修改
+	
 	/**
 	 * 
 	 * @param url 发送请求的URL
@@ -40,14 +45,17 @@ public class HttpUtil
 	public static String getRequest(String url)
 		throws Exception
 	{
+		Log.d(HttpTag, "starting a new HTTP request");
 		// 创建HttpGet对象。
 		HttpGet get = new HttpGet(url);
 		// 发送GET请求
 		HttpResponse httpResponse = httpClient.execute(get);
+		Log.d(HttpTag, "connecting the server");
 		// 如果服务器成功地返回响应
 		if (httpResponse.getStatusLine()
 			.getStatusCode() == 200)
 		{
+			Log.d(HttpTag, "Server response successfully!");
 			// 获取服务器响应字符串
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());

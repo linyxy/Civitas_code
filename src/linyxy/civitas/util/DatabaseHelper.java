@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 		System.out.println("create a Database");
-		Log.d(DBtag, "开始创建数据库");
+		Log.d(DBtag, "开始创建数据库&表格");
 		//execSQL函数用于执行SQL语句
 		
 		  db.execSQL("CREATE TABLE IF NOT EXISTS notifications (num integer primary key autoincrement, content TEXT, notificationType INTEGER)"); 

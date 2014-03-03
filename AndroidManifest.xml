@@ -36,9 +36,11 @@
         <activity 
             android:name="linyxy.civitas.conversation"
             android:label="@string/conversation"></activity>
-                <activity 
+        <activity 
             android:name="linyxy.civitas.SQLiteActivity"
             android:label="@string/SQL"  ></activity>
+        <activity
+            android:name="linyxy.civitas.DataRequestUtil"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,9 @@
 package linyxy.civitas.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import projectTesting.HttpUtilX;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -12,7 +16,7 @@ import android.util.Log;
  */
 public class UpdateData extends AsyncTask<String, Void, String> {
 
-	String async = "async task";
+	public final String async = "async task";
 	/* (non-Javadoc)
 	 * @see android.os.AsyncTask#doInBackground(Params[])
 	 */
@@ -20,24 +24,36 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 	protected String doInBackground(String... params) {
 		// TODO Auto-generated method stub
 		Log.d(async, "doing something in an new thread");
-		//DataRequestUtil DR = new DataRequestUtil();
 		
 		
-		
-//		if(params.equals("getStatus")) DR.getStatus();
-//		if(params.equals("getChat")) DR.getChat();
+
+			System.out.println("SharedTest");
+			Log.d(async, "creating DataRequestUtil activity");
+//			Intent intent = new Intent();
+//			intent.putExtra("action", params[0]);
+			
+			
+			Log.d(async, "DataRequestUtil created");
+			
+
 		if(params[0].equals("UrlTest"))
 		{
 			System.out.println("try HTTPUTILX");
 			try {
-				String ace = HttpUtilX.getRequest(HttpUtilX.BASE_URL);
-				Log.i(async, ace);
-				System.out.println(ace);
+				String urlPattern = HttpUtilX.BASE_URL+"/lgoin.jsp" ;
+				HashMap<String, String> content = new HashMap<String,String>();
+				content.put("userName", "linyxy");
+				content.put("password", "1992");
+				Log.d(async, "feng zhuang");
+				String result = HttpUtilX.postRequest(urlPattern, content);
+				if(result != null)
+					Log.d(async, result);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+
 		
 		return params[0];
 	}

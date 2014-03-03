@@ -4,14 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import linyxy.civitas.util.DataRequestUtil;
+import linyxy.civitas.util.DatabaseHelper;
 import linyxy.civitas.util.DialogUtil;
 import linyxy.civitas.util.HttpUtil;
-import linyxy.civitas.util.HttpUtilX;
 import linyxy.civitas.util.SharedPreferenceUtil;
 import linyxy.civitas.util.SystemUiHider;
 import linyxy.civitas.util.UpdateData;
 
 import org.json.JSONObject;
+
+import projectTesting.HttpUtilX;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -80,6 +82,8 @@ public class FullscreenActivity extends Activity {
 		
 	}
 	
+	
+	//按钮监听器
 	class loginButtonListener implements View.OnClickListener
 	{
 
@@ -89,9 +93,16 @@ public class FullscreenActivity extends Activity {
 			String name = userName.getText().toString();
 			Log.d(Login, "start to login");
 			System.out.println("start the program");
+			
+			Intent startDataR = new Intent();
+			startDataR.setClass(FullscreenActivity.this, DataRequestUtil.class);
 
+			
 			UpdateData update = new UpdateData();
+			//服务器相应测试
 			update.execute("UrlTest");
+			//SharedPreference测试
+			//update.execute("SharedTest");
 			
 			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
 			if(validate())
@@ -121,7 +132,7 @@ public class FullscreenActivity extends Activity {
 	}
 	
 
-	
+	//登陆
 	private boolean loginPro()
 	{
 		// 获取用户输入的用户名、密码
@@ -167,7 +178,13 @@ public class FullscreenActivity extends Activity {
 		Log.d(Login,"pass validation");
 		return true;
 	}
-
+	
+	//
+	private void SQLiteOpeningTest()
+	{
+		//DatabaseHelper dbH = new DatabaseHelper()
+	}
+	
 	// 定义发送请求的方法
 	private JSONObject query(String username, String password) throws Exception
 	{
