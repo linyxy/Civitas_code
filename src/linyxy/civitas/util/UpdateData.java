@@ -51,9 +51,10 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		{
 			System.out.println("try HTTPUTILX");
 			try {
-				String urlPattern = HttpUtilX.BASE_URL+"/lgoin.jsp" ;
+				String urlPattern = HttpUtilX.BASE_URL+"/login.jsp" ;
+				HttpUtilX.getRequest(HttpUtilX.BASE_URL);
 				HashMap<String, String> content = new HashMap<String,String>();
-				content.put("userName", "linyxy");
+				content.put("userName", "142");
 				content.put("password", "1992");
 				Log.d(async, "feng zhuang");
 				String result = HttpUtilX.postRequest(urlPattern, content);

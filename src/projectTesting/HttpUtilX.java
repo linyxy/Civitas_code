@@ -60,8 +60,9 @@ public class HttpUtilX
 			// 获取服务器响应字符串
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());
-			Log.i(HttpTag, result);
-			System.out.println(result);
+			Log.i(HttpTag, "resutl---");
+			Log.i(HttpTag, "resutl---"+result);
+			System.out.println("resutl---"+result);
 			return result;
 		}
 		return null;
@@ -78,12 +79,16 @@ public class HttpUtilX
 		, Map<String ,String> rawParams)throws Exception
 	{
 		Log.d(HttpTag, "start a post request");
+		
+		System.out.println("size of raw Params "+rawParams.size());
+		
 		// 创建HttpPost对象。
 		HttpPost post = new HttpPost(url);
 		// 如果传递参数个数比较多的话可以对传递的参数进行封装
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		for(String key : rawParams.keySet())
 		{
+			System.out.println("key name: "+key+" key value: "+rawParams.get(key));
 			//封装请求参数
 			params.add(new BasicNameValuePair(key , rawParams.get(key)));
 		}
@@ -92,9 +97,15 @@ public class HttpUtilX
 			params, "gbk"));
 		Log.d(HttpTag, "encoded the pattern into post");
 		
+		Log.i(HttpTag,"url----->"+ url);
+		
 		// 发送POST请求
 		HttpResponse httpResponse = httpClient.execute(post);
 		// 如果服务器成功地返回响应
+		
+		Log.i(HttpTag, "server status--->"+httpResponse.getStatusLine()
+				.getStatusCode());
+		
 		if (httpResponse.getStatusLine()
 			.getStatusCode() == 200)
 		{
@@ -103,6 +114,7 @@ public class HttpUtilX
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());
 			Log.d(HttpTag, result);
+			System.out.println("start"+result+"end");
 			return result;
 		}
 		return null;

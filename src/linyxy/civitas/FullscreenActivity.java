@@ -96,10 +96,10 @@ public class FullscreenActivity extends Activity {
 			
 			
 			UpdateData update = new UpdateData(FullscreenActivity.this);
+			update.execute("UrlTest");
 			//服务器相应测试
-			update.execute("SharedPTest");
+			//update.execute("SharedPTest");
 			//SharedPreference测试
-			//update.execute("SharedTest");
 			
 			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
 			if(validate())

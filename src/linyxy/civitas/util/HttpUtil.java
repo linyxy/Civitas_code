@@ -29,13 +29,13 @@ import android.util.Log;
  */
 public class HttpUtil
 {
+	// 创建HttpClient对象
 	public static final String HttpTag = "HTTP_TASK";
 	
-	// 创建HttpClient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
 	public static final String BASE_URL = 
-		"http://192.168.1.107:8080/nhjd'";//需要修改
-	
+		"http://192.168.1.107:8080/nhjd";//需要修改
+	public static final String keng = "?user='11'&pass='22";
 	/**
 	 * 
 	 * @param url 发送请求的URL
@@ -45,13 +45,13 @@ public class HttpUtil
 	public static String getRequest(String url)
 		throws Exception
 	{
+		// 创建HttpGet对象。		
 		Log.d(HttpTag, "starting a new HTTP request");
-		// 创建HttpGet对象。
 		HttpGet get = new HttpGet(url);
 		// 发送GET请求
 		HttpResponse httpResponse = httpClient.execute(get);
-		Log.d(HttpTag, "connecting the server");
 		// 如果服务器成功地返回响应
+		Log.d(HttpTag, "connecting the server");
 		if (httpResponse.getStatusLine()
 			.getStatusCode() == 200)
 		{
@@ -59,6 +59,7 @@ public class HttpUtil
 			// 获取服务器响应字符串
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());
+
 			return result;
 		}
 		return null;
@@ -74,40 +75,45 @@ public class HttpUtil
 	public static String postRequest(String url
 		, Map<String ,String> rawParams)throws Exception
 	{
+		Log.d(HttpTag, "start a post request");
+		
+		System.out.println("size of raw Params "+rawParams.size());
+		
 		// 创建HttpPost对象。
 		HttpPost post = new HttpPost(url);
 		// 如果传递参数个数比较多的话可以对传递的参数进行封装
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		for(String key : rawParams.keySet())
 		{
+			System.out.println("key name: "+key+" key value: "+rawParams.get(key));
 			//封装请求参数
 			params.add(new BasicNameValuePair(key , rawParams.get(key)));
 		}
 		// 设置请求参数
 		post.setEntity(new UrlEncodedFormEntity(
 			params, "gbk"));
+		Log.d(HttpTag, "encoded the pattern into post");
+		
+		Log.i(HttpTag,"url----->"+ url);
+		
 		// 发送POST请求
 		HttpResponse httpResponse = httpClient.execute(post);
 		// 如果服务器成功地返回响应
+		
+		Log.i(HttpTag, "server status--->"+httpResponse.getStatusLine()
+				.getStatusCode());
+		
 		if (httpResponse.getStatusLine()
 			.getStatusCode() == 200)
 		{
+			Log.d(HttpTag, "server successfully responesd");
 			// 获取服务器响应字符串
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());
+			Log.d(HttpTag, result);
+			System.out.println("start"+result+"end");
 			return result;
 		}
 		return null;
-	}
-	
-	public static void main(String[] args)
-	{
-		try {
-			String abe = getRequest(BASE_URL);
-			System.out.println(abe);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
