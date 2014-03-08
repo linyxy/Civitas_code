@@ -94,9 +94,6 @@ public class FullscreenActivity extends Activity {
 			Log.d(Login, "start to login");
 			System.out.println("start the program");
 			
-			Intent startDataR = new Intent();
-			startDataR.setClass(FullscreenActivity.this, DataRequestUtil.class);
-
 			
 			UpdateData update = new UpdateData(FullscreenActivity.this);
 			//服务器相应测试
