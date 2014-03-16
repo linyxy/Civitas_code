@@ -20,7 +20,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public static String dataBaseCivi = "civitasData"; //用于存放数据库的名字
-	public static String DBtag = "databse";
+	public static String DBtag = "database";
 	
 	private static final int VERSION = 1;
 	//在SQLiteOepnHelper的子类当中，必须有该构造函数
@@ -53,8 +53,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		  		" breakingProp TEXT,description TEXT," +
 		  		" subSkillName TEXT,subSkillPercentage TEXT)");
 		  //创建关于educationExperience的表格
-		  
+		  Log.d(DBtag, "完成了table创建");
+		 if( db.isOpen()) Log.d(DBtag, "db running on");
+		 
 		//db.execSQL("create table user(id int,name varchar(20))");
+		 if( db.isOpen()) Log.d(DBtag, "db running on2222");
+		  Log.d(DBtag,"is db close");
 	}
 
 	@Override

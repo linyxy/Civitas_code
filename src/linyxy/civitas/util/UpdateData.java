@@ -1,12 +1,9 @@
 package linyxy.civitas.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import projectTesting.HttpUtilX;
+import linyxy.civitas.FullscreenActivity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 
 
@@ -38,9 +35,25 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 
 			System.out.println("SharedTest");
 			Log.d(async, "creating DataRequestUtil activity");
-	
 			
+		if(params[0].equals("lgoin"))
+		{
+			boolean loginResult = false;
+			Log.d(FullscreenActivity.Login,"logining in the background");
+			loginResult = DataRequestUtil.login(ctx,params[1],params[2]);
+			if(loginResult)
+			{
+				return "loginTrue";
+			}
+			else return "loginFalse";
+		}
+	
+/*			
+		if(params[0].equals("SQLiteTest"))
+		{
 			Log.d(async, "DataRequestUtil created");
+			DataRequestUtil.SQLiteTest(ctx);
+		}
 			
 		if(params[0].equals("SharedPTest"))
 		{
@@ -52,10 +65,10 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			System.out.println("try HTTPUTILX");
 			try {
 				String urlPattern = HttpUtilX.BASE_URL+"/login.jsp" ;
-				HttpUtilX.getRequest(HttpUtilX.BASE_URL);
+				//HttpUtilX.getRequest(HttpUtilX.BASE_URL);
 				HashMap<String, String> content = new HashMap<String,String>();
-				content.put("userName", "142");
-				content.put("password", "1992");
+				content.put("userName", "linyxy.art@gmail.com");
+				content.put("password", "xx19970305");
 				Log.d(async, "feng zhuang");
 				String result = HttpUtilX.postRequest(urlPattern, content);
 				if(result != null)
@@ -65,7 +78,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 				e.printStackTrace();
 			}
 		}
-
+*/
 		
 		return params[0];
 	}
@@ -75,13 +88,19 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 	 */
 	@Override
 	protected void onPostExecute(String result) {
-		// Ë¢ÐÂUI½ø³Ì
-		super.onPostExecute(result);
 		
-		if(result.equals("getStatus"))
-				System.out.println("refresh UI"	);
-		
-		
+//		if(result.equals("getStatus"))
+//				System.out.println("refresh UI"	);
+		Handler han = new Handler();
+		if(result.equals("loginTrue"))
+		{
+			
+			han.sendEmptyMessage(0x1357);
+		}
+		if(result.equals("loginFalse"))
+		{
+			han.sendEmptyMessage(0x1358);
+		}
 	}
 
 	/* (non-Javadoc)

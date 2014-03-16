@@ -15,10 +15,13 @@ import org.json.JSONObject;
 
 import projectTesting.HttpUtilX;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +34,7 @@ import android.widget.Toast;
  * 
  * @see SystemUiHider
  */
+@SuppressLint("HandlerLeak")
 public class FullscreenActivity extends Activity {
 //	/**
 //	 * Whether or not the system UI should be auto-hidden after
@@ -64,7 +68,7 @@ public class FullscreenActivity extends Activity {
 	private EditText userName;
 	private EditText userPassword;
 	
-	static String Login = "logining";
+	public static String Login = "logining";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +83,37 @@ public class FullscreenActivity extends Activity {
 		userPassword = (EditText)findViewById(R.id.user_password);
 		log.setOnClickListener(new loginButtonListener());
 		
+		myHandler Han = new myHandler();
+		
 		
 	}
 	
+	class myHandler extends Handler
+	{
+
+		/* (non-Javadoc)
+		 * @see android.os.Handler#handleMessage(android.os.Message)
+		 */
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			
+			if(msg.what == 0x1357)
+			{
+				Log.d(Login, "Jump to my_second");
+				Intent startMySecond = new Intent();
+				startMySecond.setClass(FullscreenActivity.this, my_second.class);
+				FullscreenActivity.this.startActivity(startMySecond);
+				finish();
+			}
+			else if(msg.what == 0x1358)
+			{
+				DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
+			}
+		}
+		
+	}
 	
 	//按钮监听器
 	class loginButtonListener implements View.OnClickListener
@@ -96,15 +128,21 @@ public class FullscreenActivity extends Activity {
 			
 			
 			UpdateData update = new UpdateData(FullscreenActivity.this);
-			update.execute("UrlTest");
+			//update.execute("UrlTest");
 			//服务器相应测试
 			//update.execute("SharedPTest");
 			//SharedPreference测试
-			
+			//update.execute("SQLiteTest");
+			//SQLite Test
+			if(validate())
+			{
+				Toast.makeText(getApplicationContext(),"正在登陆中", Toast.LENGTH_SHORT).show();
+				update.execute("login",userName.getText().toString(),userPassword.getText().toString());
+			}
 			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
 			if(validate())
 			{
-				if(loginPro())
+				if(true)
 				{
 					
 					
@@ -114,10 +152,6 @@ public class FullscreenActivity extends Activity {
 					startMySecond.setClass(FullscreenActivity.this, my_second.class);
 					FullscreenActivity.this.startActivity(startMySecond);
 					finish();
-				}
-				else
-				{
-					DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
 				}
 			}
 			
@@ -129,33 +163,6 @@ public class FullscreenActivity extends Activity {
 	}
 	
 
-	//登陆
-	private boolean loginPro()
-	{
-		// 获取用户输入的用户名、密码
-		String username = userName.getText().toString();
-		String pwd = userPassword.getText().toString();
-		JSONObject jsonObj;
-		try
-		{
-			jsonObj = query(username, pwd);
-			// 用户名结果返回的不是“false”
-			if (!jsonObj.getString("userName").equals("false"))
-			{
-				SharedPreferenceUtil.updateSharedPreference(this, DataRequestUtil.pseronStatus, "userName",jsonObj.getString("userName"));
-				Log.d(Login, "successfully logined");
-				return true;
-			}
-		}
-		catch (Exception e)
-		{	
-			Log.d(Login, "sever response failed");
-			DialogUtil.showDialog(this, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
-			e.printStackTrace();
-		}
-
-		return false;
-	}
 
 	// 对用户输入的用户名、密码进行校验
 	private boolean validate()
@@ -176,24 +183,7 @@ public class FullscreenActivity extends Activity {
 		return true;
 	}
 	
-	//
-	private void SQLiteOpeningTest()
-	{
-		//DatabaseHelper dbH = new DatabaseHelper()
-	}
-	
-	// 定义发送请求的方法
-	private JSONObject query(String username, String password) throws Exception
-	{
-		// 使用Map封装请求参数
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("userName", username);
-		map.put("password", password);
-		// 定义发送请求的URL
-		String url = HttpUtil.BASE_URL + /*!!!!!此处仍需要修改!!!*/"processLogin.action";
-		// 发送请求
-		return new JSONObject(HttpUtil.postRequest(url, map));
-	}
+
 //		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 //		final View contentView = findViewById(R.id.fullscreen_content);
 //
