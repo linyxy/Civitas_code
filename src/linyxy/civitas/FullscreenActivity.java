@@ -83,39 +83,39 @@ public class FullscreenActivity extends Activity {
 		userPassword = (EditText)findViewById(R.id.user_password);
 		log.setOnClickListener(new loginButtonListener());
 		
-		myHandler Han = new myHandler();
 		
 		
 	}
 	
-	class myHandler extends Handler
-	{
-
-		/* (non-Javadoc)
-		 * @see android.os.Handler#handleMessage(android.os.Message)
-		 */
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			super.handleMessage(msg);
-			
-			if(msg.what == 0x1357)
-			{
-				Log.d(Login, "Jump to my_second");
-				Intent startMySecond = new Intent();
-				startMySecond.setClass(FullscreenActivity.this, my_second.class);
-				FullscreenActivity.this.startActivity(startMySecond);
-				finish();
-			}
-			else if(msg.what == 0x1358)
-			{
-				DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
-			}
-		}
-		
-	}
+//	class myHandler extends Handler
+//	{
+//
+//		/* (non-Javadoc)
+//		 * @see android.os.Handler#handleMessage(android.os.Message)
+//		 */
+//		@Override
+//		public void handleMessage(Message msg) {
+//			// TODO Auto-generated method stub
+//			super.handleMessage(msg);
+//			
+//			if(msg.what == 0x1357)
+//			{
+//				Log.d(Login, "Jump to my_second");
+//				Intent startMySecond = new Intent();
+//				startMySecond.setClass(FullscreenActivity.this, my_second.class);
+//				FullscreenActivity.this.startActivity(startMySecond);
+//				finish();
+//			}
+//			else if(msg.what == 0x1358)
+//			{
+//				DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
+//			}
+//		}
+//		
+//	}
 	
 	//按钮监听器
+	//用于后台登陆
 	class loginButtonListener implements View.OnClickListener
 	{
 
@@ -134,27 +134,14 @@ public class FullscreenActivity extends Activity {
 			//SharedPreference测试
 			//update.execute("SQLiteTest");
 			//SQLite Test
+			
 			if(validate())
 			{
 				Toast.makeText(getApplicationContext(),"正在登陆中", Toast.LENGTH_SHORT).show();
+				//进入后台验证帐号密码
 				update.execute("login",userName.getText().toString(),userPassword.getText().toString());
 			}
-			//Toast.makeText(getApplicationContext(),name+pasword, Toast.LENGTH_SHORT).show();
-			if(validate())
-			{
-				if(true)
-				{
-					
-					
-					SharedPreferenceUtil.updateSharedPreference(FullscreenActivity.this, "personStatus","userName", name);
-					Log.d(Login, "Jump to my_second");
-					Intent startMySecond = new Intent();
-					startMySecond.setClass(FullscreenActivity.this, my_second.class);
-					FullscreenActivity.this.startActivity(startMySecond);
-					finish();
-				}
-			}
-			
+
 			
 			
 			// TODO Auto-generated method stub

@@ -1,7 +1,9 @@
 package linyxy.civitas.util;
 
 import linyxy.civitas.FullscreenActivity;
+import linyxy.civitas.my_second;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
@@ -36,16 +38,13 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			System.out.println("SharedTest");
 			Log.d(async, "creating DataRequestUtil activity");
 			
-		if(params[0].equals("lgoin"))
+		if(params[0].equals("login"))//登陆
 		{
-			boolean loginResult = false;
+			String loginResult ;
 			Log.d(FullscreenActivity.Login,"logining in the background");
-			loginResult = DataRequestUtil.login(ctx,params[1],params[2]);
-			if(loginResult)
-			{
-				return "loginTrue";
-			}
-			else return "loginFalse";
+			loginResult = DataRequestUtil.login(ctx,params[1],params[2]);//转入后台验证登陆，获取结果
+			System.out.println(loginResult);
+			return loginResult;//发送结果更新UI
 		}
 	
 /*			
@@ -91,15 +90,28 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		
 //		if(result.equals("getStatus"))
 //				System.out.println("refresh UI"	);
-		Handler han = new Handler();
+		Log.d(async, "on Post Execute");
+		
+		//登陆成功
 		if(result.equals("loginTrue"))
 		{
-			
-			han.sendEmptyMessage(0x1357);
+			Log.d(async, "tring to start my_second activity");
+			Intent startMySecond = new Intent();
+			startMySecond.setClass(ctx, my_second.class);
+			Log.d(async, "building up the intent");
+			ctx.startActivity(startMySecond);
 		}
+		//登陆失败
 		if(result.equals("loginFalse"))
 		{
-			han.sendEmptyMessage(0x1358);
+			DialogUtil.showDialog(ctx, "大概帐号密码写错了", false);
+		}
+
+		
+		//服务器无连接
+		if(result.equals("badSever"))
+		{
+			DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
 		}
 	}
 

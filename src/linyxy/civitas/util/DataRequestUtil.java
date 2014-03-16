@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 /*
  * 这是一个用来访问网络数据类，
@@ -79,7 +80,7 @@ public class DataRequestUtil extends Activity{
 	 * 
 	 * @return boolean success/failed
 	 */
-	public static boolean login(Context ctx,String userName,String password)
+	public static String login(Context ctx,String userName,String password)
 	{
 		try
 		{
@@ -88,20 +89,29 @@ public class DataRequestUtil extends Activity{
 			values.put("password",password);
 			JSONObject result = query("lgoin",values);
 			// 用户名结果返回的不是“false”
+
+			
 			if (!result.getString("userName").equals("false"))
 			{
 				SharedPreferenceUtil.updateSharedPreference(ctx, DataRequestUtil.pseronStatus, "userName",result.getString("userName"));
 				Log.d(FullscreenActivity.Login, "successfully logined");
-				return true;
+				return "loginTrue";
 			}
+			else 
+			{
+				return "loginFalse";
+			}
+			
 		}
 		catch (Exception e)
 		{	
 			Log.d(FullscreenActivity.Login, "sever response failed");
-			DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
+			//DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
 			e.printStackTrace();
 		}
-		return false;
+		
+	
+		return "badSever";
 	}
 	
 	/**获取当前玩家的属性值
