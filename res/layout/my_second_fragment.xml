@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:isScrollContainer="true" >
+    
+    <!-- 状态显示栏 -->
+    <include
+        android:id="@+id/my_first_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/status" />
+    
+    <!-- 以下三行每行添加两个磁贴-->
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <ImageButton 
+            android:contentDescription="@string/my_citie"
+            android:id="@+id/messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ci_tie"
+            android:src="@drawable/messages"
+            />
+        <ImageButton 
+            android:contentDescription="@string/my_citie"
+            android:id="@+id/workplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ci_tie"
+            android:src="@drawable/workplace"
+            />
+
+	</TableRow>
+
+     <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <ImageButton 
+            android:contentDescription="@string/my_citie"
+            android:id="@+id/storeage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ci_tie"
+            />
+        <ImageButton 
+            android:contentDescription="@string/my_citie"
+            android:id="@+id/domicile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ci_tie"
+            android:src="@drawable/domicile"
+            />
+
+	</TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <ImageButton 
+            android:contentDescription="@string/my_citie"
+            android:id="@+id/recipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ci_tie"
+            android:src="@drawable/recipes"
+            />
+    	 <ImageButton 
+    	    android:contentDescription="@string/my_citie"
+    	    android:id="@+id/estates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ci_tie"
+            android:src="@drawable/estates"
+            />
+
+	</TableRow>
+    
+    <!-- 放置一个演讲列表 -->
+    <include
+        android:id="@+id/my_first_speech_list" 
+        layout="@layout/speech_list"/>
+    
+</LinearLayout>

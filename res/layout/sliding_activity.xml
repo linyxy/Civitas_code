@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <linyxy.slidingmenu.SlidingMenuView
+        android:id="@+id/sliding_menu_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        
+       <LinearLayout 
+        	android:id="@+id/left_sliding_tab"
+        	android:background="@android:color/darker_gray"
+        	android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:padding="5dip"
+        	android:layout_height="fill_parent">
+            <Button
+                android:text="我的2.。。。。。。。。。。。"               
+                android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+            <Button
+                android:text="广场。。。。。。。。。。。。。"              
+                android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+            <Button
+                android:text="街道。。。。。。。。。。。。"
+                android:id="@+id/button1"               
+                android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+            <Button
+                android:text="市场。。。。。。。。。。。。。"
+                android:id="@+id/button2"             
+                android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"/>
+          
+    	</LinearLayout>
+        
+    	
+        <FrameLayout 
+        	android:id="@+id/sliding_body_mysecond"
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent">
+            
+    	</FrameLayout>
+    	<FrameLayout 
+        	android:id="@+id/sliding_body_square"
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent">
+            
+    	</FrameLayout>
+    	<FrameLayout 
+        	android:id="@+id/sliding_body_street"
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent">
+            
+    	</FrameLayout>
+    	<FrameLayout 
+        	android:id="@+id/sliding_body_market"
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent">
+            
+    	</FrameLayout>
+            
+    </linyxy.slidingmenu.SlidingMenuView>
+
+</RelativeLayout>

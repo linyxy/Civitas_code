@@ -1,15 +1,21 @@
 package linyxy.civitas.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import linyxy.civitas.FullscreenActivity;
+import linyxy.civitas.SQLiteActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 /*
  * 这是一个用来访问网络数据类，
@@ -20,12 +26,33 @@ import android.util.Log;
 public class DataRequestUtil extends Activity{
 
 	public static final String pseronStatus = "personStatus";
-	static String dataR = "DataRequest";
+	public static final String dataR = "DataRequest";
 	
 	public DataRequestUtil() {
 		// TODO Auto-generated constructor stub
 		
 	}
+	
+
+	
+	public void process(String action)
+	{
+//		if(action.equals("getStatus")) getStatus();
+//		if(action.equals("getChat")) getChat();
+//		if(action.equals("SharedTest")) sharePTest(null);
+		
+	}
+	
+	
+
+	/**
+	 * 通过post函数向服务器调取内容的函数
+	 * 传入 连接位置 请求map
+	 * @param conectPosition
+	 * @param requestMap
+	 * @return
+	 * @throws Exception
+	 */
 	public static JSONObject query(String conectPosition,Map<String, String> requestMap) throws Exception
 	{
 		// 定义发送请求的URL
@@ -44,15 +71,57 @@ public class DataRequestUtil extends Activity{
 		return new JSONArray(HttpUtil.postRequest(url,requestMap));
 	}
 	
+	/**
+	 * 用来进行登陆的函数
+	 * 传入用户名密码，后台进行登陆
+	 * @param ctx
+	 * @param userName 用户名
+	 * @param password 密码
+	 * 
+	 * @return boolean success/failed
+	 */
+	public static String login(Context ctx,String userName,String password)
+	{
+		try
+		{
+			Map<String,String> values = new HashMap<String,String>();
+			values.put("userName", userName);
+			values.put("password",password);
+			JSONObject result = query("lgoin",values);
+			// 用户名结果返回的不是“false”
+
+			
+			if (!result.getString("userName").equals("false"))
+			{
+				SharedPreferenceUtil.updateSharedPreference(ctx, DataRequestUtil.pseronStatus, "userName",result.getString("userName"));
+				Log.d(FullscreenActivity.Login, "successfully logined");
+				return "loginTrue";
+			}
+			else 
+			{
+				return "loginFalse";
+			}
+			
+		}
+		catch (Exception e)
+		{	
+			Log.d(FullscreenActivity.Login, "sever response failed");
+			//DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
+			e.printStackTrace();
+		}
+		
+	
+		return "badSever";
+	}
 	
 	/**获取当前玩家的属性值
 	@input 玩家帐号
 	@return 一个包含玩家名字，等级，经验，精力，快乐，健康，饥饿的列表
 	 */
 	@SuppressWarnings("null")
-	public void getStatus()
+	public void getStatus(Context ctx)
 	{
-		Map<String, String> map =getName();
+		Map<String, String> map =getName(ctx);
 		
 		
 		List<String> key = null;
@@ -88,12 +157,12 @@ public class DataRequestUtil extends Activity{
 	
 	/**获取工作地址
 	@input 用户名
-	@return String 工作地点，没有工作return null
+	@return String 工作地点，没有工作return null（将存入SharedP）
 
 	 */
-	public void getWorkPlace()
+	public void getWorkPlace(Context ctx)
 	{
-		Map<String, String> map = getName();
+		Map<String, String> map = getName(ctx);
 		
 		try {
 			JSONObject w = query("getWorkPlace",map);
@@ -105,13 +174,17 @@ public class DataRequestUtil extends Activity{
 		
 		return;
 	}
-	
-	public void getChat()
+	/**
+	 * 从服务器获取chats的函数
+	 */
+	public void getChat(Context ctx)
 	{
-		Map<String, String> map = getName();
+		Map<String, String> map = getName(ctx);
 		
 		try {
 			JSONArray arr = requestData("getChat",map);
+			//从服务器获取的JSONArray需要进行解析，然后存入SQLite中等待调取
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -120,15 +193,62 @@ public class DataRequestUtil extends Activity{
 	}
 
 	/**
+	 * 从服务器获取Notifications的函数
+	 */
+	public void getNotifications(Context ctx)
+	{
+		Map<String,String> map = getName(ctx);
+		
+		try{
+			JSONArray arr = requestData("getNotifications",map);	
+			List<JSONObject> array = new ArrayList<JSONObject>();
+			array = JSONAnalysis.JSONArrayDivider(arr);
+			SQLiteActivity SQL = new SQLiteActivity(ctx);
+			SQL.refreshData("notifications", array, "content","notificationType");
+			
+			
+		} catch (Exception e) {
+			Log.d(dataR, "something wrong when handling the notifications");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	/**
 	 * 用于读取sharedP中的用户名
 	 * @return map containing of name
 	 */
-	public Map<String, String> getName()
+	public Map<String, String> getName(Context ctx)
 	{
 		String username = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this,pseronStatus, "unserNmae");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userName", username);
 		return map;
+	}
+	
+	
+	
+	//--------test---------test---------test-------------
+	public static void sharePTest(Context ctx)
+	{
+		Log.d(dataR, "Tring to put sample SharedP");
+		SharedPreferenceUtil.updateSharedPreference(ctx, pseronStatus, "ShareTest", "sample imput");
+		
+		String outByThisCtx = SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, "ShareTest");
+		Log.d(dataR, "ctx------>"+outByThisCtx);
+		
+		String outByAppCtx = SharedPreferenceUtil.readSharedPreference(ctx.getApplicationContext(), pseronStatus, "ShareTest");
+		Log.d(dataR, "aplicationCtx----->"+outByAppCtx);
+		
+		return ;
+	}
+	
+	public static void SQLiteTest(Context ctx)
+	{
+		SQLiteActivity SQL = new SQLiteActivity(ctx);
+		Log.d(dataR, "Opening a SQLite test");
+		SQL.tableTest();
 	}
 
 }

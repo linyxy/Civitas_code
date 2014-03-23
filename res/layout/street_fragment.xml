@@ -1,0 +1,12 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ 		xmlns:tools="http://schemas.android.com/tools"
+		android:background="#77ffff00"
+        android:layout_width="fill_parent"
+     	android:layout_height="fill_parent"
+     	android:id="@+id/street">
+        <TextView
+            android:text="街道"
+            android:textSize="40dp"
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+</LinearLayout>

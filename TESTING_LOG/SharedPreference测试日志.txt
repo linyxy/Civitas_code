@@ -1,0 +1,18 @@
+Mar8 
+
+Shared Preferences test log.
+
+从mainactivity调用后台线程进行SharedP读写测试
+SharedP读写存在于DataRequestUtil中，调用SharedPUtil中的方法。
+
+采用外部传入Ctx的方法
+同时分别对Ctx,appctx 进行测试
+
+读取成功。
+
+
+03-08 20:14:15.036: D/DataRequest(15510): Tring to put sample SharedP
+03-08 20:14:15.106: D/DataRequest(15510): ctx------>sample imput
+03-08 20:14:15.116: D/DataRequest(15510): aplicationCtx----->sample imput
+
+SharedPUtil，可以使用。

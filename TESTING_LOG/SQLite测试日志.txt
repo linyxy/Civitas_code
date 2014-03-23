@@ -1,0 +1,16 @@
+Mar8
+
+SQLite Testing log
+
+开始SQLite的建立
+从fullstcreen调用UpdateData的异步，调用datarequest，调用SQLiteActivity，调用DatabaseHelper
+
+SQLite表格日志创建&基础行列插入测试
+
+在chats表格中插入一项，然后读取输出测试可行性
+测试失败在db.getReadableDatabase()项目时出现错误
+
+Mar16
+
+代码修改，现在已编写数据库可正常运行。
+但是还有关闭试验等没有进行测试，有可能出现内存泄露。
