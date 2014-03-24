@@ -14,71 +14,96 @@
         layout="@layout/status" />
     
     <!-- 以下三行每行添加两个磁贴-->
+    <TableLayout android:id="@+id/TableLayout01" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent" 
+         >
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_weight="1">
         <ImageButton 
             android:contentDescription="@string/my_citie"
             android:id="@+id/messages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ci_tie"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:layout_weight="1"
+            android:background="#0099ff"
             android:src="@drawable/messages"
-            />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"/>
         <ImageButton 
             android:contentDescription="@string/my_citie"
             android:id="@+id/workplace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ci_tie"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"  
+            android:layout_weight="1"
+            android:background="#00ccff"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/workplace"
             />
 
 	</TableRow>
 
      <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_weight="1">
         <ImageButton 
             android:contentDescription="@string/my_citie"
             android:id="@+id/storeage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ci_tie"
-            />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:layout_weight="1"
+            android:background="#990099"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"/>
         <ImageButton 
             android:contentDescription="@string/my_citie"
             android:id="@+id/domicile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ci_tie"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:layout_weight="1"
+            android:background="#660066"
             android:src="@drawable/domicile"
-            />
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
 	</TableRow>
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_weight="1">
         <ImageButton 
             android:contentDescription="@string/my_citie"
             android:id="@+id/recipes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ci_tie"
+            android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+            android:layout_weight="1"
+            android:background="#ff6633"
             android:src="@drawable/recipes"
-            />
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"/>
     	 <ImageButton 
     	    android:contentDescription="@string/my_citie"
     	    android:id="@+id/estates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:layout_weight="1"
             android:background="@drawable/ci_tie"
             android:src="@drawable/estates"
-            />
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"/>
 
 	</TableRow>
-    
+    </TableLayout>
     <!-- 放置一个演讲列表 -->
     <include
         android:id="@+id/my_first_speech_list" 

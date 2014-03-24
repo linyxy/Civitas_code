@@ -1,15 +1,15 @@
 package linyxy.fragment;
 
-import linyxy.civitas.Messages;
-import linyxy.civitas.My_Second_Activity;
+
+import linyxy.civitas.LetterTabHostActivity;
 import linyxy.civitas.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 public class My2Fragment  extends Fragment {
@@ -38,10 +38,10 @@ public class My2Fragment  extends Fragment {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent startMessageActivity = new Intent();
-					startMessageActivity.setClass(getActivity(), Messages.class);
+					startMessageActivity.setClass(getActivity(),LetterTabHostActivity.class);
 					startActivity(startMessageActivity);
 				}
-				
+		
 			});
 			
 			workplace = (ImageButton)view.findViewById(R.id.workplace);

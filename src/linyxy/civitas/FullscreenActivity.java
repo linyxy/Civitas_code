@@ -129,6 +129,7 @@ public class FullscreenActivity extends Activity {
 			Intent intent = new Intent();  
             intent.setClass(FullscreenActivity.this,MainActivity.class);  
             startActivity(intent);  
+            FullscreenActivity.this.onDestroy();
 			//UpdateData update = new UpdateData(FullscreenActivity.this);
 			//update.execute("UrlTest");
 			//服务器相应测试

@@ -1,11 +1,10 @@
 package linyxy.civitas.util;
 
 import linyxy.civitas.FullscreenActivity;
-import linyxy.civitas.My_Second_Activity;
+import linyxy.fragment.My2Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.util.Log;
 
 
@@ -97,9 +96,10 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		{
 			Log.d(async, "tring to start my_second activity");
 			Intent startMySecond = new Intent();
-			startMySecond.setClass(ctx, My_Second_Activity.class);
+			startMySecond.setClass(ctx, My2Fragment.class);
 			Log.d(async, "building up the intent");
 			ctx.startActivity(startMySecond);
+			
 		}
 		//µÇÂ½Ê§°Ü
 		if(result.equals("loginFalse"))

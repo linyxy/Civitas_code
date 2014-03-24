@@ -29,12 +29,20 @@
             android:name="linyxy.civitas.MainActivity"
            
             ></activity>
+           <activity
+            android:name="linyxy.civitas.LetterActivity"
+           
+            ></activity>
+              <activity
+            android:name="linyxy.civitas.LetterTabHostActivity"
+           
+            ></activity>
         <activity
             android:name="linyxy.civitas.My_Second_Activity"
             android:label="@string/my_second"
             ></activity>
         <activity
-            android:name="linyxy.civitas.Messages"
+            android:name="linyxy.civitas.MessageActivity"
             android:label="@string/messages"
             ></activity>
         <activity 
