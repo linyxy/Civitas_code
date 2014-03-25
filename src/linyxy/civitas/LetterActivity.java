@@ -10,6 +10,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Õ¾ÄÚĞÅÀà
+ * @author Linyxy & Duanxin
+ *
+ */
 public class LetterActivity extends Activity{
 	 private ImageButton writeBtn;
 	@Override

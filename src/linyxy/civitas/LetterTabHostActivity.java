@@ -23,7 +23,12 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+/**
+ * 这是一个包含上导航栏的activity类，
+ * 导航栏按钮将生成不同的activity容器用于盛放activity.
+ * @author duanxin
+ *
+ */
 public class LetterTabHostActivity extends Activity {  
 	  
 	private ViewPager viewPager;//页卡内容  
@@ -46,21 +51,67 @@ public class LetterTabHostActivity extends Activity {
         
         setContentView(R.layout.viewpager); 
         
+        //生成manager
         context = LetterTabHostActivity.this;
         manager = new LocalActivityManager(this , true);
         manager.dispatchCreate(savedInstanceState);
        
+        /*
+         * 初始化各个view
+         */
         InitImageView();  
         InitTextView();  
         InitViewPager();  
     }  
+    
+    /** 
+     * 初始化步骤
+     * 当页卡滑动时，下面的横线也滑动的效果，
+     * 在这里需要计算一些数据 
+     * 
+     */  
   
+    private void InitImageView() {  
+        imageView= (ImageView) findViewById(R.id.cursor);  
+        bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.tab_host).getWidth();// 获取图片宽度  
+        
+        DisplayMetrics dm = new DisplayMetrics();  
+        getWindowManager().getDefaultDisplay().getMetrics(dm);  
+        int screenW = dm.widthPixels;// 获取分辨率宽度  
+        
+        offset = (screenW / 2 - bmpW)/2 ;// 计算偏移量
+        
+        
+        Matrix matrix = new Matrix();  
+        matrix.postTranslate(offset, 0);  
+        imageView.setImageMatrix(matrix);// 设置动画初始位置  
+    }  
+    
+    
+    /** 
+     *  初始化页面上方标签
+     */  
+   private void InitTextView() {  
+       textView1 = (TextView) findViewById(R.id.text1);  
+       textView2 = (TextView) findViewById(R.id.text2);  
+        
+       textView1.setOnClickListener(new MyOnClickListener(0));  //为按钮绑定监听器
+       textView2.setOnClickListener(new MyOnClickListener(1));         
+   }  
+   
+    
+   /**
+    * 初始化下方为vPager的显示区域
+    * 为下方屏幕下放view设置填充内容的adapter
+    */
     private void InitViewPager() {  
+    	
         viewPager=(ViewPager) findViewById(R.id.vPager);  
        
         final ArrayList<View> views = new ArrayList<View>();
         Intent intent1 = new Intent(context, LetterActivity.class);
-        views.add(getView("A", intent1));
+        views.add(getView("A", intent1));//使用getView函数获取view
+        
         Intent intent2 = new Intent(context, MessageActivity.class);
         views.add(getView("B", intent2));
        
@@ -80,37 +131,15 @@ public class LetterTabHostActivity extends Activity {
     private View getView(String id, Intent intent) {
         return manager.startActivity(id, intent).getDecorView();
     }
-     /** 
-      *  初始化头标 
-      */  
+    
+    
+
   
-    private void InitTextView() {  
-        textView1 = (TextView) findViewById(R.id.text1);  
-        textView2 = (TextView) findViewById(R.id.text2);  
-         
-        textView1.setOnClickListener(new MyOnClickListener(0));  
-        textView2.setOnClickListener(new MyOnClickListener(1));         
-    }  
-  
-    /** 
-     2      * 初始化动画，这个就是页卡滑动时，下面的横线也滑动的效果，在这里需要计算一些数据 
-     3 */  
-  
-    private void InitImageView() {  
-        imageView= (ImageView) findViewById(R.id.cursor);  
-        bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.tab_host).getWidth();// 获取图片宽度  
-        DisplayMetrics dm = new DisplayMetrics();  
-        getWindowManager().getDefaultDisplay().getMetrics(dm);  
-        int screenW = dm.widthPixels;// 获取分辨率宽度  
-        offset = (screenW / 2 - bmpW)/2 ;// 计算偏移量  
-        Matrix matrix = new Matrix();  
-        matrix.postTranslate(offset, 0);  
-        imageView.setImageMatrix(matrix);// 设置动画初始位置  
-    }  
+
 
     /**  
-     *      
-     * 头标点击监听 3 */  
+     * 导航栏按钮监听器
+     */  
     private class MyOnClickListener implements OnClickListener{  
         private int index=0;  
         public MyOnClickListener(int i){  
@@ -151,7 +180,8 @@ public class LetterTabHostActivity extends Activity {
             return arg0==arg1;  
         }  
     }  
-  
+
+    
     public class MyOnPageChangeListener implements OnPageChangeListener{  
   
         int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量  
