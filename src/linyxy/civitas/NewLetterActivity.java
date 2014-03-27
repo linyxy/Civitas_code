@@ -1,12 +1,15 @@
 package linyxy.civitas;
 
-import linyxy.civitas.util.SharedPreferenceUtil;
+import structure.SharedPreferenceUtil;
+import linyxy.civitas.util.UpdateData;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 /**
  * 用于发送新的站内信的activity
  * @author linyxy
@@ -17,6 +20,9 @@ public class NewLetterActivity extends Activity {
 	TextView content;
 	Button send;
 	Button cancel;
+	
+	public static final String letter = "letter";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -36,7 +42,22 @@ public class NewLetterActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO 进行站内信发送
+				Toast.makeText(getApplicationContext(),"正在发送中", Toast.LENGTH_SHORT).show();
+				//进入后台发送站内
+				UpdateData update = new UpdateData(NewLetterActivity.this);
+				update.execute("letter",receiver.getText().toString(),content.getText().toString());
 				
+				
+				//如果发送成功
+				//清除SharedP中缓存
+				//关闭这个activity
+				//TODO 使用handler处理
+				SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "receiver"
+						,"");
+				SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "content"
+						, "");
+				Toast.makeText(NewLetterActivity.this,"站内信发送成功", Toast.LENGTH_SHORT).show();
+				NewLetterActivity.this.onDestroy();
 			}
 			
 		});
@@ -72,11 +93,17 @@ public class NewLetterActivity extends Activity {
 	
 	public void intiView()
 	{
-		String Sreceiver;
-		String Scontent;
+		Log.d(letter, "init new letter view");
+		String Sreceiver="";
+		String Scontent="";
 		
-		Sreceiver = SharedPreferenceUtil.readSharedPreference(NewLetterActivity.this,"letter","receiver");
-		Scontent  = SharedPreferenceUtil.readSharedPreference(getApplicationContext(), "letter", "content");
+		try {
+			Sreceiver = SharedPreferenceUtil.readSharedPreference(NewLetterActivity.this,"letter","receiver");
+			Scontent  = SharedPreferenceUtil.readSharedPreference(getApplicationContext(), "letter", "content");
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		receiver.setText(Sreceiver);
 		content.setText(Scontent);

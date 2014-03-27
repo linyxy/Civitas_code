@@ -14,7 +14,7 @@ import android.widget.Scroller;
 
 public class SlidingMenuView extends ViewGroup{
 	
-	private static String LOG_TAG = "SlidingMenuView";
+	private static final String LOG_TAG = "SlidingMenuView";
     private static final int INVALID_SCREEN = -1;
 
     private static final int SNAP_VELOCITY = 1000;

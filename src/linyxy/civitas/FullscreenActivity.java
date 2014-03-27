@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import linyxy.civitas.util.DataRequestUtil;
-import linyxy.civitas.util.DatabaseHelper;
-import linyxy.civitas.util.DialogUtil;
-import linyxy.civitas.util.HttpUtil;
-import linyxy.civitas.util.SharedPreferenceUtil;
 import linyxy.civitas.util.SystemUiHider;
 import linyxy.civitas.util.UpdateData;
 
 import org.json.JSONObject;
 
 import projectTesting.HttpUtilX;
+import structure.DatabaseHelper;
+import structure.DialogUtil;
+import structure.HttpUtil;
+import structure.SharedPreferenceUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

@@ -37,6 +37,9 @@
             android:name="linyxy.civitas.LetterTabHostActivity"
            
             ></activity>
+              <activity 
+            android:name="linyxy.civitas.NewLetterActivity"      
+            ></activity>
         <activity
             android:name="linyxy.civitas.My_Second_Activity"
             android:label="@string/my_second"

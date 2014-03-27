@@ -1,4 +1,4 @@
-package linyxy.civitas.util;
+package structure;
 
 import android.content.Context;
 import android.content.SharedPreferences;

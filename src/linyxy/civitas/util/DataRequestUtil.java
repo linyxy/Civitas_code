@@ -11,6 +11,10 @@ import linyxy.civitas.SQLiteActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import structure.DialogUtil;
+import structure.HttpUtil;
+import structure.SharedPreferenceUtil;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -219,14 +223,45 @@ public class DataRequestUtil extends Activity{
 	 * 用于读取sharedP中的用户名
 	 * @return map containing of name
 	 */
-	public Map<String, String> getName(Context ctx)
+	public static Map<String, String> getName(Context ctx)
 	{
-		String username = SharedPreferenceUtil.readSharedPreference(DataRequestUtil.this,pseronStatus, "unserNmae");
+		String username = SharedPreferenceUtil.readSharedPreference(ctx,pseronStatus, "unserNmae");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userName", username);
 		return map;
 	}
 	
+	/**
+	 * 
+	 * 发送一个新的站内信
+	 * @param ctx
+	 * @param receiver
+	 * @param content
+	 * @return
+	 */
+	public static String sendNewLetter(Context ctx,String receiver,String content)
+	{
+		String result="badServer";
+		
+		
+		
+		Map<String,String> letter = getName(ctx);
+		letter.put("TODO", "TODO");//TODO
+		letter.put("receiver", receiver);
+		letter.put("content", content);
+		
+		try {
+			JSONObject re = query("",letter);
+			if(re.get(result).equals("TODO"))
+				return "newLetterTrue";
+			return "newLetterFalse";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 	
 	
 	//--------test---------test---------test-------------

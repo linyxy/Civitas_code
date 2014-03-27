@@ -2,10 +2,11 @@ package linyxy.civitas;
 
 import java.util.List;
 
-import linyxy.civitas.util.DatabaseHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import structure.DatabaseHelper;
 
 import android.app.Activity;
 import android.content.ContentValues;

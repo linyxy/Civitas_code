@@ -1,4 +1,4 @@
-package linyxy.civitas.util;
+package structure;
 
 
 /*这是一个从mars老师教程里面拉出来的类，

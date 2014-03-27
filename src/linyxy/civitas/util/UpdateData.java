@@ -2,10 +2,12 @@ package linyxy.civitas.util;
 
 import linyxy.civitas.FullscreenActivity;
 import linyxy.fragment.My2Fragment;
+import structure.DialogUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 
 /*
@@ -45,6 +47,13 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			System.out.println(loginResult);
 			return loginResult;//发送结果更新UI
 		}
+		if(params[0].equals("letter"))
+		{
+			String newLetterResult;
+			Log.d("letter", "sending a new letter");
+			newLetterResult = DataRequestUtil.sendNewLetter(ctx, params[1], params[2]);
+			return newLetterResult;
+		}
 	
 /*			
 		if(params[0].equals("SQLiteTest"))
@@ -72,7 +81,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 				if(result != null)
 					Log.d(async, result);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				// 
 				e.printStackTrace();
 			}
 		}
@@ -105,6 +114,19 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		if(result.equals("loginFalse"))
 		{
 			DialogUtil.showDialog(ctx, "大概帐号密码写错了", false);
+		}
+		
+		//新站内成功
+		if(result.equals("newLetterTrue"))
+		{
+			
+			//TODO handler机制
+		}
+		//新站内失败
+		if(result.equals("newLetterFalse"))
+		{
+			Toast.makeText(ctx,"站内信发送失败", Toast.LENGTH_SHORT).show();
+			//TODO handler 机制
 		}
 
 		

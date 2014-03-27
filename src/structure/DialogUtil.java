@@ -1,7 +1,7 @@
 /**
  * 
  */
-package linyxy.civitas.util;
+package structure;
 
 import android.app.AlertDialog;
 import android.content.Context;
