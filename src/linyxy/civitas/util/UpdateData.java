@@ -58,7 +58,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			Log.d("H", "Handler sending message");
 			UIupdateHandler.sendMessage(msg);
 		}
-/*			
+	
 		if(params[0].equals("login"))//登陆
 		{
 			String loginResult ;
@@ -67,6 +67,8 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			System.out.println(loginResult);
 			return loginResult;//发送结果更新UI
 		}
+		
+/*
 		if(params[0].equals("letter"))
 		{
 			String newLetterResult;
@@ -123,11 +125,19 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		//登陆成功
 		if(result.equals("loginTrue"))
 		{
+			Message msg = new Message();
+			msg.what = 0x1111;
+			//从主线程带借用Handler来发送消息
+			
+			Log.d("H", "Handler sending message");
+			UIupdateHandler.sendMessage(msg);
+			/*
 			Log.d(async, "tring to start my_second activity");
 			Intent startMySecond = new Intent();
 			startMySecond.setClass(ctx, My2Fragment.class);
 			Log.d(async, "building up the intent");
 			ctx.startActivity(startMySecond);
+			 */
 			
 		}
 		//登陆失败
@@ -140,13 +150,13 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		if(result.equals("newLetterTrue"))
 		{
 			
-			//TODO handler机制
+			UIupdateHandler.sendEmptyMessage(0x2468);
 		}
 		//新站内失败
 		if(result.equals("newLetterFalse"))
 		{
 			Toast.makeText(ctx,"站内信发送失败", Toast.LENGTH_SHORT).show();
-			//TODO handler 机制
+			
 		}
 
 		

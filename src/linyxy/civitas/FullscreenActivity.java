@@ -67,14 +67,16 @@ public class FullscreenActivity extends Activity {
 	private Button log;
 	private EditText userName;
 	private EditText userPassword;
+	public static String Login = "logining";
+	public static final int loginedTrue = 0x1111;
 	public Handler FSAHandler = new Handler(){
 
 		@Override
 		public void handleMessage(Message msg) {
-			if(msg.what == 0x1111)
+			if(msg.what == loginedTrue)
 			{
 				Log.d("H", "Handler is in use");
-				DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
+				Log.d(Login, "login succes jumping");
 				
 				Intent intent = new Intent();  
 	            intent.setClass(FullscreenActivity.this,MainActivity.class);  
@@ -87,7 +89,7 @@ public class FullscreenActivity extends Activity {
 	};
 	;
 	
-	public static String Login = "logining";
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,36 +102,11 @@ public class FullscreenActivity extends Activity {
 		log = (Button)findViewById(R.id.login_button);
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
-		log.setOnClickListener(new handlerTestListener());
+		log.setOnClickListener(new loginButtonListener());
 		
 	}
 	
-//	class myHandler extends Handler
-//	{
-//
-//		/* (non-Javadoc)
-//		 * @see android.os.Handler#handleMessage(android.os.Message)
-//		 */
-//		@Override
-//		public void handleMessage(Message msg) {
-//			// TODO Auto-generated method stub
-//			super.handleMessage(msg);
-//			
-//			if(msg.what == 0x1357)
-//			{
-//				Log.d(Login, "Jump to my_second");
-//				Intent startMySecond = new Intent();
-//				startMySecond.setClass(FullscreenActivity.this, my_second.class);
-//				FullscreenActivity.this.startActivity(startMySecond);
-//				finish();
-//			}
-//			else if(msg.what == 0x1358)
-//			{
-//				DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
-//			}
-//		}
-//		
-//	}
+
 	
 	class handlerTestListener implements View.OnClickListener
 	{
@@ -158,26 +135,20 @@ public class FullscreenActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			
-			//String name = userName.getText().toString();
-			//Log.d(Login, "start to login");
-			//System.out.println("start the program");
+			Log.d(Login, "start to login");
+			System.out.println("start the program");
 			
-			Intent intent = new Intent();  
-            intent.setClass(FullscreenActivity.this,MainActivity.class);  
-            startActivity(intent);  
-            FullscreenActivity.this.onDestroy();
-
+			UpdateData update = new UpdateData(FullscreenActivity.this,FSAHandler);
 			
-			//if(validate())
-			//{
-			//	Toast.makeText(getApplicationContext(),"正在登陆中", Toast.LENGTH_SHORT).show();
+			if(validate())
+			{
+				Toast.makeText(getApplicationContext(),"正在登陆中", Toast.LENGTH_SHORT).show();
 				//进入后台验证帐号密码
-				//update.execute("login",userName.getText().toString(),userPassword.getText().toString());
-			//}
+				update.execute("login",userName.getText().toString(),userPassword.getText().toString());
+			}
 
 		
 			
-			// TODO Auto-generated method stub
 		}
 		
 	}
