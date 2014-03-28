@@ -42,14 +42,18 @@ public class NewLetterActivity extends Activity {
 				//清除SharedP中缓存
 				//关闭这个activity
 				//TODO 使用handler处理
-				SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "receiver"
+				SharedPreferenceUtil.updateSharedPreference(NewLetterActivity.this, "letter", "receiver"
 						,"");
 				SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "content"
 						, "");
+				
+				receiver.setText("");
+				content.setText("");
 				Toast.makeText(NewLetterActivity.this,"站内信发送成功", Toast.LENGTH_SHORT).show();
 				
 				
-	            NewLetterActivity.this.onDestroy();
+				
+	            NewLetterActivity.this.onStop();
 			}
 			if(msg.what == 0x2467)
 			{
@@ -98,18 +102,9 @@ public class NewLetterActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				/*
-				 * 向SharedP中存入
-				 * "letter"
-				 * @receiver
-				 * @content
-				 */
-				SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "receiver"
-						,receiver.getText().toString());
-				SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "content"
-						, content.getText().toString());
+
 				
-				NewLetterActivity.this.onDestroy();
+				NewLetterActivity.this.onStop();
 			}
 			
 		});
@@ -118,6 +113,23 @@ public class NewLetterActivity extends Activity {
 	
 	
 	
+	@Override
+	protected void onStop() {
+		/*
+		 * 向SharedP中存入
+		 * "letter"
+		 * @receiver
+		 * @content
+		 */
+		SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "receiver"
+				,receiver.getText().toString());
+		SharedPreferenceUtil.updateSharedPreference(getApplicationContext(), "letter", "content"
+				, content.getText().toString());
+		super.onStop();
+	}
+
+
+
 	public void intiView()
 	{
 		Log.d(letter, "init new letter view");
@@ -131,6 +143,7 @@ public class NewLetterActivity extends Activity {
 		
 			e.printStackTrace();
 		}
+		
 		
 		receiver.setText(Sreceiver);
 		content.setText(Scontent);

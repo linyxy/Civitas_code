@@ -102,13 +102,13 @@ public class FullscreenActivity extends Activity {
 		log = (Button)findViewById(R.id.login_button);
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
-		log.setOnClickListener(new loginButtonListener());
+		log.setOnClickListener(new TestListener());
 		
 	}
 	
 
 	
-	class handlerTestListener implements View.OnClickListener
+	class TestListener implements View.OnClickListener
 	{
 
 		@Override
@@ -146,7 +146,7 @@ public class FullscreenActivity extends Activity {
 				//进入后台验证帐号密码
 				update.execute("login",userName.getText().toString(),userPassword.getText().toString());
 			}
-
+			Toast.makeText(FullscreenActivity.this, "登陆成功", Toast.LENGTH_SHORT);
 		
 			
 		}

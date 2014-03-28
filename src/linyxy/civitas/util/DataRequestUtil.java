@@ -242,6 +242,7 @@ public class DataRequestUtil extends Activity{
 	public static String sendNewLetter(Context ctx,String receiver,String content)
 	{
 		String result="badServer";
+		String cus ="newLetterTrue";
 		
 		
 		
@@ -251,7 +252,10 @@ public class DataRequestUtil extends Activity{
 		letter.put("content", content);
 		
 		try {
+			System.out.println("this part is runnable");
 			JSONObject re = query("",letter);
+			System.out.println("µÃµ½µÄ"+re.get(result));
+			
 			if(re.get(result).equals("TODO"))
 				return "newLetterTrue";
 			return "newLetterFalse";
@@ -259,8 +263,9 @@ public class DataRequestUtil extends Activity{
 			e.printStackTrace();
 		}
 		
+		System.out.println("result is --->"+result);
 		
-		return result;
+		return cus;
 	}
 	
 	
