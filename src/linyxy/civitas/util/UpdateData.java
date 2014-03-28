@@ -6,6 +6,8 @@ import structure.DialogUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,10 +22,17 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 
 	public final String async = "async task";
 	private Context ctx;
+			Handler UIupdateHandler;
 	
 	public UpdateData(Context ctx) {
 		super();
 		this.ctx = ctx;
+	}
+	
+	public UpdateData(Context ctx,Handler h) {
+		super();
+		this.ctx = ctx;
+		this.UIupdateHandler = h;
 	}
 
 	/* (non-Javadoc)
@@ -39,6 +48,17 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			System.out.println("SharedTest");
 			Log.d(async, "creating DataRequestUtil activity");
 			
+			
+		if(params[0].equals("handlerTest"))
+		{
+			Message msg = new Message();
+			msg.what = 0x1111;
+			//从主线程带借用Handler来发送消息
+			
+			Log.d("H", "Handler sending message");
+			UIupdateHandler.sendMessage(msg);
+		}
+/*			
 		if(params[0].equals("login"))//登陆
 		{
 			String loginResult ;
@@ -55,7 +75,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			return newLetterResult;
 		}
 	
-/*			
+			
 		if(params[0].equals("SQLiteTest"))
 		{
 			Log.d(async, "DataRequestUtil created");

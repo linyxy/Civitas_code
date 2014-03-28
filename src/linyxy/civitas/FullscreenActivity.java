@@ -67,6 +67,25 @@ public class FullscreenActivity extends Activity {
 	private Button log;
 	private EditText userName;
 	private EditText userPassword;
+	public Handler FSAHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			if(msg.what == 0x1111)
+			{
+				Log.d("H", "Handler is in use");
+				DialogUtil.showDialog(FullscreenActivity.this, "大概帐号密码写错了", false);
+				
+				Intent intent = new Intent();  
+	            intent.setClass(FullscreenActivity.this,MainActivity.class);  
+	            startActivity(intent);  
+	            FullscreenActivity.this.onDestroy();
+			}
+			super.handleMessage(msg);
+		}
+		
+	};
+	;
 	
 	public static String Login = "logining";
 	
@@ -81,9 +100,7 @@ public class FullscreenActivity extends Activity {
 		log = (Button)findViewById(R.id.login_button);
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
-		log.setOnClickListener(new loginButtonListener());
-		
-		
+		log.setOnClickListener(new handlerTestListener());
 		
 	}
 	
@@ -114,6 +131,25 @@ public class FullscreenActivity extends Activity {
 //		
 //	}
 	
+	class handlerTestListener implements View.OnClickListener
+	{
+
+		@Override
+		public void onClick(View arg0) {
+			UpdateData update = new UpdateData(FullscreenActivity.this,FSAHandler);
+//			update.execute("UrlTest");
+//			服务器相应测试
+//			update.execute("SharedPTest");
+//			SharedPreference测试
+//			update.execute("SQLiteTest");
+//			SQLite Test
+			
+			update.execute("handlerTest");
+			
+		}
+		
+	}
+	
 	//按钮监听器
 	//用于后台登陆
 	class loginButtonListener implements View.OnClickListener
@@ -130,13 +166,7 @@ public class FullscreenActivity extends Activity {
             intent.setClass(FullscreenActivity.this,MainActivity.class);  
             startActivity(intent);  
             FullscreenActivity.this.onDestroy();
-			//UpdateData update = new UpdateData(FullscreenActivity.this);
-			//update.execute("UrlTest");
-			//服务器相应测试
-			//update.execute("SharedPTest");
-			//SharedPreference测试
-			//update.execute("SQLiteTest");
-			//SQLite Test
+
 			
 			//if(validate())
 			//{
