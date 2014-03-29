@@ -242,6 +242,8 @@ public class DataRequestUtil extends Activity{
 	public static String sendNewLetter(Context ctx,String receiver,String content)
 	{
 		String result="badServer";
+		
+		//²âÊÔÓÃtag
 		String cus ="newLetterTrue";
 		
 		
@@ -265,7 +267,7 @@ public class DataRequestUtil extends Activity{
 		
 		System.out.println("result is --->"+result);
 		
-		return cus;
+		return result;
 	}
 	
 	

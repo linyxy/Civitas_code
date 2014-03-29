@@ -35,7 +35,8 @@ public class NewLetterActivity extends Activity {
 				
 				
 				Intent intent = new Intent();  
-	            intent.setClass(NewLetterActivity.this,MainActivity.class);  
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            intent.setClass(NewLetterActivity.this,LetterTabHostActivity.class);  
 	            startActivity(intent);
 	            
 				//如果发送成功
@@ -51,9 +52,7 @@ public class NewLetterActivity extends Activity {
 				content.setText("");
 				Toast.makeText(NewLetterActivity.this,"站内信发送成功", Toast.LENGTH_SHORT).show();
 				
-				
-				
-	            NewLetterActivity.this.onStop();
+				finish();
 			}
 			if(msg.what == 0x2467)
 			{
@@ -103,8 +102,11 @@ public class NewLetterActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 
-				
-				NewLetterActivity.this.onStop();
+				Intent intent = new Intent();  
+	            intent.setClass(NewLetterActivity.this,LetterTabHostActivity.class);  
+	            startActivity(intent);
+	            
+	            finish();
 			}
 			
 		});

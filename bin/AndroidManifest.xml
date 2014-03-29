@@ -35,6 +35,7 @@
             ></activity>
               <activity
             android:name="linyxy.civitas.LetterTabHostActivity"
+            android:launchMode="singleTask"
            
             ></activity>
               <activity 

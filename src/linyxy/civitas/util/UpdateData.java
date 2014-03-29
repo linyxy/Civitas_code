@@ -125,19 +125,10 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		//登陆成功
 		if(result.equals("loginTrue"))
 		{
-			Message msg = new Message();
-			msg.what = 0x1111;
 			//从主线程带借用Handler来发送消息
 			
 			Log.d("H", "Handler sending message");
-			UIupdateHandler.sendMessage(msg);
-			/*
-			Log.d(async, "tring to start my_second activity");
-			Intent startMySecond = new Intent();
-			startMySecond.setClass(ctx, My2Fragment.class);
-			Log.d(async, "building up the intent");
-			ctx.startActivity(startMySecond);
-			 */
+			UIupdateHandler.sendEmptyMessage(0x1111);
 			
 		}
 		//登陆失败
