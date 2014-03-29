@@ -1,11 +1,13 @@
 package linyxy.civitas.util;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import linyxy.civitas.FullscreenActivity;
+import linyxy.civitas.R;
 import linyxy.civitas.SQLiteActivity;
 
 import org.json.JSONArray;
@@ -13,13 +15,12 @@ import org.json.JSONObject;
 
 import structure.DialogUtil;
 import structure.HttpUtil;
+import structure.Md5Util;
 import structure.SharedPreferenceUtil;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 /*
  * 这是一个用来访问网络数据类，
@@ -31,23 +32,8 @@ public class DataRequestUtil extends Activity{
 
 	public static final String pseronStatus = "personStatus";
 	public static final String dataR = "DataRequest";
-	
-	public DataRequestUtil() {
-		// TODO Auto-generated constructor stub
+	private static final String BASE_URL = "http://azure33.chinacloudapp.cn/onionc/api.php";
 		
-	}
-	
-
-	
-	public void process(String action)
-	{
-//		if(action.equals("getStatus")) getStatus();
-//		if(action.equals("getChat")) getChat();
-//		if(action.equals("SharedTest")) sharePTest(null);
-		
-	}
-	
-	
 
 	/**
 	 * 通过post函数向服务器调取内容的函数
@@ -61,19 +47,104 @@ public class DataRequestUtil extends Activity{
 	{
 		// 定义发送请求的URL
 		Log.d(dataR, "send request to server| query");
-		String url = HttpUtil.BASE_URL + conectPosition+".jsp";
 		// 发送请求
-		return new JSONObject(HttpUtil.postRequest(url,requestMap));
+		return new JSONObject(HttpUtil.postRequest(BASE_URL,requestMap));
 	}
 	
 	public static JSONArray requestData(String conectPosition,Map<String, String> requestMap) throws Exception
 	{
 		// 定义发送请求的URL
 		Log.d(dataR, "send request to server | requestData");
-		String url = HttpUtil.BASE_URL + conectPosition+".jsp";
 		// 发送请求
-		return new JSONArray(HttpUtil.postRequest(url,requestMap));
+		
+		return new JSONArray(HttpUtil.postRequest(BASE_URL,requestMap));
 	}
+	
+	
+//------------------New Sever Code-------------
+	/*
+	 * 以下代码根据服务器API编写
+	 * 没有注释的函数请都参考API
+	 */
+	
+	public Map<String, String> getV()
+	{
+		Map<String,String> v = new HashMap<String,String>();
+		
+		v.put("v", this.getString(R.string.v));
+		
+		return v;
+	}
+
+	public Map<String,String> getBasic(String model)
+	{
+		Map<String,String> basic = getV();
+		basic.put("m", model);
+		return basic;
+	}
+	
+	public void basiclogin(Context ctx,String name,String password)
+	{
+		String res = "badServer";
+		
+		Map<String,String> baslogin = getBasic("basiclogin");
+		baslogin.put("login", name);
+		baslogin.put("password", password);
+		
+		Map<String,String> ba = appendAppAuthen(baslogin);
+		
+		try {
+			JSONObject r = query("", ba);
+			r.isNull("message");
+			String token = r.getString("token");
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * 模块授权方式：app
+	 */
+	public Map<String,String> appendAppAuthen(Map<String,String> raw)
+	{
+		
+		String time = getTimeStamp();
+		String nonce= getNonce();
+		String app_s= this.getString(R.string.app_secret);
+		raw.put("app_id", this.getString(R.string.app_id));
+		raw.put("time", time);
+		raw.put("nonce", nonce);
+		raw.put("sign", Md5Util.MD5(time+app_s+nonce));
+		return raw;
+	}
+	
+	/*
+	 * 获取一个时间戳
+	 */
+	private String getTimeStamp()
+	{
+		long t = new Date().getTime();
+		t = t/1000;
+		String stamp = String.valueOf(t);
+		
+		System.out.println("current time is---->"+stamp);
+		return stamp;
+	}
+	
+	/*
+	 * 获取一个nonce
+	 */
+	private String getNonce()
+	{
+		int in = (int)(Math.random()*10000);
+		return String.valueOf(in);
+	}
+	
+	
+
+//--------------------Old Sever Code------------------	
+	
 	
 	/**
 	 * 用来进行登陆的函数

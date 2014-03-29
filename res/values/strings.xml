@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
+    <!-- Server Configuration -->
+    <string name="v">1</string>
+    <string name="baseUrl">http://azure33.chinacloudapp.cn/onionc/api.php</string>
+	<string name="app_secret">sodFcb8tekloOCYX</string>
+	<string name="app_id">1</string>
+    
+    
     <!-- over all -->
     <string name="app_name">Civitas</string>
     <string name="dummy_button">Dummy Button</string>

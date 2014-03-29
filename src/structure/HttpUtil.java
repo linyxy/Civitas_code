@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import linyxy.civitas.R;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -17,6 +19,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import android.app.Application;
 import android.util.Log;
 /**
  * Description:
@@ -33,9 +36,7 @@ public class HttpUtil
 	public static final String HttpTag = "HTTP_TASK";
 	
 	public static HttpClient httpClient = new DefaultHttpClient();
-	public static final String BASE_URL = 
-		"http://192.168.1.107:8080/nhjd";//需要修改
-	public static final String keng = "?user='11'&pass='22";
+	//public static final String BASE_URL = "";
 	/**
 	 * 
 	 * @param url 发送请求的URL

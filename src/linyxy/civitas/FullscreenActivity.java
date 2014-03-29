@@ -96,13 +96,15 @@ public class FullscreenActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-
+		//
+		
 		
 		Log.d(Login,"The application is started normally");
 		log = (Button)findViewById(R.id.login_button);
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
 		log.setOnClickListener(new TestListener());
+		
 		
 	}
 	
