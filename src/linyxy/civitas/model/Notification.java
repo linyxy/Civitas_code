@@ -1,5 +1,6 @@
 package linyxy.civitas.model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Notification {
@@ -12,6 +13,7 @@ public class Notification {
 	private Map<String,String> related_links;
 	private String comment;
 	
+
 	
 	public static final String Interactions	 = "Interactions";
 	public static final String Relationships = "Relationships";
@@ -24,7 +26,9 @@ public class Notification {
 	public static final String VolumeTransfer = "VolumeTransfer";
 	
 	
-	
+	public static String[] links = {Interactions,Relationships,Recipes,
+		Occupancies,Inventories,Transactions,Estates,VolumeTransfer};
+
 	
 	public Notification(String id, boolean is_unread, String message,
 			String related_entity_id, String related_entity_name,

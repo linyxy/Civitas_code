@@ -202,7 +202,8 @@ public class DataRequestUtil extends Activity{
 			if(!r.getJSONObject("data").isNull("token"))
 			{
 				Log.d(dataR, "get token fro	m success login");
-				SharedPreferenceUtil.updateSharedPreference(ctx, DataRequestUtil.pseronStatus, "token",r.getJSONObject("data").getString("token"));
+				SharedPreferenceUtil.updateSharedPreference(ctx, 
+						DataRequestUtil.pseronStatus, "token",r.getJSONObject("data").getString("token"));
 				return "loginTrue";
 			}
 			//Ã»ÓÐtoken·µ»Ømessage
@@ -256,6 +257,7 @@ public class DataRequestUtil extends Activity{
 			}
 			sql.refreshCrudeData("notifications", list, "content");
 			
+			return "notificationTrue";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -279,6 +281,16 @@ public class DataRequestUtil extends Activity{
 					JSONObject obj = new JSONObject(raw);
 					Map<String,String> related_links = new HashMap<String,String>();
 					//related_links.put(key, value)TODO
+					for(int i = 0;i<Notification.links.length;i++)
+					{
+						String name = Notification.links[i];
+						
+						if(!obj.isNull(name))
+						{
+							related_links.put(name, obj.getString(name));
+						}
+					}
+					
 					Notification notif = new Notification(obj.optString("id"), obj.optBoolean("is_unread"),
 							obj.optString("message"),obj.optString("related_entity_id"), obj.optString("related_entity_name"),
 							related_links, obj.optString("comment"));
