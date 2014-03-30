@@ -75,6 +75,7 @@ public class FullscreenActivity extends Activity {
 		public void handleMessage(Message msg) {
 			if(msg.what == loginedTrue)
 			{
+				Toast.makeText(FullscreenActivity.this, "登陆成功", Toast.LENGTH_SHORT);
 				Log.d("H", "Handler is in use");
 				Log.d(Login, "login succes jumping");
 				
@@ -103,7 +104,7 @@ public class FullscreenActivity extends Activity {
 		log = (Button)findViewById(R.id.login_button);
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
-		log.setOnClickListener(new TestListener());
+		log.setOnClickListener(new loginButtonListener());
 		
 		
 	}
@@ -148,9 +149,6 @@ public class FullscreenActivity extends Activity {
 				//进入后台验证帐号密码
 				update.execute("login",userName.getText().toString(),userPassword.getText().toString());
 			}
-			Toast.makeText(FullscreenActivity.this, "登陆成功", Toast.LENGTH_SHORT);
-		
-			
 		}
 		
 	}
@@ -165,6 +163,12 @@ public class FullscreenActivity extends Activity {
 		{
 			DialogUtil.showDialog(this, "你填写的用户是个啥！", false);
 			return false;
+		}
+		//进行ping服务器
+		if(username.equals("ping"))
+		{
+			UpdateData update = new UpdateData(FullscreenActivity.this,FSAHandler);
+			update.execute("ping");
 		}
 		String pwd = userPassword.getText().toString().trim();
 		if (pwd.equals(""))

@@ -48,12 +48,17 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		System.out.println("SharedTest");
 		Log.d(async, "creating DataRequestUtil activity");
 			
+		if(params[0].equals("ping"))
+		{
+			return DataRequestUtil.ping(ctx);
 			
+		}
+		
 		if(params[0].equals("login"))//登陆
 		{
 			String loginResult ;
 			Log.d(FullscreenActivity.Login,"logining in the background");
-			loginResult = DataRequestUtil.login(ctx,params[1],params[2]);//转入后台验证登陆，获取结果
+			loginResult = DataRequestUtil.basiclogin(ctx,params[1],params[2]);//转入后台验证登陆，获取结果
 			System.out.println(loginResult);
 			return loginResult;//发送结果更新UI
 		}
@@ -123,39 +128,34 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		Log.d(async, "on Post Execute");
 		
 		//登陆成功
-		if(result.equals("loginTrue"))
+		if(result.equals("pong"))
+		{
+			DialogUtil.showDialog(ctx, "服务器可连接",false);
+		}
+		else if(result.equals("loginTrue"))
 		{
 			//从主线程带借用Handler来发送消息
 			
 			Log.d("H", "Handler sending message");
 			UIupdateHandler.sendEmptyMessage(0x1111);
 			
-		}
-		//登陆失败
-		if(result.equals("loginFalse"))
-		{
-			DialogUtil.showDialog(ctx, "大概帐号密码写错了", false);
-		}
-		
-		//新站内成功
-		if(result.equals("newLetterTrue"))
+		}		
+		else if(result.equals("newLetterTrue"))//新站内成功
 		{
 			
 			UIupdateHandler.sendEmptyMessage(0x2468);
 		}
-		//新站内失败
-		if(result.equals("newLetterFalse"))
-		{
-			Toast.makeText(ctx,"站内信发送失败", Toast.LENGTH_SHORT).show();
-			
-		}
 
-		
 		//服务器无连接
-		if(result.equals("badServer"))
+		else if(result.equals("badServer"))
 		{
 			DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
 		}
+		else //剩余情况输出message
+		{
+			DialogUtil.showDialog(ctx, result,false);
+		}
+	
 	}
 
 	/* (non-Javadoc)

@@ -67,52 +67,66 @@ public class DataRequestUtil extends Activity{
 	 * 没有注释的函数请都参考API
 	 */
 	
-	public Map<String, String> getV()
+	public static Map<String, String> getV(Context ctx)
 	{
 		Map<String,String> v = new HashMap<String,String>();
 		
-		v.put("v", this.getString(R.string.v));
+		v.put("v", ctx.getString(R.string.v));
 		
 		return v;
 	}
 
-	public Map<String,String> getBasic(String model)
+	public static Map<String,String> getBasic(Context ctx,String model)
 	{
-		Map<String,String> basic = getV();
+		Map<String,String> basic = getV(ctx);
 		basic.put("m", model);
 		return basic;
 	}
 	
-	public void basiclogin(Context ctx,String name,String password)
+	public static String basiclogin(Context ctx,String name,String password)
 	{
 		String res = "badServer";
 		
-		Map<String,String> baslogin = getBasic("basiclogin");
+		Map<String,String> baslogin = getBasic(ctx, "basiclogin");
 		baslogin.put("login", name);
 		baslogin.put("password", password);
 		
-		Map<String,String> ba = appendAppAuthen(baslogin);
+		Map<String,String> ba = appendAppAuthen(ctx,baslogin);
+		Log.d(dataR, "start to login!");
 		
 		try {
 			JSONObject r = query("", ba);
-			r.isNull("message");
-			String token = r.getString("token");
+			Log.d(dataR, "conneted to server");
+			//如果又token则返回token
+			if(!r.getJSONObject("data").isNull("token"))
+			{
+				Log.d(dataR, "get token from success login");
+				SharedPreferenceUtil.updateSharedPreference(ctx, DataRequestUtil.pseronStatus, "token",r.getJSONObject("data").getString("token"));
+				return "loginTrue";
+			}
+			//没有token返回message
+			if(!r.isNull("message"))
+			{
+				return r.optString("message");
+			}
+			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
+		return res;
 	}
 	
 	/*
 	 * 模块授权方式：app
 	 */
-	public Map<String,String> appendAppAuthen(Map<String,String> raw)
+	public static Map<String,String> appendAppAuthen(Context ctx,Map<String,String> raw)
 	{
 		
 		String time = getTimeStamp();
 		String nonce= getNonce();
-		String app_s= this.getString(R.string.app_secret);
-		raw.put("app_id", this.getString(R.string.app_id));
+		String app_s= ctx.getString(R.string.app_secret);
+		raw.put("app_id", ctx.getString(R.string.app_id));
 		raw.put("time", time);
 		raw.put("nonce", nonce);
 		raw.put("sign", Md5Util.MD5(time+app_s+nonce));
@@ -122,7 +136,7 @@ public class DataRequestUtil extends Activity{
 	/*
 	 * 获取一个时间戳
 	 */
-	private String getTimeStamp()
+	private static String getTimeStamp()
 	{
 		long t = new Date().getTime();
 		t = t/1000;
@@ -135,12 +149,25 @@ public class DataRequestUtil extends Activity{
 	/*
 	 * 获取一个nonce
 	 */
-	private String getNonce()
+	private static String getNonce()
 	{
 		int in = (int)(Math.random()*10000);
 		return String.valueOf(in);
 	}
 	
+	public static String ping(Context ctx)
+	{
+		Map<String,String> pi = getBasic(ctx,"ping");
+		try {
+			JSONObject response = query("", pi);
+			Log.d(dataR, response.getJSONObject("data").optString("ping"));
+			return response.getJSONObject("data").optString("ping");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "badServer";
+	}
 	
 
 //--------------------Old Sever Code------------------	
