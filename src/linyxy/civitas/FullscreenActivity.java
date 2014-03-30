@@ -82,13 +82,12 @@ public class FullscreenActivity extends Activity {
 				Intent intent = new Intent();  
 	            intent.setClass(FullscreenActivity.this,MainActivity.class);  
 	            startActivity(intent);  
-	            FullscreenActivity.this.onDestroy();
+	            finish();
 			}
 			super.handleMessage(msg);
 		}
 		
 	};
-	;
 	
 
 	

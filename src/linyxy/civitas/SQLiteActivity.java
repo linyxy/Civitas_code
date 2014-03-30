@@ -67,6 +67,24 @@ public class SQLiteActivity  {
 		db.close();
     }
     
+    public String refreshCrudeData(String tableName,List<JSONObject> list,String key){
+    	//创建一个DatabaseHelper对象
+		DatabaseHelper dbHelper = new DatabaseHelper(ctx,DatabaseHelper.dataBaseCivi);
+		//只有调用了DatabaseHelper对象的getReadableDatabase()方法，或者是getWritableDatabase()方法之后，才会创建，或打开一个数据库
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	
+    	ContentValues values = new ContentValues();
+    	
+    	for(JSONObject obj:list)
+    	{
+    		values.put(key, obj.toString());
+    	}
+    	db.insert(tableName, null, values);
+    	return "storeFinish";
+    }
+    
+    
+    
     public void tableTest()
     {
 

@@ -1,15 +1,15 @@
 package linyxy.civitas.util;
 
+import java.util.ArrayList;
+
 import linyxy.civitas.FullscreenActivity;
-import linyxy.fragment.My2Fragment;
+import linyxy.civitas.model.Notification;
 import structure.DialogUtil;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 
 /*
@@ -71,6 +71,12 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			newLetterResult = DataRequestUtil.sendNewLetter(ctx, params[1], params[2]);
 			return newLetterResult;
 		}
+		if(params[0].equals("get_notifications"))
+		{
+			String result = DataRequestUtil.get_notifications_S(ctx);
+			return result;
+			
+		}
 
 //----------------------TEST------------------------	
 		if(params[0].equals("handlerTest"))
@@ -88,32 +94,9 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			Log.d(async, "DataRequestUtil created");
 			DataRequestUtil.SQLiteTest(ctx);
 		}
-			
-		if(params[0].equals("SharedPTest"))
-		{
-			DataRequestUtil.sharePTest(ctx);
-		}
-			
-		if(params[0].equals("UrlTest"))
-		{
-			System.out.println("try HTTPUTILX");
-			try {
-				String urlPattern = HttpUtilX.BASE_URL+"/login.jsp" ;
-				//HttpUtilX.getRequest(HttpUtilX.BASE_URL);
-				HashMap<String, String> content = new HashMap<String,String>();
-				content.put("userName", "linyxy.art@gmail.com");
-				content.put("password", "xx19970305");
-				Log.d(async, "feng zhuang");
-				String result = HttpUtilX.postRequest(urlPattern, content);
-				if(result != null)
-					Log.d(async, result);
-			} catch (Exception e) {
-				// 
-				e.printStackTrace();
-			}
-		}
+
 */
-		
+//----------------------TEST-------------------------
 		return params[0];
 	}
 
@@ -126,20 +109,24 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 //		if(result.equals("getStatus"))
 //				System.out.println("refresh UI"	);
 		Log.d(async, "on Post Execute");
-		
-		//登陆成功
-		if(result.equals("pong"))
+				
+		if(result.equals("pong"))//ping成功 服务器通畅
 		{
 			DialogUtil.showDialog(ctx, "服务器可连接",false);
 		}
-		else if(result.equals("loginTrue"))
+		else if(result.equals("loginTrue"))//登陆成功
 		{
 			//从主线程带借用Handler来发送消息
 			
 			Log.d("H", "Handler sending message");
 			UIupdateHandler.sendEmptyMessage(0x1111);
 			
-		}		
+		}
+		else if(result.equals("notificationTrue"))
+		{
+			UIupdateHandler.sendEmptyMessage(0x1200);
+			
+		}
 		else if(result.equals("newLetterTrue"))//新站内成功
 		{
 			

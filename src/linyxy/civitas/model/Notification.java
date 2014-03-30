@@ -1,70 +1,101 @@
 package linyxy.civitas.model;
 
+import java.util.Map;
+
 public class Notification {
 
-	private String content;
-	private int notificationType;
+	private String id;
+	private boolean is_unread;
+	private String message;
+	private String related_entity_id;
+	private String related_entity_name;
+	private Map<String,String> related_links;
+	private String comment;
 	
 	
-	public static final int INDIVIDUAL = 1;
-	public static final int FRIENDSHIP = 2;
-	public static final int EXCHANGE =3;
-	public static final int JOBANDESTATE = 4;
+	public static final String Interactions	 = "Interactions";
+	public static final String Relationships = "Relationships";
+	public static final String Recipes		 ="Recipes";
+	public static final String Occupancies	 = "Occupancies";
+	
+	public static final String Inventories = "Inventories";
+	public static final String Transactions = "Transactions";
+	public static final String Estates = "Estates";
+	public static final String VolumeTransfer = "VolumeTransfer";
 	
 	
-	public Notification() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public Notification(String content, int notificationType) {
+	
+	
+	public Notification(String id, boolean is_unread, String message,
+			String related_entity_id, String related_entity_name,
+			Map<String, String> related_links, String comment) {
 		super();
-		this.content = content;
-		this.notificationType = notificationType;
+		this.id = id;
+		this.is_unread = is_unread;
+		this.message = message;
+		this.related_entity_id = related_entity_id;
+		this.related_entity_name = related_entity_name;
+		this.related_links = related_links;
+		this.comment = comment;
 	}
-
-
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	
+	
 	@Override
 	public String toString() {
-		return "Notification [content=" + content + ", notificationType="
-				+ notificationType + "]";
+		return "Notification [id=" + id + ", is_unread=" + is_unread
+				+ ", message=" + message + ", related_entity_id="
+				+ related_entity_id + ", related_entity_name="
+				+ related_entity_name + ", related_links=" + related_links
+				+ ", comment=" + comment + "]";
 	}
 
 
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
+
+	public String getId() {
+		return id;
 	}
-
-
-	/**
-	 * @param content the content to set
-	 */
-	public void setContent(String content) {
-		this.content = content;
+	public void setId(String id) {
+		this.id = id;
 	}
-
-
-	/**
-	 * @return the notificationType
-	 */
-	public int getNotificationType() {
-		return notificationType;
+	public boolean isIs_unread() {
+		return is_unread;
 	}
-
-
-	/**
-	 * @param notificationType the notificationType to set
-	 */
-	public void setNotificationType(int notificationType) {
-		this.notificationType = notificationType;
+	public void setIs_unread(boolean is_unread) {
+		this.is_unread = is_unread;
 	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getRelated_entity_id() {
+		return related_entity_id;
+	}
+	public void setRelated_entity_id(String related_entity_id) {
+		this.related_entity_id = related_entity_id;
+	}
+	public String getRelated_entity_name() {
+		return related_entity_name;
+	}
+	public void setRelated_entity_name(String related_entity_name) {
+		this.related_entity_name = related_entity_name;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public Map<String, String> getRelated_links() {
+		return related_links;
+	}
+	
+
 	
 
 }
+
+
+	

@@ -15,5 +15,13 @@ public class MessageActivity extends Activity{
 		setContentView(R.layout.station_message);
 		
 	}
+
+	@Override
+	protected void onResume() {
+		
+		super.onResume();
+	}
+	
+	
 }
 

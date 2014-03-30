@@ -3,6 +3,10 @@ package linyxy.civitas;
 import java.util.ArrayList;
 import java.util.List;
 
+import linyxy.civitas.model.Notification;
+import linyxy.civitas.util.DataRequestUtil;
+import linyxy.civitas.util.UpdateData;
+
 import android.app.Activity;
 import android.app.LocalActivityManager;
 import android.content.Context;
@@ -10,10 +14,13 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -23,6 +30,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 /**
  * 这是一个包含上导航栏的activity类，
  * 导航栏按钮将生成不同的activity容器用于盛放activity.
@@ -64,7 +72,37 @@ public class LetterTabHostActivity extends Activity {
         InitViewPager();  
     }  
     
-    /** 
+    
+    @Override
+	protected void onResume() {
+		UpdateData updata = new UpdateData(LetterTabHostActivity.this,NotifHandler);
+		updata.execute("get_notifications");
+		super.onResume();
+	}
+    
+    
+    public static int  notificationTrue = 0x1200;
+    
+    /*
+     * 用来更新UI
+     */
+	public Handler NotifHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			if(msg.what == notificationTrue )
+			{
+				Log.d("H", "Handler is in use");
+				ArrayList<Notification> notifs = (ArrayList<Notification>) DataRequestUtil.get_notifications(LetterTabHostActivity.this);
+				
+			}
+			super.handleMessage(msg);
+		}
+		
+	};
+
+
+	/** 
      * 初始化步骤
      * 当页卡滑动时，下面的横线也滑动的效果，
      * 在这里需要计算一些数据 
