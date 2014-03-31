@@ -113,7 +113,6 @@ public class HttpUtil
 			String result = EntityUtils
 				.toString(httpResponse.getEntity());
 			Log.d(HttpTag, result);
-			System.out.println("start"+result+"end");
 			return result;
 		}
 		return null;

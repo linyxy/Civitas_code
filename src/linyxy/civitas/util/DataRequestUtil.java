@@ -252,7 +252,6 @@ public class DataRequestUtil extends Activity{
 			SQLiteActivity sql = new SQLiteActivity(ctx);
 			for(int i =0 ;i<notifList.length();i++)
 			{
-				Log.d("SQL",notifList.getJSONObject(i).toString());
 				list.add(notifList.getJSONObject(i));
 			}
 			sql.refreshCrudeData("notifications", list, "content");
@@ -271,16 +270,19 @@ public class DataRequestUtil extends Activity{
 		DatabaseHelper dbHelper = new DatabaseHelper(ctx,DatabaseHelper.dataBaseCivi);
 		ArrayList<Notification> notifs = new ArrayList<Notification>();
 		SQLiteDatabase dd = dbHelper.getReadableDatabase();
-		Cursor cursor = dd.query("notifications", null, null, null, null, null, null);
+		Cursor cursor = dd.query(true,"notifications", null, null, null, null, null, null, null);
 		
 		
+		System.out.println("length of cursor--->"+cursor.getCount());
+		System.out.println("length of columns--->"+cursor.getColumnCount());
+		System.out.println("column1->"+cursor.getColumnName(0)+"\n column2->"
+						+cursor.getColumnName(1)+"\n column3->"+cursor.getColumnName(2));
 		while(cursor.moveToNext())
 		{
 			String raw = cursor.getString(cursor.getColumnIndex("content"));
 			try {
 					JSONObject obj = new JSONObject(raw);
 					Map<String,String> related_links = new HashMap<String,String>();
-					//related_links.put(key, value)TODO
 					for(int i = 0;i<Notification.links.length;i++)
 					{
 						String name = Notification.links[i];

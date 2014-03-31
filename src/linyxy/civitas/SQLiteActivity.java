@@ -73,13 +73,23 @@ public class SQLiteActivity  {
 		//只有调用了DatabaseHelper对象的getReadableDatabase()方法，或者是getWritableDatabase()方法之后，才会创建，或打开一个数据库
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
     	
-    	ContentValues values = new ContentValues();
     	
+    	
+    	Log.d(SQLTAG, "target table-->"+tableName);
+    	ContentValues values = new ContentValues();
     	for(JSONObject obj:list)
     	{
+    		
+    		Log.d(SQLTAG, "content---->"+obj.toString());
     		values.put(key, obj.toString());
+    		Log.d(SQLTAG, "size----->"+values.size());
+    		Log.d(SQLTAG, "insert----->"+values.getAsString(key));
+    		db.insert(tableName, null, values);
+    		
     	}
-    	db.insert(tableName, null, values);
+
+    		
+		db.close();
     	return "storeFinish";
     }
     
