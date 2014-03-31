@@ -273,12 +273,11 @@ public class DataRequestUtil extends Activity{
 		Cursor cursor = dd.query(true,"notifications", null, null, null, null, null, null, null);
 		
 		
-		System.out.println("length of cursor--->"+cursor.getCount());
-		System.out.println("length of columns--->"+cursor.getColumnCount());
-		System.out.println("column1->"+cursor.getColumnName(0)+"\n column2->"
-						+cursor.getColumnName(1)+"\n column3->"+cursor.getColumnName(2));
-		while(cursor.moveToNext())
-		{
+		Log.d(dataR,"length of cursor--->"+cursor.getCount());
+		Log.d(dataR,"length of columns--->"+cursor.getColumnCount());
+
+		
+		while(cursor.moveToNext())	{
 			String raw = cursor.getString(cursor.getColumnIndex("content"));
 			try {
 					JSONObject obj = new JSONObject(raw);

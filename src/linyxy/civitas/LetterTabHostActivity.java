@@ -94,9 +94,9 @@ public class LetterTabHostActivity extends Activity {
 			{
 				Log.d("H", "Handler is in use");
 				ArrayList<Notification> notifs = (ArrayList<Notification>) DataRequestUtil.get_notifications(LetterTabHostActivity.this);
-				System.out.println("length of the notif---->"+notifs.size());
+				Log.d(DataRequestUtil.dataR,"length of the notif---->"+notifs.size());
 				for(Notification notif:notifs)
-					System.out.println(notif.toString());
+					Log.i(DataRequestUtil.dataR,notif.toString());
 			}
 			super.handleMessage(msg);
 		}
