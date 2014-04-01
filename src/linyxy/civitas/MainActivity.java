@@ -5,6 +5,8 @@ import linyxy.fragment.My2Fragment;
 import linyxy.fragment.SquareFragment;
 import linyxy.fragment.StreetFragment;
 import linyxy.slidingmenu.SlidingMenuView;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -73,7 +75,18 @@ public class MainActivity extends FragmentActivity {
         
         getSupportFragmentManager().beginTransaction()
         .add(R.id.sliding_body_market, marketFragment).commit();
+        }
     }
-}
+    
+    public static void logout(Context ctx)
+    {
+    	Intent intent = new Intent();
+    	intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    	intent.setClass(ctx,MainActivity.class);
+    	
+    	ctx.startActivity(intent);
+    	
+    }
+    
 }
         

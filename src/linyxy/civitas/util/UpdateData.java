@@ -138,6 +138,10 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		{
 			DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
 		}
+		else if(result.equals("badToken"))//登陆验证失误
+		{
+			
+		}
 		else //剩余情况输出message
 		{
 			DialogUtil.showDialog(ctx, result,false);

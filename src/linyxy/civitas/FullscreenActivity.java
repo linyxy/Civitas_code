@@ -79,12 +79,7 @@ public class FullscreenActivity extends Activity {
 				Log.d("H", "Handler is in use");
 				Log.d(Login, "login succes jumping");
 				
-				/*
-				 * ±£¥Ê√‹¬Î
-				 */
-				SharedPreferenceUtil.updateSharedPreference(FullscreenActivity.this, "p", "name", userName.getText().toString());
-				SharedPreferenceUtil.updateSharedPreference(FullscreenActivity.this, "p", "password", userPassword.getText().toString());
-				
+
 				Intent intent = new Intent();  
 	            intent.setClass(FullscreenActivity.this,MainActivity.class);  
 	            startActivity(intent);  
@@ -111,15 +106,7 @@ public class FullscreenActivity extends Activity {
 		userPassword = (EditText)findViewById(R.id.user_password);
 		log.setOnClickListener(new loginButtonListener());
 		
-		/*
-		 * »°≥ˆ±£¥Ê’ ∫≈√‹¬Î FIXME Œ¥ µœ÷¬ﬂº≠
-		 */
-		try {
-			SharedPreferenceUtil.readSharedPreference(FullscreenActivity.this, "p", "name");
-			SharedPreferenceUtil.readSharedPreference(FullscreenActivity.this, "p", "password");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 	
 

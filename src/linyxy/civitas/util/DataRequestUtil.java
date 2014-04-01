@@ -199,7 +199,7 @@ public class DataRequestUtil extends Activity{
 			JSONObject r = query("", ba);
 			Log.d(dataR, "conneted to server");
 			//如果又token则返回token
-			if(!r.getJSONObject("data").isNull("token"))
+			if(!r.isNull("data") && !r.getJSONObject("data").isNull("token"))
 			{
 				Log.d(dataR, "get token fro	m success login");
 				SharedPreferenceUtil.updateSharedPreference(ctx, 
