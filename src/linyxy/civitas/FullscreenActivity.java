@@ -3,6 +3,7 @@ package linyxy.civitas;
 import java.util.HashMap;
 import java.util.Map;
 
+import linyxy.civitas.util.DataRequest;
 import linyxy.civitas.util.DataRequestUtil;
 import linyxy.civitas.util.SystemUiHider;
 import linyxy.civitas.util.UpdateData;
@@ -97,7 +98,6 @@ public class FullscreenActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-		//
 		
 		
 		Log.d(Login,"The application is started normally");
@@ -105,20 +105,23 @@ public class FullscreenActivity extends Activity {
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
 		log.setOnClickListener(new loginButtonListener());
-		
+
+		logAuto();
 
 	}
 	
 
-	
-	@Override
-	protected void onResume() {
+
+
+	public void logAuto()
+	{
 		/*
 		 * 自动登陆实现。可能需要修改方式 TODO
 		 */
+		System.out.println("zen me huis hi");
 		String token = SharedPreferenceUtil.
-				readSharedPreference(getApplicationContext(), "person_status", "token");
-		Log.d(Login, token);
+				readSharedPreference(getApplicationContext(), DataRequest.pseronStatus, "token");
+		Log.d(Login, " ---->"+token);
 		if(!token.equals(""))
 		{
 			Toast.makeText(FullscreenActivity.this, "登陆成功", Toast.LENGTH_SHORT);
@@ -130,10 +133,8 @@ public class FullscreenActivity extends Activity {
             intent.setClass(FullscreenActivity.this,MainActivity.class);  
             startActivity(intent);  
             finish();
-		}		super.onResume();
+		}		
 	}
-
-
 
 	class TestListener implements View.OnClickListener
 	{
