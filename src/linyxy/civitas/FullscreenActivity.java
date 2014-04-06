@@ -111,6 +111,30 @@ public class FullscreenActivity extends Activity {
 	
 
 	
+	@Override
+	protected void onResume() {
+		/*
+		 * 自动登陆实现。可能需要修改方式 TODO
+		 */
+		String token = SharedPreferenceUtil.
+				readSharedPreference(getApplicationContext(), "person_status", "token");
+		Log.d(Login, token);
+		if(!token.equals(""))
+		{
+			Toast.makeText(FullscreenActivity.this, "登陆成功", Toast.LENGTH_SHORT);
+			Log.d("H", "Handler is in use");
+			Log.d(Login, "login succes jumping");
+			
+
+			Intent intent = new Intent();  
+            intent.setClass(FullscreenActivity.this,MainActivity.class);  
+            startActivity(intent);  
+            finish();
+		}		super.onResume();
+	}
+
+
+
 	class TestListener implements View.OnClickListener
 	{
 

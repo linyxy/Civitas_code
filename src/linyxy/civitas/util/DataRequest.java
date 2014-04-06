@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import linyxy.civitas.FullscreenActivity;
 import linyxy.civitas.R;
 import linyxy.civitas.SQLiteActivity;
 import linyxy.civitas.model.Notification;
@@ -16,21 +15,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import structure.DatabaseHelper;
-import structure.DialogUtil;
-import structure.HttpUtil;
 import structure.Md5Util;
 import structure.SharedPreferenceUtil;
-
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-/*
- * 这个类即将被废弃
- * 代码将转移到DataRequest.class
- */
 
 /*
  * 这是一个用来访问网络数据类，
@@ -38,40 +28,12 @@ import android.util.Log;
  * 和用来刷新数据库，sharedP里面的内容的函数
  * 相当于Http＋数据库操作
  */
-public class DataRequestUtil extends Activity{
+
+public class DataRequest {
 
 	public static final String pseronStatus = "personStatus";
 	public static final String dataR = "DataRequest";
-	private static final String BASE_URL = "http://azure33.chinacloudapp.cn/onionc/api.php";
-		
 
-	/**
-	 * 通过post函数向服务器调取内容的函数
-	 * 传入 连接位置 请求map
-	 * @param conectPosition
-	 * @param requestMap
-	 * @return
-	 * @throws Exception
-	 */
-	public static JSONObject query(String conectPosition,Map<String, String> requestMap) throws Exception
-	{
-		// 定义发送请求的URL
-		Log.d(dataR, "send request to server| query");
-		// 发送请求
-		return new JSONObject(HttpUtil.postRequest(BASE_URL,requestMap));
-	}
-	
-	public static JSONArray requestData(String conectPosition,Map<String, String> requestMap) throws Exception
-	{
-		// 定义发送请求的URL
-		Log.d(dataR, "send request to server | requestData");
-		// 发送请求
-		
-		return new JSONArray(HttpUtil.postRequest(BASE_URL,requestMap));
-	}
-	
-	
-//------------------New Sever Code-------------
 	/*
 	 * 以下代码根据服务器API编写
 	 * 没有注释的函数请都参考API
@@ -167,9 +129,16 @@ public class DataRequestUtil extends Activity{
 	{
 		Map<String,String> pi = getBasic(ctx,"ping");
 		try {
-			JSONObject response = query("", pi);
-			Log.d(dataR, response.getJSONObject("data").optString("ping"));
-			return response.getJSONObject("data").optString("ping");
+			String repon = APIUtil.query(ctx, "",pi);
+			if(repon.contains("ActFalse"))return repon;
+			if(repon.contains("badServer"))return "badServer";
+			if(repon.contains("badToken"))return repon;
+			
+			Log.d(dataR, repon);
+			
+			JSONObject response = new JSONObject(repon);
+			Log.d(dataR, response.optString("ping"));
+			return response.optString("ping");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,8 +146,9 @@ public class DataRequestUtil extends Activity{
 		return "badServer";
 	}
 	
+	
 	/*
-	 * 登陆相关---------------------
+	 * -------------登陆相关---------------------
 	 */
 	
 
@@ -191,7 +161,6 @@ public class DataRequestUtil extends Activity{
 	 */
 	public static String basiclogin(Context ctx,String name,String password)
 	{
-		String res = "badServer";
 		
 		Map<String,String> baslogin = getBasic(ctx, "basiclogin");
 		baslogin.put("login", name);
@@ -200,28 +169,28 @@ public class DataRequestUtil extends Activity{
 		Map<String,String> ba = appendAppAuthen(ctx,baslogin);
 		Log.d(dataR, "start to login!");
 		
-		try {
-			JSONObject r = query("", ba);
-			Log.d(dataR, "conneted to server");
+		String repon = APIUtil.query(ctx, "",ba);
+		Log.d(dataR, "conneted to server");
+		if(repon.contains("ActFalse"))return repon;
+		if(repon.contains("badServer"))return "badServer";
+		if(repon.contains("badToken"))return repon;
+
+		Log.d(dataR,repon);
+		try {		
+			JSONObject response = new JSONObject(repon);
 			//如果又token则返回token
-			if(!r.isNull("data") && !r.getJSONObject("data").isNull("token"))
+			if(!response.isNull("token"))
 			{
 				Log.d(dataR, "get token fro	m success login");
 				SharedPreferenceUtil.updateSharedPreference(ctx, 
-						DataRequestUtil.pseronStatus, "token",r.getJSONObject("data").getString("token"));
+						DataRequestUtil.pseronStatus, "token",response.getString("token"));
 				return "loginTrue";
-			}
-			//没有token返回message
-			if(!r.isNull("message"))
-			{
-				return r.optString("message");
-			}
-			
+			}			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		return res;
+		return "badServer";
 	}
 	
 
@@ -235,7 +204,7 @@ public class DataRequestUtil extends Activity{
 		return SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, "token");
 	}
 	
-	
+	//----------------通知相关----------------
 	/**
 	 * 获取通知
 	 * @param ctx
@@ -245,27 +214,21 @@ public class DataRequestUtil extends Activity{
 	{
 		Map<String,String> raw = getBasic(ctx, "get_notifications");
 		raw = appendUserAuthen(ctx, raw);
-		raw.put("page","1" );
 		
 		try {
-			JSONObject response = query(null, raw);
-			if(response.isNull("data"))
-				return "badServer";
-			
-			JSONArray notifList = response.getJSONArray("data");
-			ArrayList<JSONObject> list = new ArrayList<JSONObject>();
-			SQLiteActivity sql = new SQLiteActivity(ctx);
-			for(int i =0 ;i<notifList.length();i++)
-			{
-				list.add(notifList.getJSONObject(i));
-			}
-			sql.refreshCrudeData("notifications", list, "content");
-			
-			return "notificationTrue";
+			String since_id = SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, "notif_since");
+			raw.put("since_id", since_id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String repon = APIUtil.query(ctx, "",raw);
+		Log.d(dataR, "conneted to server");
+		if(repon.contains("ActFalse"))return repon;
+		if(repon.contains("badServer"))return "badServer";
+		if(repon.contains("badToken"))return repon;
+		
+		Log.d(dataR, repon);
 		
 		return "badServer";
 	}
@@ -309,78 +272,4 @@ public class DataRequestUtil extends Activity{
 		
 		return notifs;
 	}
-	
-
-
-//--------------------Old Sever Code------------------	
-//--------------------Old Sever Code------------------	
-	//--------------------Old Sever Code------------------	
-	//--------------------Old Sever Code------------------	
-	//--------------------Old Sever Code------------------	
-	//--------------------Old Sever Code------------------	
-	//--------------------Old Sever Code------------------	
-
-	
-	/**
-	 * 
-	 * 发送一个新的站内信
-	 * @param ctx
-	 * @param receiver
-	 * @param content
-	 * @return
-	 */
-	public static String sendNewLetter(Context ctx,String receiver,String content)
-	{
-		String result="badServer";
-		
-		//测试用tag
-		String cus ="newLetterTrue";
-		
-		
-		
-	/*	Map<String,String> letter = getToken(ctx);
-		letter.put("TODO", "TODO");//TODO
-		letter.put("receiver", receiver);
-		letter.put("content", content);
-		
-		try {
-			System.out.println("this part is runnable");
-			JSONObject re = query("",letter);
-			System.out.println("得到的"+re.get(result));
-			
-			if(re.get(result).equals("TODO"))
-				return "newLetterTrue";
-			return "newLetterFalse";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println("result is --->"+result);
-		*/
-		return result;
-	}
-	
-	
-	//--------test---------test---------test-------------
-	public static void sharePTest(Context ctx)
-	{
-		Log.d(dataR, "Tring to put sample SharedP");
-		SharedPreferenceUtil.updateSharedPreference(ctx, pseronStatus, "ShareTest", "sample imput");
-		
-		String outByThisCtx = SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, "ShareTest");
-		Log.d(dataR, "ctx------>"+outByThisCtx);
-		
-		String outByAppCtx = SharedPreferenceUtil.readSharedPreference(ctx.getApplicationContext(), pseronStatus, "ShareTest");
-		Log.d(dataR, "aplicationCtx----->"+outByAppCtx);
-		
-		return ;
-	}
-	
-	public static void SQLiteTest(Context ctx)
-	{
-		SQLiteActivity SQL = new SQLiteActivity(ctx);
-		Log.d(dataR, "Opening a SQLite test");
-		SQL.tableTest();
-	}
-
 }

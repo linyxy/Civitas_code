@@ -8,6 +8,7 @@ import structure.DialogUtil;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
@@ -43,14 +44,15 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		// TODO Auto-generated method stub
 		Log.d(async, "doing something in an new thread");
 		
-		
+		Looper.getMainLooper();
 
+		
 		System.out.println("SharedTest");
 		Log.d(async, "creating DataRequestUtil activity");
 			
 		if(params[0].equals("ping"))
 		{
-			return DataRequestUtil.ping(ctx);
+			return DataRequest.ping(ctx);
 			
 		}
 		
@@ -58,7 +60,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		{
 			String loginResult ;
 			Log.d(FullscreenActivity.Login,"logining in the background");
-			loginResult = DataRequestUtil.basiclogin(ctx,params[1],params[2]);//转入后台验证登陆，获取结果
+			loginResult = DataRequest.basiclogin(ctx,params[1],params[2]);//转入后台验证登陆，获取结果
 			System.out.println(loginResult);
 			return loginResult;//发送结果更新UI
 		}
@@ -138,9 +140,17 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		{
 			DialogUtil.showDialog(ctx, "服(wo)务(ye)器(bu)响(zhi)应(dao)异(zen me)常(le)！", false);
 		}
-		else if(result.equals("badToken"))//登陆验证失误
+		//token error
+		else if(result.contains("badToken"))
 		{
-			
+			DialogUtil.showDialog(ctx, result, false);
+			//需要logout
+		}
+		else if(result.contains("ActFalse"))
+		{
+			//行为失败。无其他响应
+			Log.d(async, result);
+			DialogUtil.showDialog(ctx, result, false);
 		}
 		else //剩余情况输出message
 		{

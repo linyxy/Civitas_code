@@ -8,6 +8,7 @@ import structure.DialogUtil;
 import structure.HttpUtil;
 import structure.SharedPreferenceUtil;
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 
 /*
@@ -36,38 +37,52 @@ public class APIUtil {
 		return new JSONObject(HttpUtil.postRequest(BASE_URL,requestMap));
 	}
 	
-	
-	public static JSONObject query(Context ctx,String conectPosition,Map<String, String> requestMap)
+	/**
+	 * 程序内部调用连接接口
+	 * 会对返回JSON进行先预先处理
+	 * @param ctx
+	 * @param conectPosition
+	 * @param requestMap
+	 * @return  JSONObject 正常内容｜"false" 如果响应失败，但是不是验证问题｜"badToken" 响应失败token问题｜"badServer" 服务器无响应
+	 */
+	public static String query(Context ctx,String conectPosition,Map<String, String> requestMap)
 	{
 		JSONObject response = new JSONObject();
 		
 		try {
 			response = posting(conectPosition, requestMap);
+			
+			Log.d(API, "status exists? "+ response.isNull("status"));
+			Log.d(API, "status getInt ?"+ response.getInt("status"));
+			
 			if(!response.isNull("status") && response.getInt("status")==0)
 			{
 				//if(response.isNull("data"))
+				//如果响应正常
 				Log.d(API, "correct request");
-				return response.getJSONObject("data");
+				return response.getJSONObject("data").toString();
 			}
 			else if(!response.isNull("status") && response.getInt("status")<20000)
 			{
-				DialogUtil.showDialog(ctx, response.getString("message"), false);
-				return new JSONObject().put("status", "false");
+				//如果响应失败，但是不是验证问题
+				return "ActFalse "+response.getString("message");
 			}
-			else
+			else if(!response.isNull("status") && response.getInt("status")>=20000)
 			{
-				DialogUtil.showDialog(ctx, response.getString("message"), false);
+				//响应失败token问题
 				SharedPreferenceUtil.updateSharedPreference(ctx, DataRequestUtil.pseronStatus,"token","");
-				return new JSONObject().put("status", "badToken");
+				return  "badToken "+ response.getString("message");
 			}
 			
 		} catch (Exception e) {
 			
-			Log.e(API, "<!--Server response FAILED! -->"+response.toString());
+			Log.w(API, "<!--Server response FAILED! -->"+response.toString());
 			
 			e.printStackTrace();
 		}
 		
-		return response;
+		
+		
+		return "badServer";
 	}
 }
