@@ -56,7 +56,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			
 		}
 		
-		if(params[0].equals("login"))//登陆
+		else if(params[0].equals("login"))//登陆
 		{
 			String loginResult ;
 			Log.d(FullscreenActivity.Login,"logining in the background");
@@ -66,18 +66,23 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		}
 		
 
-		if(params[0].equals("letter"))
+		else if(params[0].equals("letter"))
 		{
 			String newLetterResult;
 			Log.d("letter", "sending a new letter");
 			newLetterResult = DataRequestUtil.sendNewLetter(ctx, params[1], params[2]);
 			return newLetterResult;
 		}
-		if(params[0].equals("get_notifications"))
+		else if(params[0].equals("get_notifications"))
 		{
 			String result = DataRequest.get_notifications_S(ctx);
 			return result;
 			
+		}
+		else if(params[0].equals("getMyStatus"))
+		{
+			String result = DataRequest.getMyStatus_S(ctx);
+			return result;
 		}
 
 //----------------------TEST------------------------	
@@ -134,6 +139,11 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			
 			UIupdateHandler.sendEmptyMessage(0x2468);
 		}
+		else if(result.equals("myStatusTrue"))
+		{
+			Log.d(async, result);
+			DialogUtil.showDialog(ctx, result, false);
+		}
 
 		//服务器无连接
 		else if(result.equals("badServer"))
@@ -146,12 +156,13 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			DialogUtil.showDialog(ctx, result, false);
 			//需要logout
 		}
-		else if(result.contains("ActFalse"))
+		else if(result.contains("badAct"))
 		{
 			//行为失败。无其他响应
 			Log.d(async, result);
 			DialogUtil.showDialog(ctx, result, false);
 		}
+		
 		else //剩余情况输出message
 		{
 			DialogUtil.showDialog(ctx, result,false);

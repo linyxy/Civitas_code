@@ -32,10 +32,10 @@ public class MyStatus {
     private Map<String,String> work;
     private ArrayList<EducationExperience> skill;//基础的技能
     
-    private static final String[] keys =new String[]{"avatar","entity_id","type","id","name","nick","lv"
+    private static final String[] keys =new String[]{"avatar","entity_id","type","id","name","lv"
     		,"stamina","happiness","health","starvation"};
-    static final String[] house_keys = new String[]{"house_id","house_name"};
-    static final String[] work_keys  = new String[]{"work_id","work_name","work_info"};
+    static final String[] house_keys = new String[]{"id","name"};
+    static final String[] work_keys  = new String[]{"id","name","info"};
     
     /**
      * 用于储存MyStatus的函数,
@@ -51,14 +51,6 @@ public class MyStatus {
 	    	for(int i=0;i<keys.length;i++)
 	    	{
 	    		
-	    			if(keys[i].equals("name")  || keys[i].equals("nick"))
-	    			{
-	    				SharedPreferenceUtil.updateSharedPreference(ctx, 
-	    						DataRequest.pseronStatus, keys[i], 
-	    						obj.getJSONObject("name").getJSONObject("name").optString(keys[i]));
-	    				continue;
-	    			}
-	    		
 					SharedPreferenceUtil.updateSharedPreference(ctx, 
 							DataRequest.pseronStatus, keys[i], obj.getString(keys[i]));
 	    	}
@@ -66,14 +58,14 @@ public class MyStatus {
 	    	{
 	    			    		
 					SharedPreferenceUtil.updateSharedPreference(ctx, 
-							DataRequest.pseronStatus, house_keys[i], 
+							DataRequest.pseronStatus, "house_"+house_keys[i], 
 							obj.getJSONObject("house").getString(house_keys[i]));
 	    	}
 	    	for(int i=0;i<work_keys.length;i++)
 	    	{
 	    			    		
 					SharedPreferenceUtil.updateSharedPreference(ctx, 
-							DataRequest.pseronStatus, work_keys[i],
+							DataRequest.pseronStatus, "work_"+work_keys[i],
 							obj.getJSONObject("work").getString(work_keys[i]));
 	    	}
 	    	

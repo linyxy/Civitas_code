@@ -3,6 +3,7 @@ package linyxy.fragment;
 
 import linyxy.civitas.LetterTabHostActivity;
 import linyxy.civitas.R;
+import linyxy.civitas.util.UpdateData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -52,5 +53,11 @@ public class My2Fragment  extends Fragment {
 	    	
 	        return view;
 	    }
+		@Override
+		public void onResume() {
+			UpdateData updata = new UpdateData(My2Fragment.this.getActivity());
+			updata.execute("getMyStatus");
+			super.onResume();
+		}
 	}
 

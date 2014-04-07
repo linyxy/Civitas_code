@@ -66,7 +66,7 @@ public class APIUtil {
 			else if(!response.isNull("status") && response.getInt("status")<20000)
 			{
 				//如果响应失败，但是不是验证问题
-				return "ActFalse "+response.getString("message");
+				return "badAct "+response.getString("message");
 			}
 			else if(!response.isNull("status") && response.getInt("status")>=20000)
 			{

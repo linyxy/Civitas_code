@@ -131,9 +131,8 @@ public class DataRequest {
 		Map<String,String> pi = getBasic(ctx,"ping");
 		try {
 			String repon = APIUtil.query(ctx, "",pi);
-			if(repon.contains("ActFalse"))return repon;
-			if(repon.contains("badServer"))return "badServer";
-			if(repon.contains("badToken"))return repon;
+			if(repon.startsWith("bad"))return repon;
+
 			
 			Log.d(dataR, repon);
 			
@@ -172,9 +171,8 @@ public class DataRequest {
 		
 		String repon = APIUtil.query(ctx, "",ba);
 		Log.d(dataR, "conneted to server");
-		if(repon.contains("ActFalse"))return repon;
-		if(repon.contains("badServer"))return "badServer";
-		if(repon.contains("badToken"))return repon;
+		if(repon.startsWith("bad"))return repon;
+
 
 		Log.d(dataR,repon);
 		try {		
@@ -191,7 +189,7 @@ public class DataRequest {
 			
 			e.printStackTrace();
 		}
-		return "ActFalse 登陆失败";
+		return "badAct 登陆失败";
 	}
 	
 
@@ -218,9 +216,7 @@ public class DataRequest {
 		
 		String repon = APIUtil.query(ctx, "",raw);
 		Log.d(dataR, "conneted to server");
-		if(repon.contains("ActFalse"))return repon;
-		if(repon.contains("badServer"))return "badServer";
-		if(repon.contains("badToken"))return repon;
+		if(repon.startsWith("bad"))return repon;
 		Log.d(dataR, repon);
 		
 		try {
@@ -231,9 +227,24 @@ public class DataRequest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ActFalse 基础调用失败";
+		return "badAct 基础调用失败";
 	}
 	
+	//----------------获取实体---------------
+	public static String getEntityInfo(Context ctx,String id)
+	{
+		Map<String,String> raw = getBasic(ctx,"get_entity_info");
+		raw = appendUserAuthen(ctx, raw);
+		
+		String repon = APIUtil.query(ctx, "",raw);
+		Log.d(dataR, "conneted to server");
+		if(repon.startsWith("bad"))return repon;
+		Log.d(dataR, repon);
+		
+		
+		
+		return "badAct 查询失败";
+	}
 	//----------------通知相关----------------
 	/**
 	 * 获取通知
@@ -249,9 +260,8 @@ public class DataRequest {
 
 		String repon = APIUtil.query(ctx, "",raw);
 		Log.d(dataR, "conneted to server");
-		if(repon.contains("ActFalse"))return repon;
-		if(repon.contains("badServer"))return "badServer";
-		if(repon.contains("badToken"))return repon;
+		if(repon.startsWith("bad"))return repon;
+
 		
 		//----------------上方为请求函数--
 		//-----下面将存入数据库------------
@@ -285,7 +295,7 @@ public class DataRequest {
 			e.printStackTrace();
 		}
 		
-		return "ActFalse 存入错误";
+		return "badAct 存入错误";
 	}
 	
 	public static  Map<String,String> appendNotifSinceId(Context ctx,Map<String,String> raw)
