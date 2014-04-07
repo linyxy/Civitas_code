@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Log.d(DBtag, "开始创建数据库&表格");
 		//execSQL函数用于执行SQL语句
 		
-		  db.execSQL("CREATE TABLE IF NOT EXISTS notifications (content TEXT)"); 
+		  db.execSQL("CREATE TABLE IF NOT EXISTS notifications (content TEXT,id TEXT,PRIMARY KEY (id))"); 
 		  //创建关于notifications的表格
 		  db.execSQL("CREATE TABLE IF NOT EXISTS chats (name TEXT, content TEXT,num INTEGER, send INTEGER)");
 		  //创建关于chats的表格

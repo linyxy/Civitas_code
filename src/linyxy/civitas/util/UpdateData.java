@@ -41,10 +41,10 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 	 */
 	@Override
 	protected String doInBackground(String... params) {
-		// TODO Auto-generated method stub
+
 		Log.d(async, "doing something in an new thread");
 		
-		Looper.getMainLooper();
+
 
 		
 		System.out.println("SharedTest");
@@ -75,7 +75,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		}
 		if(params[0].equals("get_notifications"))
 		{
-			String result = DataRequestUtil.get_notifications_S(ctx);
+			String result = DataRequest.get_notifications_S(ctx);
 			return result;
 			
 		}

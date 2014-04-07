@@ -13,7 +13,7 @@ public class Notification {
 	private Map<String,String> related_links;
 	private String comment;
 	
-
+	public static final String since_id = "notification_since_id";
 	
 	public static final String Interactions	 = "Interactions";
 	public static final String Relationships = "Relationships";

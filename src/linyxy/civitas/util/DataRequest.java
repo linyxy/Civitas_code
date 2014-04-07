@@ -190,7 +190,7 @@ public class DataRequest {
 			
 			e.printStackTrace();
 		}
-		return "badServer";
+		return "ActFalse 登陆失败";
 	}
 	
 
@@ -214,23 +214,56 @@ public class DataRequest {
 	{
 		Map<String,String> raw = getBasic(ctx, "get_notifications");
 		raw = appendUserAuthen(ctx, raw);
+		raw = appendNotifSinceId(ctx,raw);
 		
-		try {
-			String since_id = SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, "notif_since");
-			raw.put("since_id", since_id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		String repon = APIUtil.query(ctx, "",raw);
 		Log.d(dataR, "conneted to server");
 		if(repon.contains("ActFalse"))return repon;
 		if(repon.contains("badServer"))return "badServer";
 		if(repon.contains("badToken"))return repon;
 		
+		//----------------上方为请求函数--
+		//-----下面将存入数据库------------
+		
 		Log.d(dataR, repon);
 		
-		return "badServer";
+		try {
+			//首先将内容拆分到JSONarray
+			if(repon.equals("[]")) return "notificationTrue";
+			JSONArray result = new JSONArray(repon);
+			SQLiteActivity sql = new SQLiteActivity(ctx);
+			
+			//保存一个since_id用于以后访问
+			String since_id = result.getJSONObject(0).optString("id");
+			SharedPreferenceUtil.updateSharedPreference(ctx, pseronStatus, Notification.since_id, since_id);
+			
+			//然后将JSONarray拆分，转换成与SQLActivity里面适配的方法
+			List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+			for(int i=0;i<result.length();i++)
+			{
+				Map<String,String> value = new HashMap<String,String>();
+				value.put("id", result.getJSONObject(i).optString("id"));
+				value.put("content", result.getJSONObject(i).toString());
+				
+				list.add(value);
+			}
+			//存入数据库
+			sql.refreshPrimaryKeyData("notifications", list, "id","content");
+			return "notificationTrue";
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return "ActFalse 存入错误";
+	}
+	
+	public static  Map<String,String> appendNotifSinceId(Context ctx,Map<String,String> raw)
+	{
+		String since=SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, Notification.since_id);
+		Log.d(dataR, "since_id is----->"+since);
+		raw.put("since_id", since);
+		return raw;
 	}
 	
 	public static List<Notification> get_notifications(Context ctx)

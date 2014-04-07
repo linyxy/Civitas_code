@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import linyxy.civitas.model.Notification;
+import linyxy.civitas.util.DataRequest;
 import linyxy.civitas.util.DataRequestUtil;
 import linyxy.civitas.util.UpdateData;
-
 import android.app.Activity;
 import android.app.LocalActivityManager;
 import android.content.Context;
@@ -30,7 +30,6 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 /**
  * 这是一个包含上导航栏的activity类，
  * 导航栏按钮将生成不同的activity容器用于盛放activity.
@@ -93,8 +92,8 @@ public class LetterTabHostActivity extends Activity {
 			if(msg.what == notificationTrue )
 			{
 				Log.d("H", "Handler is in use");
-				ArrayList<Notification> notifs = (ArrayList<Notification>) DataRequestUtil.get_notifications(LetterTabHostActivity.this);
-				Log.d(DataRequestUtil.dataR,"length of the notif---->"+notifs.size());
+				ArrayList<Notification> notifs = (ArrayList<Notification>) DataRequest.get_notifications(LetterTabHostActivity.this);
+				Log.d(DataRequest.dataR,"length of the notif---->"+notifs.size());
 				for(Notification notif:notifs)
 					Log.i(DataRequestUtil.dataR,notif.toString());
 			}

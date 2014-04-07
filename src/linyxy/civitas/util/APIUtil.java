@@ -58,9 +58,10 @@ public class APIUtil {
 			if(!response.isNull("status") && response.getInt("status")==0)
 			{
 				//if(response.isNull("data"))
-				//如果响应正常
+				
 				Log.d(API, "correct request");
-				return response.getJSONObject("data").toString();
+				return response.getString("data");
+
 			}
 			else if(!response.isNull("status") && response.getInt("status")<20000)
 			{

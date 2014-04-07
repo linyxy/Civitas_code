@@ -1,6 +1,7 @@
 package linyxy.civitas;
 
 import java.util.List;
+import java.util.Map;
 
 
 import org.json.JSONException;
@@ -62,7 +63,13 @@ public class SQLiteActivity  {
 			}
 			
 			//调用insert方法，就可以将数据插入到数据库当中
-			db.insert(tableName, null, values);
+			//try一下。不是unique就可忽略～
+			try {
+				db.insert(tableName, null, values);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		db.close();
     }
@@ -93,7 +100,31 @@ public class SQLiteActivity  {
     	return "storeFinish";
     }
     
-    
+    public String refreshPrimaryKeyData(String tableName,List<Map<String,String>> list,String... keys)
+    {
+    	//创建一个DatabaseHelper对象
+		DatabaseHelper dbHelper = new DatabaseHelper(ctx,DatabaseHelper.dataBaseCivi);
+		//只有调用了DatabaseHelper对象的getReadableDatabase()方法，或者是getWritableDatabase()方法之后，才会创建，或打开一个数据库
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	
+    	
+    	
+    	Log.d(SQLTAG, "target table-->"+tableName);
+    	ContentValues values = new ContentValues();
+    	for(Map<String,String> map:list)
+    	{
+    		values.clear();
+    		for(int i=0;i<keys.length;i++)
+    		{
+    			values.put(keys[i], map.get(keys[i]).toString());
+        		Log.d(SQLTAG, "insert----->"+values.getAsString(keys[i]));
+    		}
+    		db.insert(tableName, null, values);
+    	}
+    	db.close();
+    	
+    	return "storeFinish";
+    }
     
     public void tableTest()
     {
