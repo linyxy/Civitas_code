@@ -8,6 +8,7 @@ import java.util.Map;
 
 import linyxy.civitas.R;
 import linyxy.civitas.SQLiteActivity;
+import linyxy.civitas.model.MyStatus;
 import linyxy.civitas.model.Notification;
 
 import org.json.JSONArray;
@@ -202,6 +203,35 @@ public class DataRequest {
 	private static String getToken(Context ctx)
 	{
 		return SharedPreferenceUtil.readSharedPreference(ctx, pseronStatus, "token");
+	}
+	
+	//----------------基础信息（4围等）---------
+	/**
+	 * 获取四维并存入sharedP
+	 * @param ctx
+	 * @return
+	 */
+	public static String getMyStatus_S(Context ctx)
+	{
+		Map<String,String> raw = getBasic(ctx,"get_my_status");
+		raw = appendUserAuthen(ctx, raw);
+		
+		String repon = APIUtil.query(ctx, "",raw);
+		Log.d(dataR, "conneted to server");
+		if(repon.contains("ActFalse"))return repon;
+		if(repon.contains("badServer"))return "badServer";
+		if(repon.contains("badToken"))return repon;
+		Log.d(dataR, repon);
+		
+		try {
+			if(MyStatus.saveMyStatus(ctx, new JSONObject(repon)))
+				return "myStatusTrue";
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "ActFalse 基础调用失败";
 	}
 	
 	//----------------通知相关----------------

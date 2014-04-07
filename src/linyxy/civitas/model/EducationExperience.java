@@ -10,7 +10,8 @@ public class EducationExperience {
 	private String breakingProp;		//突破概率
 	private String description;		//额外描述
 	private ArrayList<Skill> subSkills;		//对于某个教育所属的技能
-
+	private String skillId;	//civitas网络上的skill的ID号码
+	
 	public EducationExperience(String skillName, String skillLevel,
 			String comprehension, String breakingProp, String description) {
 		super();
@@ -20,6 +21,23 @@ public class EducationExperience {
 		this.breakingProp = breakingProp;
 		this.description = description;
 	}
+	
+	
+	/**
+	 * 创建一个基础的技能
+	 * @param skillName
+	 * @param skillLevel
+	 * @param skillId
+	 */
+	public EducationExperience(String skillName, String skillLevel,
+			String skillId) {
+		super();
+		this.skillName = skillName;
+		this.skillLevel = skillLevel;
+		this.skillId = skillId;
+	}
+
+
 
 	/**
 	 * 创建新的educationExperience附带附带一个包含sub Skill的ArrayList
@@ -130,6 +148,14 @@ public class EducationExperience {
 	 */
 	public void setSubSkills(ArrayList<Skill> subSkills) {
 		this.subSkills = subSkills;
+	}
+
+	public String getSkillId() {
+		return skillId;
+	}
+
+	public void setSkillId(String skillId) {
+		this.skillId = skillId;
 	}
 
 }
