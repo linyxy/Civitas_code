@@ -1,8 +1,10 @@
 package linyxy.fragment;
 
 
+import structure.SharedPreferenceUtil;
 import linyxy.civitas.LetterTabHostActivity;
 import linyxy.civitas.R;
+import linyxy.civitas.util.DataRequest;
 import linyxy.civitas.util.UpdateData;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class My2Fragment  extends Fragment {
 	
@@ -21,6 +24,12 @@ public class My2Fragment  extends Fragment {
 	private ImageButton domicile;
 	private ImageButton recipes;
 	private ImageButton estates;
+	
+	private TextView energy_points;
+	private TextView happy_points;
+	private TextView health_points;
+	private TextView hunger_points;
+	
 	
 	    @Override
 	    public void onCreate(Bundle savedInstanceState)
@@ -51,12 +60,29 @@ public class My2Fragment  extends Fragment {
 			recipes = (ImageButton)view.findViewById(R.id.recipes);
 			estates = (ImageButton)view.findViewById(R.id.estates);
 	    	
+	    	energy_points = (TextView)view.findViewById(R.id.energy_points);
+
+	    	
+	    	happy_points  = (TextView)view.findViewById(R.id.happy_points);
+
+	    	
+	    	health_points = (TextView)view.findViewById(R.id.health_points);
+
+	    	
+	    	hunger_points = (TextView)view.findViewById(R.id.hunger_points);
+
+			
 	        return view;
 	    }
 		@Override
 		public void onResume() {
 			UpdateData updata = new UpdateData(My2Fragment.this.getActivity());
 			updata.execute("getMyStatus");
+			
+	    	energy_points.setText(SharedPreferenceUtil.readSharedPreference(getActivity(), DataRequest.pseronStatus, "stamina"));
+	    	happy_points.setText(SharedPreferenceUtil.readSharedPreference(getActivity(), DataRequest.pseronStatus, "happiness"));
+	    	health_points.setText(SharedPreferenceUtil.readSharedPreference(getActivity(), DataRequest.pseronStatus, "health"));
+	    	hunger_points.setText(SharedPreferenceUtil.readSharedPreference(getActivity(), DataRequest.pseronStatus, "starvation"));
 			super.onResume();
 		}
 	}
