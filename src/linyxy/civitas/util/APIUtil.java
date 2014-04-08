@@ -29,7 +29,7 @@ public class APIUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static JSONObject posting(String conectPosition,Map<String, String> requestMap) throws Exception
+	private static JSONObject posting(String conectPosition,Map<String, String> requestMap) throws Exception
 	{
 		// 定义发送请求的URL
 		Log.d(API, "send request to server| query");

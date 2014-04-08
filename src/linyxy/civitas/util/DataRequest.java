@@ -345,4 +345,21 @@ public class DataRequest {
 		
 		return notifs;
 	}
+	
+	
+	//----------------站内信相关-----------
+	
+	public static String sendNewLetter(Context ctx,String person,String content)
+	{
+		Map<String,String> raw = getBasic(ctx, "send_pm");
+		raw = appendUserAuthen(ctx,raw);
+		
+		raw.put("soobb_name", person);
+		raw.put("message", content);
+		
+		String repon = APIUtil.query(ctx, "", raw);
+		Log.d(dataR, repon);
+		
+		return "badAct 发送失败";
+	}
 }

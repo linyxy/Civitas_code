@@ -1,14 +1,11 @@
 package linyxy.civitas.util;
 
-import java.util.ArrayList;
-
 import linyxy.civitas.FullscreenActivity;
-import linyxy.civitas.model.Notification;
 import structure.DialogUtil;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
@@ -64,13 +61,13 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 			System.out.println(loginResult);
 			return loginResult;//发送结果更新UI
 		}
-		
-
 		else if(params[0].equals("letter"))
 		{
 			String newLetterResult;
 			Log.d("letter", "sending a new letter");
-			newLetterResult = DataRequestUtil.sendNewLetter(ctx, params[1], params[2]);
+			Log.d(async,"target--->"	+ params[1]);
+			Log.d(async,"content--->"+ params[2]);
+			newLetterResult = DataRequest.sendNewLetter(ctx, params[1], params[2]);
 			return newLetterResult;
 		}
 		else if(params[0].equals("get_notifications"))
@@ -154,6 +151,10 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		else if(result.contains("badToken"))
 		{
 			DialogUtil.showDialog(ctx, result, false);
+			Intent i = new Intent();
+			i.setClass(ctx, FullscreenActivity.class);
+			ctx.startActivity(i);
+			ctx.fileList();
 			//需要logout
 		}
 		else if(result.contains("badAct"))

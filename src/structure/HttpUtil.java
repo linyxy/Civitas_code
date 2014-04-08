@@ -93,7 +93,7 @@ public class HttpUtil
 		}
 		// 设置请求参数
 		post.setEntity(new UrlEncodedFormEntity(
-			params, "gbk"));
+			params, "UTF-8"));
 		Log.d(HttpTag, "encoded the pattern into post");
 		
 		Log.i(HttpTag,"url----->"+ url);

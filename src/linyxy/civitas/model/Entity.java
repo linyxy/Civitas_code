@@ -12,17 +12,31 @@ public class Entity {
 	private String expMax;
 	private String relationship;
 	private String at;
+	private String soobb_id;
 	
+	public String getSoobb_id() {
+		return soobb_id;
+	}
+	public void setSoobb_id(String soobb_id) {
+		this.soobb_id = soobb_id;
+	}
 	static final String[] list  = new String[]{"type","id","avatar","name"
-		,"nick","level","expNow","expMax","relationship","at"};
+		,"nick","level","expNow","expMax","relationship","at","soobb_id"};
 	static final String[] types = new String[]{"People","Estates","Unknow"};
 	
 	
-	
-	
+	/**
+	 * 获取网络上的某个Entity内容
+	 * @param target_id 传入目标ID
+	 */
+	public static void getEntity_s(String target_id)
+	{
+		
+	}
+
 	public Entity(String type, String id, String avatar, String name,
 			String nick, String level, String expNow, String expMax,
-			String relationship, String at) {
+			String relationship, String at, String soobb_id) {
 		super();
 		this.type = type;
 		this.id = id;
@@ -34,6 +48,7 @@ public class Entity {
 		this.expMax = expMax;
 		this.relationship = relationship;
 		this.at = at;
+		this.soobb_id = soobb_id;
 	}
 	public String getType() {
 		return type;
