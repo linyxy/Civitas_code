@@ -359,7 +359,8 @@ public class DataRequest {
 		
 		String repon = APIUtil.query(ctx, "", raw);
 		Log.d(dataR, repon);
-		
+		if(repon.contains("≥…π¶"))return "newLetterTrue";
+		if(repon.contains("bad"))return repon;
 		return "badAct ∑¢ÀÕ ß∞‹";
 	}
 }
