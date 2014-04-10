@@ -35,4 +35,9 @@
 	<string name="login_subtitle">短暂的超游之后是长久的沉浸</string>
 	<string name="sample_level">6级</string>
 	<string name="sample_exp">128/200</string>
+	
+	<!-- msg view -->
+	<string name="user_name">天地一蜉蝣</string>
+    <string name="user_msg">不识晦朔，无意春秋。取足一日，尚又何求？戏渟淹而委余，何必江湖而是游。</string>
+    <string name="msg_time">4月3日</string>
 </resources>

@@ -12,13 +12,12 @@
         android:layout_weight="1" >
     </ListView>
 
-    
-     <ImageButton 
+    <ImageButton 
        android:id="@+id/write"
        android:layout_width="fill_parent"
        android:layout_height="50dp"
        android:src="@drawable/station_write"
        
-       />   
-  
+       />
+         
 </LinearLayout>

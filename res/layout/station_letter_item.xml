@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/listitem_letter"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:descendantFocusability="blocksDescendants" >
+
+    <ImageView
+        android:id="@+id/head"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="5dp"
+        android:src="@drawable/user_head_icon" 
+        android:focusable="false"/>
+    
+        
+    <TextView
+        android:id="@+id/user_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/head"
+        android:layout_toRightOf="@+id/head"
+        android:padding="7dp"
+        android:text="@string/user_name"
+        android:textColor="#666" 
+        android:focusable="false"/>
+
+    <TextView
+        android:id="@+id/user_msg_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/user_name_text"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/msg_time_text"
+        android:padding="7dp"
+        android:singleLine="true"
+        android:text="@string/user_msg"
+        android:textColor="#000"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/msg_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:padding="7dp"
+        android:text="@string/msg_time"
+        android:textColor="#666"
+        android:focusable="false" />
+
+</RelativeLayout>
