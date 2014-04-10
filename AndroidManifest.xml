@@ -58,6 +58,10 @@
             android:label="@string/SQL"  ></activity>
         <activity
             android:name="linyxy.civitas.DataRequestUtil"></activity>
+         <activity 
+            android:name="linyxy.civitas.ChatActivity"      
+            ></activity>
     </application>
+    
 
 </manifest>

@@ -50,7 +50,7 @@ public class NewLetterActivity extends Activity {
 				
 				receiver.setText("");
 				content.setText("");
-				Toast.makeText(NewLetterActivity.this,"站内信大概发送成功了", Toast.LENGTH_SHORT).show();
+				Toast.makeText(NewLetterActivity.this,"站内信发送成功", Toast.LENGTH_SHORT).show();
 				
 				finish();
 			}
