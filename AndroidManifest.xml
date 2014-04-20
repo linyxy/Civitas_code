@@ -13,8 +13,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:debuggable="true">
+        android:theme="@style/AppTheme">
         <activity
             android:name="linyxy.civitas.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -32,7 +31,7 @@
             ></activity>
            <activity
             android:name="linyxy.civitas.LetterActivity"
-           
+            
             ></activity>
               <activity
             android:name="linyxy.civitas.LetterTabHostActivity"
@@ -60,7 +59,7 @@
             android:name="linyxy.civitas.DataRequestUtil"></activity>
          <activity 
             android:name="linyxy.civitas.ChatActivity"      
-            ></activity>
+            android:theme="@style/NoTitle"></activity>
     </application>
     
 

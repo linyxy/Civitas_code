@@ -6,7 +6,7 @@
   android:background="@drawable/chat_bg_default" >
     
     <RelativeLayout 
-        android:id="@+id/top_layout"
+            android:id="@+id/top_layout"
   			android:layout_width="fill_parent"
   			android:layout_height="45dp"
   			android:background="@drawable/title_bar"
@@ -21,7 +21,7 @@
   			    android:onClick="chat_back"
   			    android:text="站内信"
   			    android:textColor="#fff"
-  			    android:textSize="14sp" />
+  			    android:textSize="14sp"/>
     
       		<TextView
         		android:layout_width="wrap_content" 
@@ -30,6 +30,7 @@
         		android:layout_centerInParent="true"
         		android:textSize="20sp"		
 				android:textColor="#ffffff" /> 
+				
 			<ImageButton 
 			    android:id="@+id/right_btn"
 			    android:layout_width="67dp" 
@@ -38,12 +39,9 @@
         		android:layout_centerVertical="true"
         		android:layout_marginRight="5dp"
         		android:src="@drawable/title_btn_contact_normal"
-				android:background="@drawable/title_btn_right"
-				
-			    />      
+				android:background="@drawable/title_btn_right"/>      
 		</RelativeLayout>
-    
-	  
+    	  
    <RelativeLayout
         android:id="@+id/bottom_layout"
         android:layout_width="fill_parent"
@@ -59,8 +57,7 @@
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
         android:text="发送"
-        android:background="@drawable/chat_send_btn" />
-         
+        android:background="@drawable/chat_send_btn" />        
         
         <EditText
         android:id="@+id/send_message_edit"
@@ -70,22 +67,19 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/login_edit_normal"
-        android:layout_centerVertical="true"
-        android:singleLine="true"
-        android:textSize="18sp"/>
-         
+        android:layout_centerVertical="true"       
+        android:textSize="18sp"/>        
     </RelativeLayout>
     
         
-    <ListView
+    <ListView   
     android:id="@+id/listview"
     android:layout_below="@id/top_layout"
     android:layout_above="@id/bottom_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"    
 	android:divider="@null"
-    android:dividerHeight="5dp"
-    android:stackFromBottom="true"
+    android:dividerHeight="5dp"  
     android:scrollbarStyle="outsideOverlay" 
     android:cacheColorHint="#0000"/>
     

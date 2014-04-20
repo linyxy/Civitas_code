@@ -29,42 +29,29 @@
 	        android:layout_marginRight="5dp" >
 	        
 	        
-	           <ImageView 
+	        <ImageButton 
 	           android:id="@+id/userhead" 
-	           android:layout_width="52dp"
-		       android:layout_height="52dp"
+	           android:layout_width="50dp"
+		       android:layout_height="50dp"
 	           android:focusable="false" 
 	           android:layout_alignParentRight="true" 
                android:layout_alignParentTop="true" 
 	           android:background="@drawable/user_head_icon"/>
  				
- 				<TextView 
-	            android:id="@+id/chat_content" 
-	            android:layout_toLeftOf="@id/userhead"
-	            android:layout_marginRight="10dp"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:background="@drawable/chat_to" 
-	            android:textSize="15sp"
-	            android:textColor="#ff000000"
-	            android:gravity="left|center"
-	            android:minHeight="50dp" 
-	            android:lineSpacingExtra="2dp"
-	            android:clickable="true"
-	            android:focusable="true"/>   
-	                 
-	                  
-	            <TextView 
-	            android:id="@+id/username" 
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_below="@id/userhead"
-	            android:layout_alignParentRight="true"
-	            android:layout_toRightOf="@id/chat_content"
-	            android:textSize="15sp"
-	            android:gravity="center"
-	            android:textColor="#818181"/>
-	        
+ 				<TextView
+ 				    android:id="@+id/chat_content"
+ 				    android:layout_width="wrap_content"
+ 				    android:layout_height="wrap_content"
+ 				    android:minHeight="50dp"
+ 				    android:layout_marginRight="10dp"
+ 				    android:layout_toLeftOf="@id/userhead"
+ 				    android:background="@drawable/chat_to"
+ 				    android:clickable="true"
+ 				    android:focusable="true"
+ 				    android:gravity="left|center"
+ 				    android:lineSpacingExtra="2dp"				    
+ 				    android:textColor="#ff000000"
+ 				    android:textSize="15sp" />	        
 	    </RelativeLayout>
 
 </LinearLayout>

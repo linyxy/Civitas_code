@@ -9,10 +9,11 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:orientation="vertical" 
-	        android:gravity="center_horizontal">
+	        android:gravity="center_horizontal"
+	        >
 	
 	        <TextView
-	            android:id="@+id/sendtime"
+	            android:id="@+id/sendtime"	            
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	           	style="@style/chat_text_date"/>
@@ -26,35 +27,23 @@
 	        android:layout_marginTop="5dp"
 	        android:layout_marginLeft="5dp" >
 	        
-	         	<ImageView 
+	         	<ImageButton 
 		           android:id="@+id/userhead" 
-		           android:layout_width="52dp"
-		           android:layout_height="52dp"
+		           android:layout_width="50dp"
+		           android:layout_height="50dp"
 		           android:clickable="true"		          
 		           android:layout_alignParentLeft="true" 
                    android:layout_alignParentTop="true" 
 		           android:background="@drawable/user_head_icon"/>
- 				
- 				<TextView 
-	            android:id="@+id/chat_content" 
-	            android:layout_toRightOf="@id/userhead"
-	            android:layout_marginLeft="10dp"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:background="@drawable/chat_from" 
-	          	style="@style/chat_content_date"/>   
-	                 
-	                  
-	            <TextView 
-	            android:id="@+id/username" 
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_below="@id/userhead"
-	            android:layout_alignParentLeft="true"
-	            android:layout_toLeftOf="@id/chat_content"
-	            style="@style/chat_text_name"/>
-	         
-	           
+	                  	           
+	            <TextView
+	                android:id="@+id/chat_content"
+	                style="@style/chat_text_content"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"	              
+	                android:layout_marginLeft="10sp"
+	                android:layout_toRightOf="@+id/userhead"	               
+	                android:background="@drawable/chat_from"/>
 	           
 	    </RelativeLayout>
 	    

@@ -79,8 +79,7 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 			  }
 
 	    	  viewHolder = new ViewHolder();
-			  viewHolder.SendTime = (TextView) convertView.findViewById(R.id.sendtime);
-			  viewHolder.UserName = (TextView) convertView.findViewById(R.id.username);
+			  viewHolder.SendTime = (TextView) convertView.findViewById(R.id.sendtime);			 
 			  viewHolder.Content = (TextView) convertView.findViewById(R.id.chat_content);
 			  viewHolder.ComMsg = isComMsg;
 			  
@@ -89,16 +88,14 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	        viewHolder = (ViewHolder) convertView.getTag();
 	    }
 		    	    
-	    viewHolder.SendTime.setText(entity.getDate());
-	    viewHolder.UserName.setText(entity.getName());
+	    viewHolder.SendTime.setText(entity.getDate());	  
 	    viewHolder.Content.setText(entity.getText());
 	    
 	    return convertView;
     }
     
     static class ViewHolder { 
-        public TextView SendTime;
-        public TextView UserName;
+        public TextView SendTime;        
         public TextView Content;
         public boolean ComMsg = true;
     }

@@ -76,7 +76,7 @@ public class FullscreenActivity extends Activity {
 		public void handleMessage(Message msg) {
 			if(msg.what == loginedTrue)
 			{
-				Toast.makeText(FullscreenActivity.this, "µÇÂ½³É¹¦", Toast.LENGTH_SHORT);
+				Toast.makeText(FullscreenActivity.this, "ç™»é™†æˆåŠŸ", Toast.LENGTH_SHORT);
 				Log.d("H", "Handler is in use");
 				Log.d(Login, "login succes jumping");
 				
@@ -98,6 +98,7 @@ public class FullscreenActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
+		//
 		
 		
 		Log.d(Login,"The application is started normally");
@@ -105,26 +106,23 @@ public class FullscreenActivity extends Activity {
 		userName = (EditText)findViewById(R.id.user_name);
 		userPassword = (EditText)findViewById(R.id.user_password);
 		log.setOnClickListener(new loginButtonListener());
-
+		
 		logAuto();
 
 	}
 	
 
 
-
 	public void logAuto()
 	{
-		/*
-		 * ×Ô¶¯µÇÂ½ÊµÏÖ¡£¿ÉÄÜĞèÒªĞŞ¸Ä·½Ê½ TODO
-		 */
+
 		System.out.println("zen me huis hi");
 		String token = SharedPreferenceUtil.
 				readSharedPreference(getApplicationContext(), DataRequest.pseronStatus, "token");
 		Log.d(Login, " ---->"+token);
 		if(!token.equals(""))
 		{
-			Toast.makeText(FullscreenActivity.this, "µÇÂ½³É¹¦", Toast.LENGTH_SHORT);
+			Toast.makeText(FullscreenActivity.this, "ÂµÃ‡Ã‚Â½Â³Ã‰Â¹Â¦", Toast.LENGTH_SHORT);
 			Log.d("H", "Handler is in use");
 			Log.d(Login, "login succes jumping");
 			
@@ -136,6 +134,8 @@ public class FullscreenActivity extends Activity {
 		}		
 	}
 
+
+	
 	class TestListener implements View.OnClickListener
 	{
 
@@ -143,9 +143,9 @@ public class FullscreenActivity extends Activity {
 		public void onClick(View arg0) {
 			UpdateData update = new UpdateData(FullscreenActivity.this,FSAHandler);
 //			update.execute("UrlTest");
-//			·şÎñÆ÷ÏàÓ¦²âÊÔ
+//			æœåŠ¡å™¨ç›¸åº”æµ‹è¯•
 //			update.execute("SharedPTest");
-//			SharedPreference²âÊÔ
+//			SharedPreferenceæµ‹è¯•
 //			update.execute("SQLiteTest");
 //			SQLite Test
 			
@@ -155,8 +155,8 @@ public class FullscreenActivity extends Activity {
 		
 	}
 	
-	//°´Å¥¼àÌıÆ÷
-	//ÓÃÓÚºóÌ¨µÇÂ½
+	//æŒ‰é’®ç›‘å¬å™¨
+	//ç”¨äºåå°ç™»é™†
 	class loginButtonListener implements View.OnClickListener
 	{
 
@@ -170,8 +170,8 @@ public class FullscreenActivity extends Activity {
 			
 			if(validate())
 			{
-				Toast.makeText(getApplicationContext(),"ÕıÔÚµÇÂ½ÖĞ", Toast.LENGTH_SHORT).show();
-				//½øÈëºóÌ¨ÑéÖ¤ÕÊºÅÃÜÂë
+				Toast.makeText(getApplicationContext(),"æ­£åœ¨ç™»é™†ä¸­", Toast.LENGTH_SHORT).show();
+				//è¿›å…¥åå°éªŒè¯å¸å·å¯†ç 
 				update.execute("login",userName.getText().toString(),userPassword.getText().toString());
 			}
 		}
@@ -180,16 +180,16 @@ public class FullscreenActivity extends Activity {
 	
 
 
-	// ¶ÔÓÃ»§ÊäÈëµÄÓÃ»§Ãû¡¢ÃÜÂë½øĞĞĞ£Ñé
+	// å¯¹ç”¨æˆ·è¾“å…¥çš„ç”¨æˆ·åã€å¯†ç è¿›è¡Œæ ¡éªŒ
 	private boolean validate()
 	{
 		String username = userName.getText().toString().trim();
 		if (username.equals(""))
 		{
-			DialogUtil.showDialog(this, "ÄãÌîĞ´µÄÓÃ»§ÊÇ¸öÉ¶£¡", false);
+			DialogUtil.showDialog(this, "ä½ å¡«å†™çš„ç”¨æˆ·æ˜¯ä¸ªå•¥ï¼", false);
 			return false;
 		}
-		//½øĞĞping·şÎñÆ÷
+		//è¿›è¡ŒpingæœåŠ¡å™¨
 		if(username.equals("ping"))
 		{
 			UpdateData update = new UpdateData(FullscreenActivity.this,FSAHandler);
@@ -198,7 +198,7 @@ public class FullscreenActivity extends Activity {
 		String pwd = userPassword.getText().toString().trim();
 		if (pwd.equals(""))
 		{
-			DialogUtil.showDialog(this, "ÄãÌîµÄÃÜÂëÊÇ¸öÉ¶£¡", false);
+			DialogUtil.showDialog(this, "ä½ å¡«çš„å¯†ç æ˜¯ä¸ªå•¥ï¼", false);
 			return false;
 		}
 		Log.d(Login,"pass validation");

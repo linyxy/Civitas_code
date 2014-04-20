@@ -28,7 +28,7 @@ public class ChatActivity extends Activity implements OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_user);
-        //Æô¶¯activityÊ±²»×Ô¶¯µ¯³öÈí¼üÅÌ
+        //å¯åŠ¨activityæ—¶ä¸è‡ªåŠ¨å¼¹å‡ºè½¯é”®ç›˜
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         
         initView();
@@ -49,9 +49,9 @@ public class ChatActivity extends Activity implements OnClickListener{
     	EditTextContent = (EditText) findViewById(R.id.send_message_edit);
     }
     
-    private String[] msgArray = new String[]{"ÌìµØÒ»òİòö","²»Ê¶»ŞË·£¬ÎŞÒâ´ºÇï¡£È¡×ãÒ»ÈÕ£¬ÉĞÓÖºÎÇó£¿Ï·œsÑÍ¶øÎ¯Óà£¬ºÎ±Ø½­ºş¶øÊÇÓÎ¡£"};
+    private String[] msgArray = new String[]{"å¤©åœ°ä¸€èœ‰è£","ä¸è¯†æ™¦æœ”ï¼Œæ— æ„æ˜¥ç§‹ã€‚å–è¶³ä¸€æ—¥ï¼Œå°šåˆä½•æ±‚ï¼Ÿæˆï¿½sæ·¹è€Œå§”ä½™ï¼Œä½•å¿…æ±Ÿæ¹–è€Œæ˜¯æ¸¸ã€‚"};
     
-    private String[] dataArray = new String[]{"2014-04-07 9:00", "2014-04-07 9:01", }; 
+    private String[] dataArray = new String[]{"2014-04-07 9:00", "2014-04-07 9:01"}; 
     private final static int COUNT = 2;
     
     public void initData()
@@ -62,10 +62,10 @@ public class ChatActivity extends Activity implements OnClickListener{
     		entity.setDate(dataArray[i]);
     		if (i % 2 == 0)
     		{
-    			entity.setName("ÌìµØ");
+    			
     			entity.setMsgType(true);
     		}else{
-    			entity.setName("Ò»òİòö");
+    			
     			entity.setMsgType(false);
     		}
     		
@@ -100,16 +100,14 @@ public class ChatActivity extends Activity implements OnClickListener{
 		{
 			ChatMsgEntity entity = new ChatMsgEntity();
 			entity.setDate(getDate());
-			entity.setName("Ò»òİòö");
 			entity.setMsgType(false);
-			entity.setText(contString);
-			
+			entity.setText(contString);			
 			DataArrays.add(entity);
-			Adapter.notifyDataSetChanged();
+			Adapter.notifyDataSetChanged();//åŠ¨æ€æ›´æ–°
 			
 			EditTextContent.setText("");
 			
-			listview.setSelection(listview.getCount() - 1);
+			//listview.setSelection(listview.getCount() - 1);
 		}
 	}
 	
@@ -117,8 +115,8 @@ public class ChatActivity extends Activity implements OnClickListener{
         Calendar c = Calendar.getInstance();
 
         String year = String.valueOf(c.get(Calendar.YEAR));
-        String month = String.valueOf(c.get(Calendar.MONTH));
-        String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH) + 1);
+        String month = String.valueOf(c.get(Calendar.MONTH)+1);
+        String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
         String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
         String mins = String.valueOf(c.get(Calendar.MINUTE));
         
