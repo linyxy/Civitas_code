@@ -60,6 +60,9 @@
          <activity 
             android:name="linyxy.civitas.ChatActivity"      
             android:theme="@style/NoTitle"></activity>
+         <activity
+             android:name="linyxy.civitas.WorkActivity"
+             ></activity>
     </application>
     
 

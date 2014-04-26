@@ -16,6 +16,10 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+
+/*
+ * 通知类
+ */
 public class MessageActivity extends Activity{
 	
 	ListView list;

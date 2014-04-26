@@ -93,21 +93,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int send_btn_normal=0x7f02002a;
         public static final int send_btn_pressed=0x7f02002b;
         public static final int station_write=0x7f02002c;
-        public static final int tab_host=0x7f02002d;
-        public static final int title_back_focused=0x7f02002e;
-        public static final int title_back_normal=0x7f02002f;
-        public static final int title_back_pressed=0x7f020030;
-        public static final int title_bar=0x7f020031;
-        public static final int title_btn_back=0x7f020032;
-        public static final int title_btn_contact_normal=0x7f020033;
-        public static final int title_btn_focused=0x7f020034;
-        public static final int title_btn_normal=0x7f020035;
-        public static final int title_btn_pressed=0x7f020036;
-        public static final int title_btn_right=0x7f020037;
-        public static final int type_block=0x7f020038;
-        public static final int user_head_icon=0x7f020039;
-        public static final int user_icon=0x7f02003a;
-        public static final int workplace=0x7f02003b;
+        public static final int strategy_0=0x7f02002d;
+        public static final int strategy_1=0x7f02002e;
+        public static final int strategy_2=0x7f02002f;
+        public static final int strategy_4=0x7f020030;
+        public static final int strategy_6=0x7f020031;
+        public static final int tab_host=0x7f020032;
+        public static final int title_back_focused=0x7f020033;
+        public static final int title_back_normal=0x7f020034;
+        public static final int title_back_pressed=0x7f020035;
+        public static final int title_bar=0x7f020036;
+        public static final int title_btn_back=0x7f020037;
+        public static final int title_btn_contact_normal=0x7f020038;
+        public static final int title_btn_focused=0x7f020039;
+        public static final int title_btn_normal=0x7f02003a;
+        public static final int title_btn_pressed=0x7f02003b;
+        public static final int title_btn_right=0x7f02003c;
+        public static final int type_block=0x7f02003d;
+        public static final int user_head_icon=0x7f02003e;
+        public static final int user_icon=0x7f02003f;
+        public static final int workplace=0x7f020040;
     }
     public static final class id {
         public static final int TableLayout01=0x7f09001b;
@@ -117,7 +122,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int button1=0x7f090026;
         public static final int button2=0x7f090029;
         public static final int chat_content=0x7f090005;
-        public static final int cursor=0x7f090050;
+        public static final int cursor=0x7f090053;
         public static final int dao_cai=0x7f090033;
         public static final int domicile=0x7f09001f;
         public static final int dummy_button=0x7f090002;
@@ -143,7 +148,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int letter_receiver=0x7f09003d;
         public static final int letter_send=0x7f09003f;
         public static final int letterlistview=0x7f090037;
-        public static final int linearLayout1=0x7f09004d;
+        public static final int linearLayout1=0x7f090050;
         public static final int listview=0x7f09000c;
         public static final int login_button=0x7f090012;
         public static final int login_icon=0x7f090013;
@@ -177,9 +182,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int status=0x7f090041;
         public static final int status_bar=0x7f090043;
         public static final int storeage=0x7f09001e;
-        public static final int street=0x7f09004c;
-        public static final int text1=0x7f09004e;
-        public static final int text2=0x7f09004f;
+        public static final int street=0x7f09004f;
+        public static final int text1=0x7f090051;
+        public static final int text2=0x7f090052;
         public static final int top_layout=0x7f090006;
         public static final int user_exp=0x7f09000f;
         public static final int user_icon=0x7f090042;
@@ -189,8 +194,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int user_name_text=0x7f09003a;
         public static final int user_password=0x7f090011;
         public static final int userhead=0x7f090004;
-        public static final int vPager=0x7f090051;
+        public static final int vPager=0x7f090054;
+        public static final int work_place_des=0x7f090057;
+        public static final int work_place_icon=0x7f090055;
+        public static final int work_place_name=0x7f090056;
+        public static final int work_strategy_icon=0x7f09004c;
+        public static final int work_strategy_info=0x7f09004e;
+        public static final int work_strategy_list=0x7f090059;
+        public static final int work_strategy_name=0x7f09004d;
         public static final int workplace=0x7f09001d;
+        public static final int workplace_preinfo=0x7f090058;
         public static final int write=0x7f090038;
     }
     public static final class layout {
@@ -220,8 +233,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int station_letter_new=0x7f030017;
         public static final int station_message=0x7f030018;
         public static final int status=0x7f030019;
-        public static final int street_fragment=0x7f03001a;
-        public static final int viewpager=0x7f03001b;
+        public static final int strategy_item=0x7f03001a;
+        public static final int street_fragment=0x7f03001b;
+        public static final int viewpager=0x7f03001c;
+        public static final int work_place_info=0x7f03001d;
+        public static final int work_post=0x7f03001e;
+        public static final int work_pre=0x7f03001f;
     }
     public static final class string {
         public static final int SQL=0x7f07000c;
