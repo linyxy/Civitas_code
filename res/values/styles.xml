@@ -64,6 +64,7 @@
 	 <style name="NoTitle" parent="android:Theme">  
         <item name="android:windowNoTitle">true</item>  
      </style> 
+     
     
 	 
 </resources>

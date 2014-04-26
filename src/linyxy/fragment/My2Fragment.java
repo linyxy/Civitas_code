@@ -1,8 +1,10 @@
 package linyxy.fragment;
 
 
+import linyxy.civitas.FullscreenActivity;
 import linyxy.civitas.LetterTabHostActivity;
 import linyxy.civitas.R;
+import linyxy.civitas.WorkActivity;
 import linyxy.civitas.util.DataRequest;
 import linyxy.civitas.util.UpdateData;
 import structure.SharedPreferenceUtil;
@@ -34,11 +36,15 @@ public class My2Fragment  extends Fragment {
 	
 	private ImageView icon;
 	
+	private String workP_id;
+	
 	    @Override
 	    public void onCreate(Bundle savedInstanceState)
 	    {
 	        super.onCreate(savedInstanceState);
 	    } 
+	    
+	    
 	    @Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	            Bundle savedInstanceState) { 
@@ -58,11 +64,14 @@ public class My2Fragment  extends Fragment {
 			});
 			
 			workplace = (ImageButton)view.findViewById(R.id.workplace);
+			workplace.setOnClickListener(new WorkPlaceListener());//绑定监听
 			storeage = (ImageButton)view.findViewById(R.id.storeage);
 			domicile = (ImageButton)view.findViewById(R.id.domicile);
 			recipes = (ImageButton)view.findViewById(R.id.recipes);
 			estates = (ImageButton)view.findViewById(R.id.estates);
 	    	
+			
+			
 	    	energy_points = (TextView)view.findViewById(R.id.energy_points);
 	    	happy_points  = (TextView)view.findViewById(R.id.happy_points);
 	    	health_points = (TextView)view.findViewById(R.id.health_points);
@@ -73,11 +82,13 @@ public class My2Fragment  extends Fragment {
 	    	
 	        return view;
 	    }
+	    
+	    
 		@Override
 		public void onStart() {
 			UpdateData updata = new UpdateData(My2Fragment.this.getActivity());
 			updata.execute("getMyStatus");
-			
+			//刷新精力等
 	    	energy_points.setText(SharedPreferenceUtil.readSharedPreference(getActivity()
 	    			, DataRequest.pseronStatus, "stamina"));
 	    	happy_points.setText(SharedPreferenceUtil.readSharedPreference(getActivity()
@@ -94,7 +105,24 @@ public class My2Fragment  extends Fragment {
 	    	//Author koush 
 	    	UrlImageViewHelper.setUrlDrawable(icon, url);
 			
+	    	workP_id = SharedPreferenceUtil.readSharedPreference(getActivity(), 
+	    			DataRequest.pseronStatus, "work_id");
+	    	//获取工作地点id
+	    	//进行判断&修改外部磁贴
+	    	
+	    	
 			super.onResume();
 		}
-	}
+		
+	//工作磁贴的监听器
+	class WorkPlaceListener implements View.OnClickListener
+	{
 
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.setClass(getActivity(), WorkActivity.class);
+			getActivity().startActivity(intent);
+		}
+	}
+}
