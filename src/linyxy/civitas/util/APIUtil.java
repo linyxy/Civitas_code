@@ -4,12 +4,12 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import structure.DialogUtil;
 import structure.HttpUtil;
 import structure.SharedPreferenceUtil;
 import android.content.Context;
-import android.os.Looper;
 import android.util.Log;
+
+import com.loopj.android.http.AsyncHttpClient;
 
 /*
  * APIUtil
@@ -34,6 +34,8 @@ public class APIUtil {
 		// 定义发送请求的URL
 		Log.d(API, "send request to server| query");
 		// 发送请求
+		AsyncHttpClient client = new AsyncHttpClient();
+		
 		return new JSONObject(HttpUtil.postRequest(BASE_URL,requestMap));
 	}
 	
