@@ -7,11 +7,13 @@
 	<include 
 	    android:id="@+id/workplace_preinfo"
 	 	android:layout_height="wrap_content"
+	 	android:layout_width="match_parent"
 	    layout="@layout/work_place_info"/>
     
 	    <ListView    
          android:layout_width="match_parent"
     	 android:layout_height="match_parent"
+    	 android:dividerHeight="1dp"
     	 android:id="@+id/work_strategy_list"></ListView>
     
 </LinearLayout>

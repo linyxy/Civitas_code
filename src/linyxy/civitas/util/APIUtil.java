@@ -1,15 +1,22 @@
 package linyxy.civitas.util;
 
+import java.io.IOException;
 import java.util.Map;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import structure.HttpUtil;
 import structure.SharedPreferenceUtil;
 import android.content.Context;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.BinaryHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /*
  * APIUtil
@@ -35,8 +42,58 @@ public class APIUtil {
 		Log.d(API, "send request to server| query");
 		// 发送请求
 		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = convertParams(requestMap);
+		BinaryHttpResponseHandler BHP = new BinaryHttpResponseHandler(){
+			
+		};
 		
-		return new JSONObject(HttpUtil.postRequest(BASE_URL,requestMap));
+		client.post(BASE_URL,params,new AsyncHttpResponseHandler());
+		DefaultHttpClient httpResponse =  (DefaultHttpClient) client.getHttpClient();
+		
+		return new JSONObject(processResponse(httpResponse));
+		
+	}
+	
+	/*
+	 * 将返回结果进行响应
+	 */
+	private static String processResponse(DefaultHttpClient httpResponse)
+	{
+		if (((HttpResponse) httpResponse).getStatusLine()
+				.getStatusCode() == 200)
+			{
+				Log.d(API, "server successfully responesd");
+				// 获取服务器响应字符串
+				String result = "";
+				try {
+					result = EntityUtils
+						.toString(((HttpResponse) httpResponse).getEntity());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Log.d(API, result);
+				return result;
+			}
+		return null;
+	}
+	
+	/*
+	 * 将post内容转化成asyncHttpClient可用数据
+	 */
+	private static RequestParams convertParams(Map<String, String> rawParams)
+	{
+		RequestParams params = new RequestParams();
+		for(String key: rawParams.keySet())
+		{
+			System.out.println("key name: "+key+" key value: "+rawParams.get(key));
+			//封装请求参数
+			params.put(key , rawParams.get(key));
+		}
+		return params;
 	}
 	
 	/**
