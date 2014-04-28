@@ -33,6 +33,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /*
  * 进行工作或查看工资的页面
@@ -82,7 +84,7 @@ public class WorkActivity extends Activity {
 				strategyList = (ListView)findViewById(R.id.work_strategy_list);
 				placeIcon = (ImageView)findViewById(R.id.work_place_icon);
 				placeName = (TextView)findViewById(R.id.work_place_name);
-				placeInfo = (TextView)findViewById(R.id.work_strategy_info);
+				placeInfo = (TextView)findViewById(R.id.work_place_des);
 				inflateWorkPre();
 			}
 		else 
@@ -90,7 +92,7 @@ public class WorkActivity extends Activity {
 				setContentView(R.layout.work_post);
 				placeIcon = (ImageView)findViewById(R.id.work_place_icon);
 				placeName = (TextView)findViewById(R.id.work_place_name);
-				placeInfo = (TextView)findViewById(R.id.work_strategy_info);
+				placeInfo = (TextView)findViewById(R.id.work_place_des);
 				inflateWorkPost();
 			}
 	}
@@ -100,23 +102,42 @@ public class WorkActivity extends Activity {
 	/**
 	 * 从服务器获取消息
 	 */
-	public static String get_estate_info(Context ctx)
+	public void get_estate_info(Context ctx)
 	{
 		Map<String,String> raw = DataRequestUtil.getBasic(ctx,"get_estate_info");
 		raw = DataRequestUtil.appendUserAuthen(ctx, raw);
 		//add work Id
 		raw.put("id", workP_id);
 		
-		String repon = APIUtil.query(ctx, "",raw);
-		Log.d(DataRequestUtil.dataR, "conneted to server");
-		if(repon.startsWith("bad"))
-			{
-				DialogUtil.showDialog(ctx, repon, false);
-				ServerResponseProcess.proBadResponse(ctx, repon);
-				return " ";
+		// 发送请求
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = APIUtil.convertParams(raw);
+		Log.d(APIUtil.API, "start posting ");
+		
+		client.post(APIUtil.BASE_URL,params,new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject response) {
+				Log.d(APIUtil.API, "onSuccess");
+				try {
+					Log.d(APIUtil.API,"---->"+response.getString("status"));
+					String a= APIUtil.responseDeal(WorkActivity.this, response.toString());
+					inflateWorkStra(new JSONObject(a));
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				super.onSuccess(statusCode, response);
 			}
-		Log.d(DataRequestUtil.dataR, repon);
-		return repon;
+
+			@Override
+			public void onFailure(Throwable e, JSONObject errorResponse) {
+				//DialogUtil.showDialog(ctx, "do not know failure", true);
+				Log.d(APIUtil.API, "onFailure");
+				super.onFailure(e, errorResponse);
+			}
+			
+		});
 	}
 	
 	@TargetApi(19)
@@ -125,21 +146,21 @@ public class WorkActivity extends Activity {
 	 */
 	private void inflateWorkPre()
 	{	
-		String sample ="";
-		String res = get_estate_info(WorkActivity.this);
-		if(res.equals(" "))finish();
-		
+		get_estate_info(WorkActivity.this);
+	}
+	
+	@TargetApi(19)
+	private void inflateWorkStra(JSONObject content)
+	{
 		try {
-			
-			JSONObject content = new JSONObject(res);
 			//添加房产信息
 			inflateEstateInfo(content);
 			//添加工作策略
 			List<Map<String, Object>> listItems = 
-					getContents(new JSONArray(content.getJSONArray("work_strategy")));
+					getContents(content.getJSONArray("work_strategy"));
 			SimpleAdapter simpleAdapter = new SimpleAdapter(this
 					, listItems 
-					, R.layout.notif_item
+					, R.layout.strategy_item
 					, new String[]{"img", "name", "effects" }//content & decription
 					, new int[]{R.id.work_strategy_icon,
 								R.id.work_strategy_name , 
@@ -147,11 +168,13 @@ public class WorkActivity extends Activity {
 
 			strategyList.setAdapter(simpleAdapter);
 			
-			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void aa(){
 		
 	}
 	
@@ -161,6 +184,7 @@ public class WorkActivity extends Activity {
 	 */
 	private void inflateEstateInfo(JSONObject content)
 	{
+		Log.d("API", content.toString());
 		try {
 			if(content.has("avatar"))
 			{
@@ -171,8 +195,11 @@ public class WorkActivity extends Activity {
 			{
 				placeName.setText(content.getString("name"));
 			}
-			if(content.has("type") && content.has("level"))
+			if(!content.isNull("type") && !content.isNull("level"))
+			{
+				Log.d("API", content.getString("type")+"  "+content.getString("level"));
 				placeInfo.setText(content.getString("type")+"  "+content.getString("level"));
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
