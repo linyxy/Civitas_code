@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import structure.DialogUtil;
 import structure.HttpUtil;
 import structure.SharedPreferenceUtil;
 import android.content.Context;
@@ -128,11 +129,13 @@ public class APIUtil {
 			else if(!response.isNull("status") && response.getInt("status")<20000)
 			{
 				//如果响应失败，但是不是验证问题
+				DialogUtil.showDialog(ctx, response.getString("message"), false);
 				return "badAct "+response.getString("message");
 			}
 			else if(!response.isNull("status") && response.getInt("status")>=20000)
 			{
 				//响应失败token问题
+				DialogUtil.showDialog(ctx, response.getString("message"), false);
 				SharedPreferenceUtil.updateSharedPreference(ctx, DataRequestUtil.pseronStatus,"token","");
 				return  "badToken "+ response.getString("message");
 			}
@@ -148,4 +151,5 @@ public class APIUtil {
 		
 		return "badServer";
 	}
+	
 }

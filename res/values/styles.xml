@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -62,7 +62,8 @@
 	</style>
 	<!-- No Title -->
 	 <style name="NoTitle" parent="android:Theme">  
-        <item name="android:windowNoTitle">true</item>  
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#FFFFFF</item>
      </style> 
      
     

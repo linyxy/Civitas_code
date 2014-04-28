@@ -21,11 +21,14 @@ import urlimageviewhelper.UrlImageViewHelper;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -37,24 +40,24 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /*
- * ½øĞĞ¹¤×÷»ò²é¿´¹¤×ÊµÄÒ³Ãæ
+ * è¿›è¡Œå·¥ä½œæˆ–æŸ¥çœ‹å·¥èµ„çš„é¡µé¢
  */
 public class WorkActivity extends Activity {
 
 	AsyncHttpClient client = new AsyncHttpClient();
-	static //¹¤×÷µØµãÇé¿ö
-	String workP_id;//¹¤×÷µØµãid
+	static //å·¥ä½œåœ°ç‚¹æƒ…å†µ
+	String workP_id;//å·¥ä½œåœ°ç‚¹id
 	static JSONObject info;
 	ImageView placeIcon;
 	TextView placeName;
 	TextView placeInfo;
+	static int[] straId = new int[]{-1,0,1,2,0,0,0,0};
 	
-	
-	//Çø·ÖÊÇ·ñ¹¤×÷
+	//åŒºåˆ†æ˜¯å¦å·¥ä½œ
 	public static boolean isWorkToday = false;
-	//Î´¹¤×÷
+	//æœªå·¥ä½œ
 	ListView strategyList;
-	//²»Í¬²ßÂÔÍ¼±ê
+	//ä¸åŒç­–ç•¥å›¾æ ‡
 	private int[] imageIds = {R.drawable.strategy_0,
 			R.drawable.strategy_1,
 			R.drawable.strategy_2,
@@ -65,9 +68,9 @@ public class WorkActivity extends Activity {
 			R.drawable.strategy_1,
 			R.drawable.strategy_1,
 	};
-	//ÒÑ¾­¹¤×÷
+	//å·²ç»å·¥ä½œ
 	
-	//´ÇÖ°
+	//è¾èŒ
 	Button quitJob;
 	
 	@Override
@@ -76,8 +79,8 @@ public class WorkActivity extends Activity {
 		
 		workP_id = SharedPreferenceUtil.readSharedPreference(WorkActivity.this, 
     			DataRequest.pseronStatus, "work_id");
-		//ÒÑ¾­¹¤×÷¾ÍÕ¹Ê¾ÒÑ¾­¹¤×÷
-		//Î´¹¤×÷¾ÍÕ¹Ê¾²ßÂÔÊ²Ã´µÄ
+		//å·²ç»å·¥ä½œå°±å±•ç¤ºå·²ç»å·¥ä½œ
+		//æœªå·¥ä½œå°±å±•ç¤ºç­–ç•¥ä»€ä¹ˆçš„
 		if(!isWorkToday)
 			{
 				setContentView(R.layout.work_pre);
@@ -86,6 +89,8 @@ public class WorkActivity extends Activity {
 				placeName = (TextView)findViewById(R.id.work_place_name);
 				placeInfo = (TextView)findViewById(R.id.work_place_des);
 				inflateWorkPre();
+				//ä¸ºé€‰æ‹©æ·»åŠ straè¿›è¡Œå·¥ä½œæ·»åŠ ç›¸åº”
+				strategyList.setOnItemClickListener(new myItemClickListener());
 			}
 		else 
 			{
@@ -100,7 +105,7 @@ public class WorkActivity extends Activity {
 	
 	
 	/**
-	 * ´Ó·şÎñÆ÷»ñÈ¡ÏûÏ¢
+	 * ä»æœåŠ¡å™¨è·å–æ¶ˆæ¯
 	 */
 	public void get_estate_info(Context ctx)
 	{
@@ -109,11 +114,10 @@ public class WorkActivity extends Activity {
 		//add work Id
 		raw.put("id", workP_id);
 		
-		// ·¢ËÍÇëÇó
+		// å‘é€è¯·æ±‚
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = APIUtil.convertParams(raw);
 		Log.d(APIUtil.API, "start posting ");
-		
 		client.post(APIUtil.BASE_URL,params,new JsonHttpResponseHandler(){
 
 			@Override
@@ -142,7 +146,7 @@ public class WorkActivity extends Activity {
 	
 	@TargetApi(19)
 	/**
-	 * Ìî³äÒ³ÃæÓÃº¯Êı
+	 * å¡«å……é¡µé¢ç”¨å‡½æ•°
 	 */
 	private void inflateWorkPre()
 	{	
@@ -153,9 +157,9 @@ public class WorkActivity extends Activity {
 	private void inflateWorkStra(JSONObject content)
 	{
 		try {
-			//Ìí¼Ó·¿²úĞÅÏ¢
+			//æ·»åŠ æˆ¿äº§ä¿¡æ¯
 			inflateEstateInfo(content);
-			//Ìí¼Ó¹¤×÷²ßÂÔ
+			//æ·»åŠ å·¥ä½œç­–ç•¥
 			List<Map<String, Object>> listItems = 
 					getContents(content.getJSONArray("work_strategy"));
 			SimpleAdapter simpleAdapter = new SimpleAdapter(this
@@ -174,12 +178,10 @@ public class WorkActivity extends Activity {
 		}
 	}
 	
-	private void aa(){
-		
-	}
+
 	
 	/**
-	 * ÉèÖÃµØ²úĞÅÏ¢
+	 * è®¾ç½®åœ°äº§ä¿¡æ¯
 	 * @param content
 	 */
 	private void inflateEstateInfo(JSONObject content)
@@ -198,7 +200,7 @@ public class WorkActivity extends Activity {
 			if(!content.isNull("type") && !content.isNull("level"))
 			{
 				Log.d("API", content.getString("type")+"  "+content.getString("level"));
-				placeInfo.setText(content.getString("type")+"  "+content.getString("level"));
+				placeInfo.setText(content.getString("type")+"  Level:"+content.getDouble("level")/10);
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -208,7 +210,7 @@ public class WorkActivity extends Activity {
 	}
 	
 	/**
-	 * ÎªStrategyÌîÈëÄÚÈİ
+	 * ä¸ºStrategyå¡«å…¥å†…å®¹
 	 * @return
 	 */
 	private ArrayList<Map<String, Object>> getContents(JSONArray stra) {
@@ -223,6 +225,7 @@ public class WorkActivity extends Activity {
 				obj = stra.getJSONObject(i);
 				listItem.put("name",obj.get("name"));
 				listItem.put("effects", obj.get("tips"));
+				straId[i] = obj.getInt("id");
 				listItem.put("img",imageIds[obj.getInt("id")+1]);
 				listItems.add(listItem);
 				
@@ -243,4 +246,65 @@ public class WorkActivity extends Activity {
 	}
 	
 	//class straSelctListener extends 
+	/*
+	 * é¡¹ç›®é€‰æ‹©listener è¿›è¡Œå·¥ä½œ
+	 */
+	public class myItemClickListener implements AdapterView.OnItemClickListener
+	 {
+
+		 @Override
+		 public void onItemClick(AdapterView<?> adapterview,View view,int position,long arg0)
+		 {
+				Map<String,String> raw = DataRequestUtil.getBasic(WorkActivity.this,"work");
+				raw = DataRequestUtil.appendUserAuthen(WorkActivity.this, raw);
+				//add work Id
+				raw.put("id", workP_id);
+				raw.put("strategy", straId[position]+"");
+				//raw.put("is_test", "1");
+				
+				// å‘é€è¯·æ±‚
+				AsyncHttpClient client = new AsyncHttpClient();
+				RequestParams params = APIUtil.convertParams(raw);
+				Log.d(APIUtil.API, "start posting ");
+				client.post(APIUtil.BASE_URL,params,new JsonHttpResponseHandler(){
+
+					@Override
+					public void onSuccess(int statusCode, JSONObject response) {
+						Log.d(APIUtil.API, "onSuccess");
+						try {
+							Log.d(APIUtil.API,"---->"+response.getString("status"));
+							String a= APIUtil.responseDeal(WorkActivity.this, response.toString());
+							Log.d("API",a);
+							JSONObject repon = new JSONObject(a);
+							JSONObject salary= repon.getJSONObject("salary");
+							String msg = "å®Œæˆäº†ä»Šå¤©çš„å·¥ä½œâ™ª( Â´â–½ï½€)\næ”¶åˆ°äº†å·¥èµ„"+salary.getString("amount")+
+									"å•ä½çš„"+salary.getString("unit");
+							DialogUtil.showDialog(WorkActivity.this, msg, false);
+							//setWorkToday(true);
+							//finish();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+						super.onSuccess(statusCode, response);
+					}
+
+					@Override
+					public void onFailure(Throwable e, JSONObject errorResponse) {
+						//DialogUtil.showDialog(ctx, "do not know failure", true);
+						Log.d(APIUtil.API, "onFailure");
+						super.onFailure(e, errorResponse);
+					}
+					
+				});
+			
+		 }
+	 }
+
+	public static boolean isWorkToday() {
+		return isWorkToday;
+	}
+	public static void setWorkToday(boolean isWorkToday) {
+		WorkActivity.isWorkToday = isWorkToday;
+	} 
 }
+

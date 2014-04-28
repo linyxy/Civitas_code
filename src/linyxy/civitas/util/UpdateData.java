@@ -139,7 +139,7 @@ public class UpdateData extends AsyncTask<String, Void, String> {
 		else if(result.equals("myStatusTrue"))
 		{
 			Log.d(async, result);
-			DialogUtil.showDialog(ctx, result, false);
+			//DialogUtil.showDialog(ctx, result, false);
 		}
 
 		//服务器无连接
